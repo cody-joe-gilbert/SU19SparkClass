@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir /scratch/"$@"/hmda_script/data-files
 
 for i in {2007..2017};
 do
