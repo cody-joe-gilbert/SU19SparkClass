@@ -9,7 +9,7 @@ do
 
   echo $prefix$i$ext
 
-  unzip -d /scratch/jjl359/hmda_script/data-files/ $prefix$i$ext
-  mv /scratch/jjl359/hmda_script/data-files/hmda_lar.csv /scratch/jjl359/hmda_script/data-files/$prefix$i$csv
+  unzip -d /scratch/"$@"/hmda_script/data-files/ $prefix$i$ext
+  mv /scratch/"$@"/hmda_script/data-files/hmda_lar.csv /scratch/jjl359/hmda_script/data-files/$prefix$i$csv
 
 done
