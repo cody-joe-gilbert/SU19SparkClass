@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mkdir /scratch/"$@"/hmda_script/
-mkdir /scratch/"$@"/hmda_script/data-files
+mkdir /scratch/"$@"/hmda_script2/
+mkdir /scratch/"$@"/hmda_script2/data-files
 
 for i in {2007..2017};
 do
@@ -11,7 +11,7 @@ do
 
   echo $prefix$i$ext
 
-  unzip -d /scratch/"$@"/hmda_script/zip-files/ $prefix$i$ext
-  mv /scratch/"$@"/hmda_script/data-files/hmda_lar.csv /scratch/"$@"/hmda_script/data-files/$prefix$i$csv
+  unzip -d /scratch/"$@"/hmda_script2/data-files/ /scratch/"$@"/hmda_script2/zip-files/$prefix$i$ext
+  mv /scratch/"$@"/hmda_script2/data-files/hmda_lar.csv /scratch/"$@"/hmda_script2/data-files/$prefix$i$csv
 
 done
