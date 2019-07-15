@@ -24,5 +24,9 @@ val dataSet = sqlContext.read.format("csv").option("header", "true").option("inf
 
 val dataForAnalysis = dataSet.select("loan_amount_000s","applicant_income_000s","state_name","state_abbr","respondent_id","purchaser_type_name","property_type_name","loan_type_name","loan_purpose_name","county_name","as_of_year","applicant_sex_name","applicant_race_name_1","applicant_ethnicity_name","agency_name","agency_abbr","action_taken_name")
 
+dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(1))), min(dataForAnalysis(dataForAnalysis.columns(1)))).show
+
+dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(0))), min(dataForAnalysis(dataForAnalysis.columns(0)))).show
+
 dataSet.saveAsTextFile("project/clean-data/")
 
