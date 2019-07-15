@@ -38,5 +38,40 @@ println("Distinct Actions Taken")
 val distinctActionsTaken = dataForAnalysis.select(dataForAnalysis("action_taken_name")).distinct
 distinctActionsTaken.collect().foreach(println)
 
+
+println("===========================")
+println("Purchaser Type Name")
+val distinctPurchaserType = dataForAnalysis.select(dataForAnalysis("purchaser_type_name")).distinct
+distinctPurchaserType.collect().foreach(println)
+
+
+println("===========================")
+println("Property Type Name")
+val distinctPropertyType = dataForAnalysis.select(dataForAnalysis("property_type_name")).distinct
+distinctPropertyType.collect().foreach(println)
+
+
+println("===========================")
+println("Loan Type Name")
+val distinctLoanType = dataForAnalysis.select(dataForAnalysis("loan_type_name")).distinct
+distinctLoanType.collect().foreach(println)
+
+
+println("===========================")
+println("Loan Purpose Name")
+val distinctLoanPurpose = dataForAnalysis.select(dataForAnalysis("loan_purpose_name")).distinct
+distinctLoanPurpose.collect().foreach(println)
+
+println("===========================")
+println("Applicant Race")
+val applicant_race_name = dataForAnalysis.select(dataForAnalysis("applicant_race_name")).distinct
+applicant_race_name.collect().foreach(println)
+
+
+println("===========================")
+println("Applicant Ethnicity")
+val applicant_ethnicity_name = dataForAnalysis.select(dataForAnalysis("applicant_ethnicity_name")).distinct
+applicant_ethnicity_name.collect().foreach(println)
+
 dataSet.saveAsTextFile("project/clean-data/")
 
