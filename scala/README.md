@@ -1,4 +1,4 @@
-0	tract_to_msamd_income
+|0	|tract_to_msamd_income|
 
 1	rate_spread
 
