@@ -6,9 +6,9 @@
 | 3  | minority_population            |
 | 4  | number_of_owner_occupied_units |
 | 5  | number_of_1_to_4_family_units  |
-| 6  | loan_amount_000s               |
+| **6**  | **loan_amount_000s**               |
 | 7  | hud_median_family_income       |
-| 8  | applicant_income_000s          |
+| **8** | **applicant_income_000s**          |
 | 9  | state_name                     |
 | 10 | state_abbr                     |
 | 11 | sequence_number                |
