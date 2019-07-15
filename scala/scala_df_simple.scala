@@ -32,6 +32,8 @@ dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(0))), min(dataFo
 println("===========================")
 println("Applicant Income - Maximum,Minimum")
 dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(1))), min(dataForAnalysis(dataForAnalysis.columns(1)))).show
+val mrAppIncome = dataForAnalysis.groupBy("applicant_income_000s").count()
+mrAppIncome.show()
 
 println("===========================")
 println("Distinct Actions Taken")
@@ -44,7 +46,8 @@ println("===========================")
 println("Purchaser Type Name")
 val distinctPurchaserType = dataForAnalysis.select(dataForAnalysis("purchaser_type_name")).distinct
 distinctPurchaserType.collect().foreach(println)
-
+val mrDistinctPurchaserType = dataForAnalysis.groupBy("purchaser_type_name").count()
+mrDistinctPurchaserType.show()
 
 println("===========================")
 println("Property Type Name")
