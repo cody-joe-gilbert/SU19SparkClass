@@ -34,5 +34,5 @@ output.saveAsTextFile("project/clean-data/data_for_analysis.csv")
 
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 
-val dataSet = sqlContext.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/clean-data/data_for_analysis.csv")
+val dataSet = sqlContext.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/clean-data/part*")
 
