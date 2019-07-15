@@ -18,6 +18,7 @@ import scala.util.Random
 import sqlContext.implicits._
 
 
+val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 
 val dataSet = sqlContext.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/data/top_1000.csv")
 
