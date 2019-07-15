@@ -30,8 +30,9 @@ val output = data_tuple.map(values => values.toString).
    map(s=>s.substring(1,s.length-1))
    output.take(10).foreach(println)
  
+output.saveAsTextFile("project/clean-data/data_for_analysis.csv")
+
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 
-val dataSet = sqlContext.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/data/top_1000.csv")
+val dataSet = sqlContext.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/clean-data/data_for_analysis.csv")
 
-output.saveAsTextFile("project/clean-data/data_for_analysis.csv")
