@@ -37,7 +37,8 @@ println("===========================")
 println("Distinct Actions Taken")
 val distinctActionsTaken = dataForAnalysis.select(dataForAnalysis("action_taken_name")).distinct
 distinctActionsTaken.collect().foreach(println)
-
+val mrDistinctActionsTaken = dataForAnalysis.groupBy("action_taken_name").count()
+mrDistinctActionsTaken.show()
 
 println("===========================")
 println("Purchaser Type Name")
