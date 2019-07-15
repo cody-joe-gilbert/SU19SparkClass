@@ -64,7 +64,7 @@ distinctLoanPurpose.collect().foreach(println)
 
 println("===========================")
 println("Applicant Race")
-val applicant_race_name = dataForAnalysis.select(dataForAnalysis("applicant_race_name")).distinct
+val applicant_race_name = dataForAnalysis.select(dataForAnalysis("applicant_race_name_1")).distinct
 applicant_race_name.collect().foreach(println)
 
 
