@@ -35,8 +35,8 @@ dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(1))), min(dataFo
 
 println("===========================")
 println("Distinct Actions Taken")
-dataForAnalysis.select(dataForAnalysis("action_taken_name")).distinct
-
+val distinctActionsTaken = dataForAnalysis.select(dataForAnalysis("action_taken_name")).distinct
+distinctActionsTaken.collect().foreach(println)
 
 dataSet.saveAsTextFile("project/clean-data/")
 
