@@ -28,5 +28,7 @@ dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(1))), min(dataFo
 
 dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(0))), min(dataForAnalysis(dataForAnalysis.columns(0)))).show
 
+dataForAnalysis.select(dataForAnalysis("action_taken_name")).distinct
+
 dataSet.saveAsTextFile("project/clean-data/")
 
