@@ -1,93 +1,49 @@
-|0	|tract_to_msamd_income|
-
-1	rate_spread
-
-2	population
-
-3	minority_population
-
-4	number_of_owner_occupied_units
-
-5	number_of_1_to_4_family_units
-
-6	loan_amount_000s
-
-7	hud_median_family_income
-
-8	applicant_income_000s
-
-9	state_name
-
-10	state_abbr
-
-11	sequence_number
-
-12	respondent_id
-
-13	purchaser_type_name
-
-14	property_type_name
-
-15	preapproval_name
-
-16	owner_occupancy_name
-
-17	msamd_name
-
-18	loan_type_name
-
-19	loan_purpose_name
-
-20	lien_status_name
-
-21	hoepa_status_name
-
-22	edit_status_name
-
-23	denial_reason_name_3
-
-24	denial_reason_name_2
-
-25	denial_reason_name_1
-
-26	county_name
-
-27	co_applicant_sex_name
-
-28	co_applicant_race_name_5
-
-29	co_applicant_race_name_4
-
-30	co_applicant_race_name_3
-
-31	co_applicant_race_name_2
-
-32	co_applicant_race_name_1
-
-33	co_applicant_ethnicity_name
-
-34	census_tract_number
-
-35	as_of_year
-
-36	application_date_indicator
-
-37	applicant_sex_name
-
-38	applicant_race_name_5
-
-39	applicant_race_name_4
-
-40	applicant_race_name_3
-
-41	applicant_race_name_2
-
-42	applicant_race_name_1
-
-43	applicant_ethnicity_name
-
-44	agency_name
-
-45	agency_abbr
-
-46	action_taken_name
+| Index  | Column Name          |
+|----|--------------------------------|
+| 0  | tract_to_msamd_income          |
+| 1  | rate_spread                    |
+| 2  | population                     |
+| 3  | minority_population            |
+| 4  | number_of_owner_occupied_units |
+| 5  | number_of_1_to_4_family_units  |
+| 6  | loan_amount_000s               |
+| 7  | hud_median_family_income       |
+| 8  | applicant_income_000s          |
+| 9  | state_name                     |
+| 10 | state_abbr                     |
+| 11 | sequence_number                |
+| 12 | respondent_id                  |
+| 13 | purchaser_type_name            |
+| 14 | property_type_name             |
+| 15 | preapproval_name               |
+| 16 | owner_occupancy_name           |
+| 17 | msamd_name                     |
+| 18 | loan_type_name                 |
+| 19 | loan_purpose_name              |
+| 20 | lien_status_name               |
+| 21 | hoepa_status_name              |
+| 22 | edit_status_name               |
+| 23 | denial_reason_name_3           |
+| 24 | denial_reason_name_2           |
+| 25 | denial_reason_name_1           |
+| 26 | county_name                    |
+| 27 | co_applicant_sex_name          |
+| 28 | co_applicant_race_name_5       |
+| 29 | co_applicant_race_name_4       |
+| 30 | co_applicant_race_name_3       |
+| 31 | co_applicant_race_name_2       |
+| 32 | co_applicant_race_name_1       |
+| 33 | co_applicant_ethnicity_name    |
+| 34 | census_tract_number            |
+| 35 | as_of_year                     |
+| 36 | application_date_indicator     |
+| 37 | applicant_sex_name             |
+| 38 | applicant_race_name_5          |
+| 39 | applicant_race_name_4          |
+| 40 | applicant_race_name_3          |
+| 41 | applicant_race_name_2          |
+| 42 | applicant_race_name_1          |
+| 43 | applicant_ethnicity_name       |
+| 44 | agency_name                    |
+| 45 | agency_abbr                    |
+| 46 | action_taken_name              |
