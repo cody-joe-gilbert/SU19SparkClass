@@ -18,8 +18,6 @@ import scala.util.Random
 import sqlContext.implicits._
 
 val data = sc.textFile("project/data/top_1000.csv")
-//val header = data.first
-//val data_filtered = data.filter(_(0) != header(0))
 val data_split = data.map(line => line.split(",").mkString(","))
 
 val data_tuple = data_split.map(line => {
