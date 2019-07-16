@@ -15,7 +15,7 @@ import org.apache.spark.sql._
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
-import sqlContext.implicits._
+//import sqlContext.implicits._
 
 
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
