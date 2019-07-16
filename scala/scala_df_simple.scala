@@ -15,12 +15,12 @@ import org.apache.spark.sql._
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
-//import sqlContext.implicits._
+import org.apache.spark.sql.SparkSession
 
 
-val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+val spark = SparkSession.builder().appName("DataProfiling").getOrCreate()
 
-val dataSet = sqlContext.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/data/hmda_2013.csv")
+val dataSet = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/data/hmda_2013.csv")
 
 val dataForAnalysis = dataSet.select("loan_amount_000s","applicant_income_000s","state_name","state_abbr","respondent_id","purchaser_type_name","property_type_name","loan_type_name","lien_status_name","loan_purpose_name","county_name","as_of_year","applicant_sex_name","applicant_race_name_1","applicant_ethnicity_name","agency_name","agency_abbr","action_taken_name")
 
