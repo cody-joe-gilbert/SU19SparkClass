@@ -28,19 +28,22 @@ val dataForAnalysis = dataSet.select("loan_amount_000s","applicant_income_000s",
 println("===========================")
 println("Loan Amount - Maximum,Minimum")
 dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(0))), min(dataForAnalysis(dataForAnalysis.columns(0)))).show
+val mrLoanAmount = dataForAnalysis.groupBy("loan_amount_000s").count()
+mrLoanAmount.coalesce(1).write.mode("overwrite").format("csv").save("loan-amount-dist")
 
 println("===========================")
 println("Applicant Income - Maximum,Minimum")
 dataForAnalysis.agg(max(dataForAnalysis(dataForAnalysis.columns(1))), min(dataForAnalysis(dataForAnalysis.columns(1)))).show
 val mrAppIncome = dataForAnalysis.groupBy("applicant_income_000s").count()
-mrAppIncome.show()
+mrAppIncome.coalesce(1).write.mode("overwrite").format("csv").save("app-income-dist")
 
 println("===========================")
 println("Distinct Actions Taken")
 val distinctActionsTaken = dataForAnalysis.select(dataForAnalysis("action_taken_name")).distinct
 distinctActionsTaken.collect().foreach(println)
 val mrDistinctActionsTaken = dataForAnalysis.groupBy("action_taken_name").count()
-mrDistinctActionsTaken.show()
+mrDistinctActionsTaken.coalesce(1).write.mode("overwrite").format("csv").save("distinct-actions")
+
 
 println("===========================")
 println("Purchaser Type Name")
