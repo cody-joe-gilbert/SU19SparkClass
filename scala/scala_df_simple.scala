@@ -120,23 +120,17 @@ def dataProfiling(spark : SparkSession, hdfsPath : String) = {
 
     println("===========================")
     println("Applicant Gender")
-    //val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
-    //applicant_sex_name.collect().foreach(println)
     val applicant_sex_name = dataForAnalysis.groupBy("applicant_sex_name").count()
     applicant_sex_name.coalesce(1).write.mode("overwrite").format("csv").save("applicant_sex_name")
 
 
     println("===========================")
     println("Applicant Lender")
-    //val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
-    //applicant_sex_name.collect().foreach(println)
     val respondent_id = dataForAnalysis.groupBy("as_of_year","respondent_id").count()
     respondent_id.coalesce(1).write.mode("overwrite").format("csv").save("respondent_id")
 
     println("===========================")
     println("County")
-    //val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
-    //applicant_sex_name.collect().foreach(println)
     val county_name = dataForAnalysis.groupBy("as_of_year","state_abbr","county_name").count()
     county_name.coalesce(1).write.mode("overwrite").format("csv").save("state_county_occurrence")
 
