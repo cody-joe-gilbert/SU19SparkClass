@@ -20,7 +20,7 @@ import org.apache.spark.sql.SparkSession
 
 val spark = SparkSession.builder().appName("DataProfiling").getOrCreate()
 
-val dataSet = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/data/hmda_2013.csv")
+val dataSet = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/data/HMDA_DATA_2007_2017.csv").select("loan_amount_000s","applicant_income_000s","state_name","state_abbr","respondent_id","purchaser_type_name","property_type_name","loan_type_name","lien_status_name","loan_purpose_name","county_name","as_of_year","applicant_sex_name","applicant_race_name_1","applicant_ethnicity_name","agency_name","agency_abbr","action_taken_name")
 //val dataSet = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("project/data/HMDA_DATA_2007_2017.csv")
 
 
@@ -93,6 +93,25 @@ val applicant_ethnicity_name = dataForAnalysis.select(dataForAnalysis("applicant
 applicant_ethnicity_name.collect().foreach(println)
 val applicant_ethnicity_name = dataForAnalysis.groupBy("applicant_ethnicity_name").count()
 applicant_ethnicity_name.coalesce(1).write.mode("overwrite").format("csv").save("applicant_ethnicity_name")
+
+println("===========================")
+println("Applicant Ethnicity")
+//val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
+//applicant_sex_name.collect().foreach(println)
+val applicant_sex_name = dataForAnalysis.groupBy("applicant_sex_name").count()
+applicant_sex_name.coalesce(1).write.mode("overwrite").format("csv").save("applicant_sex_name")
+
+
+println("===========================")
+println("Applicant Ethnicity")
+//val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
+//applicant_sex_name.collect().foreach(println)
+val respondent_id = dataForAnalysis.groupBy("year","respondent_id").count()
+respondent_id.coalesce(1).write.mode("overwrite").format("csv").save("respondent_id")
+
+
+
+
 
 
 
