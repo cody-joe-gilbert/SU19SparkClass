@@ -136,11 +136,38 @@ def dataProfiling(spark : SparkSession, hdfsPath : String) = {
 
 def dataFiltering(spark : SparkSession, hdfsPath : String) = {
 
+    val dataForAnalysis = spark.read.format("csv").
+                  option("header", "true").  
+                  option("inferSchema", "true").
+                  load(hdfsPath).
+                  select("loan_amount_000s",
+                         "applicant_income_000s",
+                         "state_name","state_abbr",
+                         "respondent_id",
+                         "purchaser_type_name",
+                         "property_type_name",
+                         "loan_type_name",
+                         "lien_status_name",
+                         "loan_purpose_name",
+                         "county_name",
+                         "as_of_year",
+                         "applicant_sex_name",
+                         "applicant_race_name_1",
+                         "applicant_ethnicity_name",
+                         "agency_name","agency_abbr",
+                         "action_taken_name")
     
+    //Filtering the data frame for analysis
+    //Removing 
+    val dataForAnalysis = dataForAnalysis.
+                          filter(col("applicant_ethnicity_name").like("%Hispanic_or_Latino")).
+                          filter(col("applicant_race_name_1").equalTo("White") || col("applicant_race_name_1").equalTo("Asian")  || col("applicant_race_name_1").equalTo("Black_or_African American")  || col("applicant_race_name_1").equalTo("Native_Hawaiian_or_Other_Pacific_Islander") || col("applicant_race_name_1").equalTo("American_Indian_or_Alaska_Native")).
+                          filter(col("action_taken_name").equalTo("Application denied by financial institution") || col("action_taken_name").equalTo("Loan originated") || col("action_taken_name").equalTo("Application approved but not accepted"))
 }
 
 val spark = SparkSession.builder().appName("DataProfiling").getOrCreate()
 val path = "/user/jjl359/project/data/HMDA_2007_to_2017.csv"
 val smallFilePath = "/user/jjl359/project/data/top_1000.csv"
 dataProfiling(spark,path)
+dataFiltering(spark,path)
 
