@@ -95,7 +95,7 @@ val applicant_ethnicity_name = dataForAnalysis.groupBy("applicant_ethnicity_name
 applicant_ethnicity_name.coalesce(1).write.mode("overwrite").format("csv").save("applicant_ethnicity_name")
 
 println("===========================")
-println("Applicant Ethnicity")
+println("Applicant Gender")
 //val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
 //applicant_sex_name.collect().foreach(println)
 val applicant_sex_name = dataForAnalysis.groupBy("applicant_sex_name").count()
@@ -103,11 +103,18 @@ applicant_sex_name.coalesce(1).write.mode("overwrite").format("csv").save("appli
 
 
 println("===========================")
-println("Applicant Ethnicity")
+println("Applicant Lender")
 //val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
 //applicant_sex_name.collect().foreach(println)
 val respondent_id = dataForAnalysis.groupBy("year","respondent_id").count()
 respondent_id.coalesce(1).write.mode("overwrite").format("csv").save("respondent_id")
+
+println("===========================")
+println("County")
+//val applicant_sex_name = dataForAnalysis.select(dataForAnalysis("applicant_sex_name")).distinct
+//applicant_sex_name.collect().foreach(println)
+val county_name = dataForAnalysis.groupBy("state_abbr","county_name").count()
+county_name.coalesce(1).write.mode("overwrite").format("csv").save("state_county_occurrence")
 
 
 
