@@ -144,7 +144,7 @@ def dataProfiling(spark : SparkSession, hdfsPath : String) = {
 
 
 val spark = SparkSession.builder().appName("DataProfiling").getOrCreate()
-val path = "project/data/HMDA_DATA_2007_2017.csv"
+val path = "project/data/HMDA_2007_to_2017.csv"
 val smallFilePath = "project/data/top_1000.csv"
 dataProfiling(spark,smallFilePath)
 
