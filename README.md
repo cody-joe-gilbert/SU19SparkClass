@@ -10,7 +10,8 @@ In order to use dataFrames type the following lines into the Dumbo shell (load m
 ````spark-shell --packages com.databricks:spark-csv_2.11:1.2.0 --master local -deprecation````
 
 
-**Running ````spark-submit````: **
+
+**Running** ````spark-submit````:
 
     /opt/maven/bin/mvn package
     
