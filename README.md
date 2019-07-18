@@ -11,7 +11,7 @@ In order to use dataFrames type the following lines into the Dumbo shell (load m
 
 
 
-**Running** ````spark-submit````:
+**Running** ````spark-submit````, provide a pathname to a folder for the output (arg[0]):
 
     /opt/maven/bin/mvn package
     
