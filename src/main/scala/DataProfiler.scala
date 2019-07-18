@@ -147,7 +147,7 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
                           filter(col("applicant_race_name_1").equalTo("White") || col("applicant_race_name_1").equalTo("Asian")  || col("applicant_race_name_1").equalTo("Black_or_African American")  || col("applicant_race_name_1").equalTo("Native_Hawaiian_or_Other_Pacific_Islander") || col("applicant_race_name_1").equalTo("American_Indian_or_Alaska_Native")).
                           filter(col("action_taken_name").equalTo("Application denied by financial institution") || col("action_taken_name").equalTo("Loan originated") || col("action_taken_name").equalTo("Application approved but not accepted"))
     
-    filteredDataForAnalysis.coalesce(1).write.mode("overwrite").format("csv").save(outputPath+"/data_filtered_jl")
+    filteredDataForAnalysis.coalesce(1).write.mode("overwrite").format("csv").save(outputPath+"/filtered-data")
 
 }
 
