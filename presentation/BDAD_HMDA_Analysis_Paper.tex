@@ -48,9 +48,11 @@
  \section{Objectives}
 
 
-\section{Methodology}
+\section{Data}
 
-\subsection{Calculating Denial Rates}
+\subsection{Denial Rate Analysis}
+
+\subsubsection{}
 
 Our work includes studying the denial rate of one-to-four family, manufactured, and multifamily housing for the various race and ethnic groups reported in the HMDA data.  \vertSpace
 
@@ -65,10 +67,21 @@ In our initial study of denial rates, we will look at the denial rate for the fo
   \item American Indian or Alaska Native
 \end{itemize}
 
-We will calculate the average denial rate, $D$ by race $r$, represented as $D_r$: 
+We will calculate the average denial rate, $D$ by race $r$, represented as $D_r$.  The denial rate $D_r$ by race is caluclated as the number of approvals, $a_r$, divided by the number of loans applied, $n_r$, for given a race group.
 
+
+\begin{equation}
+  a=\begin{cases}
+    1, & \text{if loan approved}.\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+
+\noindent The average denial rate by race, $D_r$, is calculated as: 
 
 $$D_r={\frac {1}{n_r}}\sum _{i=1}^{n_r}a_{i}={\frac {a_{r_1}+a_{r_2}+\cdots +a_{r_n}}{n_r}}$$
+
+
 
 
 \subsection{Data}
