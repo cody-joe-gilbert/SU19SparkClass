@@ -48,13 +48,13 @@
  \section{Objectives}
 
 
-\section{Data}
+\section{Data, Analysis, and Methodology}
 
-\subsection{Denial Rate Analysis}
+This section discusses the analysis of the data set and our modelling methodology. The time frame of the data set spans from 2007-2017 and our analysis focuses on the denial rate of mortgage applications by borrow characteristics such as race, ethnicity, and gender.  We will also analyze denial rate by geographic features and at the institution level.  We will also model whether borrower characteristics impact denial rates through controlling for factors in a regression analysis.  Ultimately our model will show how the denial rate, controlled for borrower characteristics, varies by race, ethnicity, state, and lending institution.   
 
-\subsubsection{}
+\subsection{Average Denial Rate}
 
-Our work includes studying the denial rate of one-to-four family, manufactured, and multifamily housing for the various race and ethnic groups reported in the HMDA data.  \vertSpace
+Our work begins with studying the denial rate of one-to-four family, manufactured, and multifamily housing for the various race and ethnic groups reported in the HMDA data.  \vertSpace
 
 In our initial study of denial rates, we will look at the denial rate for the following ethnic/race groups $r$:
 
@@ -79,26 +79,22 @@ We will calculate the average denial rate, $D$ by race $r$, represented as $D_r$
 
 \noindent The average denial rate by race, $D_r$, is calculated as: 
 
-$$D_r={\frac {1}{n_r}}\sum _{i=1}^{n_r}a_{i}={\frac {a_{r_1}+a_{r_2}+\cdots +a_{r_n}}{n_r}}$$
+\begin{equation}
+D_r={\frac {1}{n_r}}\sum _{i=1}^{n_r}a_{i}={\frac {a_{r_1}+a_{r_2}+\cdots +a_{r_n}}{n_r}}
+\end{equation}
+
+
+
+\subsection{Discussion of Methodology}
 
 
 
 
-\subsection{Data}
+\section{Analytic/Visualization Application}
 
 
 
-
-
-\subsection{Apply ML to Sparse Matrices generated from CountVectorizer}
-
-
-
-\subsubsection{Training, Testing, and Determining the Efficacy of the Models}
-
-
-
-\section{Fruther Work}
+\section{Further Work}
 
 \section{Conclusion}
 Reducing the sparsity of the matrices generated from CountVectorizer by stacking the documents greatly improved the results.  \vertSpace
