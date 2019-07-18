@@ -141,11 +141,6 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
                          "action_taken_name")
     
     //Filtering the data frame for analysis
-    //Removing 
-   // val filteredDataForAnalysis = dataForAnalysis.
-   //                       filter(col("applicant_ethnicity_name") === "Not_Hispanic_or_Latino" || $"applicant_ethnicity_name" === "Hispanic_or_Latino").
-  //                        filter($"applicant_race_name_1" === "White" || $"applicant_race_name_1" === "Asian"  || $"applicant_race_name_1" === "Black_or_African American"  || $"applicant_race_name_1" === "Native_Hawaiian_or_Other_Pacific_Islander" || $"applicant_race_name_1" === "American_Indian_or_Alaska_Native").
-  //                        filter($"action_taken_name" === "Application denied by financial institution" || $"action_taken_name" === "Loan originated" || $"action_taken_name" === "Application approved but not accepted")
       
       val filteredDataForAnalysis = dataForAnalysis.
                           filter(col("applicant_ethnicity_name").like("%Hispanic_or_Latino")).
@@ -163,8 +158,8 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     val smallFilePath = "/user/jjl359/project/data/top_1000.csv"
     val outputPath = args(0)
     
-    dataProfiling(spark,smallFilePath,outputPath)
-    dataFiltering(spark,smallFilePath,outputPath)
+    dataProfiling(spark,path,outputPath)
+    dataFiltering(spark,path,outputPath)
     
     
   }
