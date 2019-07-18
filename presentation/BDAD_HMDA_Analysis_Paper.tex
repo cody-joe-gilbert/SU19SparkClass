@@ -1,0 +1,110 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% BDAD 2019 
+% Cody Gilbert, Fang Han, Jeremy Lao
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+
+% AMS packages:
+\usepackage[fleqn]{amsmath}
+\usepackage{amsmath, amsthm, amsfonts}
+
+% Document Formatting Packages:
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\newcommand{\vertSpace}[1]{\vspace{3mm}}
+
+
+%----------------------------------------------------------------
+\title{Using Big Data Systems to Analyze Big (not Jumbo) Mortgage Data}
+\author{
+        Cody Gilbert \\
+        NYU Computer Science \\
+            \and
+        Fang Han\\
+        NYU Computer Science \\
+             \and
+        Jeremy Lao \\
+        NYU Computer Science
+}
+
+\begin{document}
+{\setlength{\mathindent}{0cm}
+\maketitle
+
+\abstract{\textit{Banking professionals are required to submit data to Federal regulators for the purposese of monitoring the health and safety of the financial system and individual banks.  However, banks are also required by law to help promote growth in their local economies through lending.  The Home Mortgage Disclosure acts requires banks and lenders to provide low-level mortgage application data to the Consumer Finance Protection Bureau (CFPB).  Federal banking regulators analyze the data to discern economic trends and monitor for unfair lending practices.  Our analysis utilizes big data architecture, namely Spark, to dig deeper into the numbers to analyze denial rates by race group, gender, and various borrower characteristics.  Our visualization application will serve as a tool for both regulators and lenders to help identify possible red flags in lending practices.}}
+
+\section{Introduction}
+
+
+\vertSpace
+
+ \section{Objectives}
+
+
+\section{Methodology}
+
+\subsection{Calculating Denial Rates}
+
+Our work includes studying the denial rate of one-to-four family, manufactured, and multifamily housing for the various race and ethnic groups reported in the HMDA data.  \vertSpace
+
+In our initial study of denial rates, we will look at the denial rate for the following ethnic/race groups $r$:
+
+\begin{itemize}
+  \item White
+  \item Hispanic
+  \item Asian
+  \item African American
+  \item Native Hawaiian or Pacific Islander
+  \item American Indian or Alaska Native
+\end{itemize}
+
+We will calculate the average denial rate, $D$ by race $r$, represented as $D_r$: 
+
+
+$$D_r={\frac {1}{n_r}}\sum _{i=1}^{n_r}a_{i}={\frac {a_{r_1}+a_{r_2}+\cdots +a_{r_n}}{n_r}}$$
+
+
+\subsection{Data}
+
+
+
+
+
+\subsection{Apply ML to Sparse Matrices generated from CountVectorizer}
+
+
+
+\subsubsection{Training, Testing, and Determining the Efficacy of the Models}
+
+
+
+\section{Fruther Work}
+
+\section{Conclusion}
+Reducing the sparsity of the matrices generated from CountVectorizer by stacking the documents greatly improved the results.  \vertSpace
+
+
+
+
+\appendix
+\section{Appendix}
+
+\subsection{What is HMDA}
+
+
+% Bibliography
+%-----------------------------------------------------------------
+\begin{thebibliography}{99}
+
+\bibitem item
+
+
+\end{thebibliography}
+\end{document}
