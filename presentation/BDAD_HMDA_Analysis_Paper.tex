@@ -56,7 +56,8 @@ This section discusses the analysis of the data set and our modelling methodolog
 
 Our work begins with studying the denial rate of one-to-four family, manufactured, and multifamily housing for the various race and ethnic groups reported in the HMDA data.  \vertSpace
 
-In our initial study of denial rates, we will look at the denial rate for the following ethnic/race groups $r$:
+
+\noindent The following ethnic and race groups are reported in the HMDA data:
 
 \begin{itemize}
   \item White
@@ -65,9 +66,19 @@ In our initial study of denial rates, we will look at the denial rate for the fo
   \item African American
   \item Native Hawaiian or Pacific Islander
   \item American Indian or Alaska Native
-\end{itemize}
+\end{itemize}  \vertSpace
 
-We will calculate the average denial rate, $D$ by race $r$, represented as $D_r$.  The denial rate $D_r$ by race is caluclated as the number of approvals, $a_r$, divided by the number of loans applied, $n_r$, for given a race group.
+
+
+Our analysis excludes line items where the race and ethnicity are not known and reported as \textit{Not Applicable, Blank, or ''Cannot be Reached by Phone,Internet,Fax, Mail ``}.  The percentage of items where ethnicity is not identified is $\approx 21\%$ and the percentage of items where race is not reported is only $\approx 11\%$.  Given the high percentage of data where race and ethnicity are specified, we will have a significantly large data set.  The intent of analyzing denial rate by race and ethnicity is to compare mortgage loan denial rate of non-white loan applicants to white loan applicants (the control group).  \vertSpace 
+
+
+Previous research has been done in this area and it is widely acknowledged that white loan applicants as a whole have the lowest denial rates. \cite{opportunitiesAndIssues}  However, we will begin our analysis with the overall denial rate and further analysis will show the comparative denial rate when borrower characteristics are taken into account.  \vertSpace
+
+
+
+We will calculate the average denial rate, $D$ by race $r$, represented as $D_r$.  The denial rate $D_r$ by race is caluclated as the number of approvals, $a_r$, divided by the number of loans applied, $n_r$, for given a race group. \vertSpace
+
 
 
 \begin{equation}
@@ -112,7 +123,10 @@ Reducing the sparsity of the matrices generated from CountVectorizer by stacking
 %-----------------------------------------------------------------
 \begin{thebibliography}{99}
 
-\bibitem item
+\bibitem{opportunitiesAndIssues} 
+\textit{Opportunities and Issues in Using HMDA Data}. 
+Robert Avery, Kenneth Brevoort, Glenn Canner. JRER Vol. 29, April 2007. 
+
 
 
 \end{thebibliography}
