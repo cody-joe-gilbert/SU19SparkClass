@@ -1,4 +1,6 @@
-https://stackoverflow.com/questions/37201918/spark-job-keep-on-running
+**How to keep spark-submit jobs running after closing the shell**
+
+   +  https://stackoverflow.com/questions/37201918/spark-job-keep-on-running
 
 
 **Download HMDA data in *raw* and *descriptive* formats from this site:**
