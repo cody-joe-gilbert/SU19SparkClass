@@ -1,0 +1,3 @@
+#!/bin/bash
+
+{ cat hmda_2007_nationwide_all-records_codes.csv; sed '1d' hmda_2008_nationwide_all-records_codes.csv; sed '1d' hmda_2009_nationwide_all-records_codes.csv; sed '1d' hmda_2010_nationwide_all-records_codes.csv; sed '1d' hmda_2011_nationwide_all-records_codes.csv; sed '1d' hmda_2012_nationwide_all-records_codes.csv; sed '1d' hmda_2013_nationwide_all-records_codes.csv; sed '1d' hmda_2014_nationwide_all-records_codes.csv; sed '1d' hmda_2015_nationwide_all-records_codes.csv; sed '1d' hmda_2016_nationwide_all-records_codes.csv;  sed '1d' hmda_2017_nationwide_all-records_codes.csv;} > HMDA_2007_to_2017_codes.csv
