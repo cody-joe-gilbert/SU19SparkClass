@@ -71,7 +71,9 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                              replace("5","File closed for incompleteness").
                              replace("6","Loan purchased by the institution").
                              replace("7","Preapproval request denied by financial institution").
-                             replace("8","Preapproval request approved but not accepted")+","+x(1).toString.mkString(""))
+                             replace("8","Preapproval request approved but not accepted")+","+x(1).toString.mkString("")).
+                             repartition(1)
+                             
     header_3.union(reducedActionData).saveAsTextFile(outputPath+"/distinct-actions")
     
     println("===========================")
@@ -92,7 +94,9 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                              replace("6","Commercial bank savings bank or savings association").
                              replace("7","Life insurance company credit union mortgage bank or finance company").
                              replace("8","Affiliate institution").
-                             replace("9","Other type of purchaser")+","+x(1).toString.mkString(""))
+                             replace("9","Other type of purchaser")+","+x(1).toString.mkString("")).
+                             repartition(1)
+                             
     header_4.union(reducedPTypeData).saveAsTextFile(outputPath+"/distinct-purchaser-type")
 
     println("===========================")
@@ -106,7 +110,9 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                          map(x => x.split(",")).map(x => x(0).toString.
                              replace("1","One to four-family (other than manufactured housing)").
                              replace("2","Manufactured housing").
-                             replace("3","Multifamily")+","+x(1).toString.mkString(""))
+                             replace("3","Multifamily")+","+x(1).toString.mkString("")).
+                             repartition(1)
+                             
     header_5.union(reducedPropType).saveAsTextFile(outputPath+"/property-type-name")
 
     println("===========================")
@@ -121,7 +127,9 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                              replace("1","Conventional (any loan other than FHA, VA, FSA, or RHS loans)").
                              replace("2","FHA-insured (Federal Housing Administration)").
                              replace("3","VA-guaranteed (Veterans Administration)").
-                             replace("4","FSA/RHS (Farm Service Agency or Rural Housing Service)")+","+x(1).toString.mkString(""))
+                             replace("4","FSA/RHS (Farm Service Agency or Rural Housing Service)")+","+x(1).toString.mkString("")).
+                             repartition(1)
+                             
     header_6.union(reducedLoanType).saveAsTextFile(outputPath+"/loan-type-name")
 
     
@@ -141,7 +149,9 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                              replace("5","White").
                              replace("6","Information not provided by applicant in mail Internet or telephone application").
                              replace("7","Not applicable").
-                             replace("8","No co-applicant")+","+x(1).toString.mkString(""))
+                             replace("8","No co-applicant")+","+x(1).toString.mkString("")).
+                             repartition(1)
+                             
     header_7.union(appRace).saveAsTextFile(outputPath+"/applicant_race_name")
 
     println("===========================")
@@ -157,7 +167,9 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                              replace("2","Not Hispanic or Latino").
                              replace("3","Information not provided by applicant in mail Internet or telephone application").
                              replace("4","Not applicable").
-                             replace("5","No co-applicant")+","+x(1).toString.mkString(""))
+                             replace("5","No co-applicant")+","+x(1).toString.mkString("")).
+                             repartition(1)
+                             
     header_8.union(appEth).saveAsTextFile(outputPath+"/applicant_ethnicity")
 
     println("===========================")
@@ -173,7 +185,9 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                              replace("2","Female").
                              replace("3","Information not provided by applicant in mail Internet or telephone application").
                              replace("4","Not applicable").
-                             replace("5","No co-applicant")+","+x(1).toString.mkString(""))
+                             replace("5","No co-applicant")+","+x(1).toString.mkString("")).
+                             repartition(1)
+                             
     header_9.union(appGen).saveAsTextFile(outputPath+"/applicant_gender")
 
     println("===========================")
@@ -191,10 +205,10 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("County")
     val header_11: RDD[String]= sc.parallelize(List("county,frequency"))
     val county = mapReduceFunc(dataForAnalysis, 12).
-                        // map( x => x.split(",").
-                        // map(_.replace("NA","0").replace("","0")).
-                        // map(_.trim.toInt).
-                        // mkString(",")).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0").replace("","0")).
+                         map(_.trim.toInt).
+                         mkString(",")).
                          repartition(1)
                          
     header_11.union(county).saveAsTextFile(outputPath+"/county")
@@ -216,11 +230,11 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("Year")
     val header_13: RDD[String]= sc.parallelize(List("year,frequency"))
     val year = mapReduceFunc(dataForAnalysis, 0).
-                        // map( x => x.split(",").
-                        // map(_.replace("NA","0").replace("","0")).
-                        // map(_.trim.toInt).
-                        // mkString(",")).
-                         repartition(1)
+                        map( x => x.split(",").
+                        map(_.replace("NA","0").replace("","0")).
+                        map(_.trim.toInt).
+                        mkString(",")).
+                        repartition(1)
                          
     header_13.union(year).saveAsTextFile(outputPath+"/year")
 
@@ -391,7 +405,7 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     
     val path_hmda_codes = "/user/jjl359/project/data/HMDA_2007_to_2017_codes.csv"
     val smallFilePath_hmda_codes = "/user/jjl359/project/data/HMDA_codes_5000_lines.csv"
-    val outputPath_hmda_codes = "/user/jjl359/project/profiling-hmda-codes"
+    val outputPath_hmda_codes = "/user/jjl359/project/profiling-hmda-codes-v2"
     val outputPathAnalysis_hmda_codes = "/user/jjl359/project/profiling-hmda-codes-analysis-v2"
     
     val path = "/user/jjl359/project/data/HMDA_2007_to_2017.csv"
@@ -399,8 +413,8 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     //val outputPath = args(0)
     
     
-    //dataProfilingHMDACode(path_hmda_codes,outputPath_hmda_codes)
-    dataFilteringRDD(path_hmda_codes,outputPathAnalysis_hmda_codes)
+    dataProfilingHMDACode(path_hmda_codes,outputPath_hmda_codes)
+    //dataFilteringRDD(path_hmda_codes,outputPathAnalysis_hmda_codes)
     //dataProfiling(spark,path,outputPath)
     //dataFiltering(spark,path,outputPath)
   }
