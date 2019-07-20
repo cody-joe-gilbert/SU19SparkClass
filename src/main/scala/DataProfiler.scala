@@ -37,8 +37,8 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header: RDD[String]= sc.parallelize(List("loan_amount,frequency"))
     val reducedLoanAmtData = mapReduceFunc(dataForAnalysis, 7).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
-                         map(_.trim.toInt).
+                         map(_.replace("NA","0").replace("","0")).
+                         map(_.trim.toDouble).
                          mkString(",")).
                          repartition(1)
     header.union(reducedLoanAmtData).saveAsTextFile(outputPath+"/loan-amount-dist")
@@ -49,8 +49,8 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_2: RDD[String]= sc.parallelize(List("applicant_income,frequency"))     
     val reducedIncData = mapReduceFunc(dataForAnalysis, 28).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
-                         map(_.trim.toInt).
+                         map(_.replace("NA","0").replace("","0").replace("000 0 0","0")).
+                         map(_.trim.toDouble).
                          mkString(",")).
                          repartition(1)
     header_2.union(reducedIncData).saveAsTextFile(outputPath+"/app-income-dist")
@@ -61,7 +61,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_3: RDD[String]= sc.parallelize(List("distinct_actions,frequency"))
     val reducedActionData = mapReduceFunc(dataForAnalysis, 9).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
+                         map(_.replace("NA","NA").replace("","NA")).
                          mkString(",")).
                          repartition(1).
                          map(x => x.split(",")).map(x => x(0).toString.replace("1","Loan originated"). 
@@ -79,7 +79,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_4: RDD[String]= sc.parallelize(List("purchaser_type,frequency"))
     val reducedPTypeData = mapReduceFunc(dataForAnalysis, 29).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
+                         map(_.replace("NA","NA").replace("","NA")).
                          mkString(",")).
                          repartition(1).
                          map(x => x.split(",")).map(x => x(0).toString.
@@ -100,7 +100,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_5: RDD[String]= sc.parallelize(List("property_type,frequency"))
     val reducedPropType = mapReduceFunc(dataForAnalysis, 4).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
+                         map(_.replace("NA","NA").replace("","NA")).
                          mkString(",")).
                          repartition(1).
                          map(x => x.split(",")).map(x => x(0).toString.
@@ -114,7 +114,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_6: RDD[String]= sc.parallelize(List("loan_type,frequency"))
     val reducedLoanType = mapReduceFunc(dataForAnalysis, 5).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
+                         map(_.replace("NA","NA").replace("","NA")).
                          mkString(",")).
                          repartition(1).
                          map(x => x.split(",")).map(x => x(0).toString.
@@ -130,7 +130,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_7: RDD[String]= sc.parallelize(List("applicant_race,frequency"))
     val appRace = mapReduceFunc(dataForAnalysis, 16).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
+                         map(_.replace("NA","7").replace("","7")).
                          mkString(",")).
                          repartition(1).
                          map(x => x.split(",")).map(x => x(0).toString.
@@ -149,7 +149,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_8: RDD[String]= sc.parallelize(List("applicant_ethnicity,frequency"))
     val appEth = mapReduceFunc(dataForAnalysis, 14).
                          map( x => x.split(",").
-                         map(_.replace("NA","0")).
+                         map(_.replace("NA","4")).
                          mkString(",")).
                          repartition(1).
                          map(x => x.split(",")).map(x => x(0).toString.
@@ -181,7 +181,6 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val header_10: RDD[String]= sc.parallelize(List("lender,frequency"))
     val lender = mapReduceFunc(dataForAnalysis, 1).
                          map( x => x.split(",").
-                         map(_.trim.toInt).
                          mkString(",")).
                          repartition(1)
                          
@@ -192,10 +191,10 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("County")
     val header_11: RDD[String]= sc.parallelize(List("county,frequency"))
     val county = mapReduceFunc(dataForAnalysis, 12).
-                         map( x => x.split(",").
-                         map(_.replace("NA","0")).
-                         map(_.trim.toInt).
-                         mkString(",")).
+                        // map( x => x.split(",").
+                        // map(_.replace("NA","0").replace("","0")).
+                        // map(_.trim.toInt).
+                        // mkString(",")).
                          repartition(1)
                          
     header_11.union(county).saveAsTextFile(outputPath+"/county")
@@ -205,10 +204,10 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("State")
     val header_12: RDD[String]= sc.parallelize(List("state,frequency"))
     val state = mapReduceFunc(dataForAnalysis, 11).
-                         map( x => x.split(",").
-                         map(_.replace("NA","0")).
-                         map(_.trim.toInt).
-                         mkString(",")).
+                        // map( x => x.split(",").
+                        // map(_.replace("NA","0").replace("","0")).
+                        // map(_.trim.toInt).
+                        // mkString(",")).
                          repartition(1)
                          
     header_12.union(state).saveAsTextFile(outputPath+"/state")
@@ -217,10 +216,10 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("Year")
     val header_13: RDD[String]= sc.parallelize(List("year,frequency"))
     val year = mapReduceFunc(dataForAnalysis, 0).
-                         map( x => x.split(",").
-                         map(_.replace("NA","0")).
-                         map(_.trim.toInt).
-                         mkString(",")).
+                        // map( x => x.split(",").
+                        // map(_.replace("NA","0").replace("","0")).
+                        // map(_.trim.toInt).
+                        // mkString(",")).
                          repartition(1)
                          
     header_13.union(year).saveAsTextFile(outputPath+"/year")
