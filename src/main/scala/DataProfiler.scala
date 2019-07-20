@@ -1,13 +1,3 @@
-//import org.apache.spark.ml.evaluation.RegressionEvaluator
-//import org.apache.spark.ml.feature.Normalizer
-//import org.apache.spark.ml.feature.StandardScaler
-//import org.apache.spark.ml.linalg.Vectors
-//import org.apache.spark.ml.regression.LinearRegression
-//import org.apache.spark.ml.tuning.{ParamGridBuilder, TrainValidationSplit}
-//import org.apache.spark.mllib.linalg.Vectors
-//import org.apache.spark.mllib.regression.LabeledPoint
-//import org.apache.spark.mllib.regression.LinearRegressionModel
-//import org.apache.spark.mllib.regression.LinearRegressionWithSGD
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
@@ -17,8 +7,224 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Random
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
+import org.apache.spark.rdd.RDD
+import org.apache.spark.SparkConf
+
 
 object DataProfiler {
+
+def mapReduceFunc(dataForAnalysis : RDD[String], colNum : Integer) : RDD[String] = {
+  val firstLine = dataForAnalysis.first() 
+  val data = dataForAnalysis.filter(row => row != firstLine)
+  val keyAmt = data.map(_.split(",")).
+               map(c => (c(colNum),1)).
+               reduceByKey((x,y) => x+y)
+  val mrAmt = keyAmt.
+              map(x => x._1.stripPrefix("\"").stripSuffix("\"") + "," + x._2)
+  mrAmt
+}
+
+def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
+    
+    val conf = new SparkConf().setAppName("DataProfiling").set("spark.driver.allowMultipleContexts", "true").setMaster("local")
+    val sc = new SparkContext(conf)
+    
+    val dataForAnalysis = sc.textFile(hdfsPath).persist
+    
+    //Maximum-Minimum for Loan amount
+    println("===========================")
+    println("Loan Amount")
+    val header: RDD[String]= sc.parallelize(List("loan_amount,frequency"))
+    val reducedLoanAmtData = mapReduceFunc(dataForAnalysis, 7).
+                             map( x => x.split(",").
+                             map(_.trim.toInt).
+                             mkString(",")).
+                             repartition(1)
+    header.union(reducedLoanAmtData).saveAsTextFile(outputPath+"/loan-amount-dist")
+    
+    //Applicant Income
+    println("===========================")
+    println("Applicant Income")
+    val header_2: RDD[String]= sc.parallelize(List("applicant_income,frequency"))     
+    val reducedIncData = mapReduceFunc(dataForAnalysis, 28).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         map(_.trim.toInt).
+                         mkString(",")).
+                         repartition(1)
+    header_2.union(reducedIncData).saveAsTextFile(outputPath+"/app-income-dist")
+    
+    //Distinct Actions Taken
+    println("===========================")
+    println("Distinct Actions Taken")
+    val header_3: RDD[String]= sc.parallelize(List("distinct_actions,frequency"))
+    val reducedActionData = mapReduceFunc(dataForAnalysis, 9).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         mkString(",")).
+                         repartition(1).
+                         map(x => x.split(",")).map(x => x(0).toString.replace("1","Loan originated"). 
+                             replace("2","Application approved but not accepted").
+                             replace("3","Application denied by financial institution").
+                             replace("4","Application withdrawn by applicant").
+                             replace("5","File closed for incompleteness").
+                             replace("6","Loan purchased by the institution").
+                             replace("7","Preapproval request denied by financial institution").
+                             replace("8","Preapproval request approved but not accepted")+","+x(1).toString.mkString(""))
+    header_3.union(reducedActionData).saveAsTextFile(outputPath+"/distinct-actions")
+    
+    println("===========================")
+    println("Purchaser Type Name")
+    val header_4: RDD[String]= sc.parallelize(List("purchaser_type,frequency"))
+    val reducedPTypeData = mapReduceFunc(dataForAnalysis, 29).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         mkString(",")).
+                         repartition(1).
+                         map(x => x.split(",")).map(x => x(0).toString.
+                             replace("0","Loan was not originated or was not sold in calendar year covered by register"). 
+                             replace("1","Fannie Mae (FNMA)").
+                             replace("2","Ginnie Mae (GNMA)").
+                             replace("3","Freddie Mac (FHLMC)").
+                             replace("4","Farmer Mac (FAMC) ").
+                             replace("5","Private securitization").
+                             replace("6","Commercial bank savings bank or savings association").
+                             replace("7","Life insurance company credit union mortgage bank or finance company").
+                             replace("8","Affiliate institution").
+                             replace("9","Other type of purchaser")+","+x(1).toString.mkString(""))
+    header_4.union(reducedPTypeData).saveAsTextFile(outputPath+"/distinct-purchaser-type")
+
+    println("===========================")
+    println("Property Type Name")
+    val header_5: RDD[String]= sc.parallelize(List("property_type,frequency"))
+    val reducedPropType = mapReduceFunc(dataForAnalysis, 4).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         mkString(",")).
+                         repartition(1).
+                         map(x => x.split(",")).map(x => x(0).toString.
+                             replace("1","One to four-family (other than manufactured housing)").
+                             replace("2","Manufactured housing").
+                             replace("3","Multifamily")+","+x(1).toString.mkString(""))
+    header_5.union(reducedPropType).saveAsTextFile(outputPath+"/property-type-name")
+
+    println("===========================")
+    println("Loan Type Name")
+    val header_6: RDD[String]= sc.parallelize(List("loan_type,frequency"))
+    val reducedLoanType = mapReduceFunc(dataForAnalysis, 5).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         mkString(",")).
+                         repartition(1).
+                         map(x => x.split(",")).map(x => x(0).toString.
+                             replace("1","Conventional (any loan other than FHA, VA, FSA, or RHS loans)").
+                             replace("2","FHA-insured (Federal Housing Administration)").
+                             replace("3","VA-guaranteed (Veterans Administration)").
+                             replace("4","FSA/RHS (Farm Service Agency or Rural Housing Service)")+","+x(1).toString.mkString(""))
+    header_6.union(reducedLoanType).saveAsTextFile(outputPath+"/loan-type-name")
+
+    
+    println("===========================")
+    println("Applicant Race")
+    val header_7: RDD[String]= sc.parallelize(List("applicant_race,frequency"))
+    val appRace = mapReduceFunc(dataForAnalysis, 16).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         mkString(",")).
+                         repartition(1).
+                         map(x => x.split(",")).map(x => x(0).toString.
+                             replace("1","American Indian or Alaska Native").
+                             replace("2","Asian").
+                             replace("3","Black or African American").
+                             replace("4","Native Hawaiian or Other Pacific Islander").
+                             replace("5","White").
+                             replace("6","Information not provided by applicant in mail Internet or telephone application").
+                             replace("7","Not applicable").
+                             replace("8","No co-applicant")+","+x(1).toString.mkString(""))
+    header_7.union(appRace).saveAsTextFile(outputPath+"/applicant_race_name")
+
+    println("===========================")
+    println("Applicant Ethnicity")
+    val header_8: RDD[String]= sc.parallelize(List("applicant_ethnicity,frequency"))
+    val appEth = mapReduceFunc(dataForAnalysis, 14).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         mkString(",")).
+                         repartition(1).
+                         map(x => x.split(",")).map(x => x(0).toString.
+                             replace("1","Hispanic or Latino").
+                             replace("2","Not Hispanic or Latino").
+                             replace("3","Information not provided by applicant in mail Internet or telephone application").
+                             replace("4","Not applicable").
+                             replace("5","No co-applicant")+","+x(1).toString.mkString(""))
+    header_8.union(appEth).saveAsTextFile(outputPath+"/applicant_ethnicity")
+
+    println("===========================")
+    println("Applicant Gender")
+    val header_9: RDD[String]= sc.parallelize(List("applicant_gender,frequency"))
+    val appGen = mapReduceFunc(dataForAnalysis, 26).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         mkString(",")).
+                         repartition(1).
+                         map(x => x.split(",")).map(x => x(0).toString.
+                             replace("1","Male").
+                             replace("2","Female").
+                             replace("3","Information not provided by applicant in mail Internet or telephone application").
+                             replace("4","Not applicable").
+                             replace("5","No co-applicant")+","+x(1).toString.mkString(""))
+    header_9.union(appGen).saveAsTextFile(outputPath+"/applicant_gender")
+
+    println("===========================")
+    println("Lender")
+    val header_10: RDD[String]= sc.parallelize(List("lender,frequency"))
+    val lender = mapReduceFunc(dataForAnalysis, 1).
+                         map( x => x.split(",").
+                         map(_.trim.toInt).
+                         mkString(",")).
+                         repartition(1)
+                         
+    header_10.union(lender).saveAsTextFile(outputPath+"/lender")
+    
+    
+    println("===========================")
+    println("County")
+    val header_11: RDD[String]= sc.parallelize(List("county,frequency"))
+    val county = mapReduceFunc(dataForAnalysis, 12).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         map(_.trim.toInt).
+                         mkString(",")).
+                         repartition(1)
+                         
+    header_11.union(county).saveAsTextFile(outputPath+"/county")
+    
+    
+    println("===========================")
+    println("State")
+    val header_12: RDD[String]= sc.parallelize(List("state,frequency"))
+    val state = mapReduceFunc(dataForAnalysis, 11).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         map(_.trim.toInt).
+                         mkString(",")).
+                         repartition(1)
+                         
+    header_12.union(state).saveAsTextFile(outputPath+"/state")
+
+    println("===========================")
+    println("Year")
+    val header_13: RDD[String]= sc.parallelize(List("year,frequency"))
+    val year = mapReduceFunc(dataForAnalysis, 0).
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         map(_.trim.toInt).
+                         mkString(",")).
+                         repartition(1)
+                         
+    header_13.union(year).saveAsTextFile(outputPath+"/year")
+
+}
 
 
 
@@ -153,14 +359,21 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
 
   def main(args: Array[String]) {
   
-    val spark = SparkSession.builder().appName("DataProfiling").getOrCreate()
+    //val spark = SparkSession.builder().appName("DataProfiling").getOrCreate()
+    
+
+    
+    val path_hmda_codes = "/user/jjl359/project/data/HMDA_2007_to_2017_codes.csv"
+    val smallFilePath_hmda_codes = "/user/jjl359/project/data/HMDA_codes_5000_lines.csv"
+    val outputPath_hmda_codes = "/user/jjl359/project/profiling-hmda-codes"
+    
     val path = "/user/jjl359/project/data/HMDA_2007_to_2017.csv"
     val smallFilePath = "/user/jjl359/project/data/top_1000.csv"
-    val outputPath = args(0)
-    
-    dataProfiling(spark,path,outputPath)
-    dataFiltering(spark,path,outputPath)
+    //val outputPath = args(0)
     
     
+    dataProfilingHMDACode(path_hmda_codes,outputPath_hmda_codes)
+    //dataProfiling(spark,path,outputPath)
+    //dataFiltering(spark,path,outputPath)
   }
 }
