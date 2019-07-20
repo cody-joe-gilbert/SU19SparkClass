@@ -36,10 +36,6 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("Loan Amount")
     val header: RDD[String]= sc.parallelize(List("loan_amount,frequency"))
     val reducedLoanAmtData = mapReduceFunc(dataForAnalysis, 7).
-                         map( x => x.split(",").
-                         map(_.replace("NA","0").replace("","0")).
-                         map(_.trim.toDouble).
-                         mkString(",")).
                          repartition(1)
     header.union(reducedLoanAmtData).saveAsTextFile(outputPath+"/loan-amount-dist")
     
@@ -48,13 +44,12 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("Applicant Income")
     val header_2: RDD[String]= sc.parallelize(List("applicant_income,frequency"))     
     val reducedIncData = mapReduceFunc(dataForAnalysis, 28).
-                         map( x => x.split(",").
-                         map(_.replace("NA","0").replace("","0").replace("000 0 0","0")).
-                         map(_.trim.toDouble).
-                         mkString(",")).
-                         repartition(1)
+                        repartition(1)
     header_2.union(reducedIncData).saveAsTextFile(outputPath+"/app-income-dist")
     
+    
+   
+
     //Distinct Actions Taken
     println("===========================")
     println("Distinct Actions Taken")
@@ -236,7 +231,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                         mkString(",")).
                         repartition(1)
                          
-    header_13.union(year).saveAsTextFile(outputPath+"/year")
+    header_13.union(year).saveAsTextFile(outputPath+"/year") 
 
 }
 
@@ -414,7 +409,7 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     
     
     dataProfilingHMDACode(path_hmda_codes,outputPath_hmda_codes)
-    //dataFilteringRDD(path_hmda_codes,outputPathAnalysis_hmda_codes)
+    dataFilteringRDD(path_hmda_codes,outputPathAnalysis_hmda_codes)
     //dataProfiling(spark,path,outputPath)
     //dataFiltering(spark,path,outputPath)
   }
