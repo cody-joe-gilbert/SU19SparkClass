@@ -36,10 +36,11 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     println("Loan Amount")
     val header: RDD[String]= sc.parallelize(List("loan_amount,frequency"))
     val reducedLoanAmtData = mapReduceFunc(dataForAnalysis, 7).
-                             map( x => x.split(",").
-                             map(_.trim.toInt).
-                             mkString(",")).
-                             repartition(1)
+                         map( x => x.split(",").
+                         map(_.replace("NA","0")).
+                         map(_.trim.toInt).
+                         mkString(",")).
+                         repartition(1)
     header.union(reducedLoanAmtData).saveAsTextFile(outputPath+"/loan-amount-dist")
     
     //Applicant Income
