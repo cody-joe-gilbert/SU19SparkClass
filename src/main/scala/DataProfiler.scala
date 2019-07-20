@@ -29,7 +29,7 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     val conf = new SparkConf().setAppName("DataProfiling").set("spark.driver.allowMultipleContexts", "true").setMaster("local")
     val sc = new SparkContext(conf)
     
-    val dataForAnalysis = sc.textFile(hdfsPath).persist
+    val dataForAnalysis = sc.textFile(hdfsPath)
     
     //Maximum-Minimum for Loan amount
     println("===========================")
@@ -323,6 +323,32 @@ def dataProfiling(spark : SparkSession, hdfsPath : String, outputPath : String) 
 }
 
 
+def dataFilteringRDD(hdfsPath : String, outputPath : String) = {
+
+    val conf = new SparkConf().setAppName("DataProfiling").set("spark.driver.allowMultipleContexts", "true").setMaster("local")
+    val sc = new SparkContext(conf)
+    
+    val dataForAnalysis = sc.textFile(hdfsPath)
+    
+    val firstLine = dataForAnalysis.first() 
+    val data = dataForAnalysis.filter(row => row != firstLine)
+    val keyAmt = data.map(_.split(",")).map(c => (c(9).toString +","+c(28).toString,1)).
+               reduceByKey((x,y) => x+y)
+    val mrAmt = keyAmt.map(x => x._1.stripPrefix("\"").stripSuffix("\"") + "," + x._2).
+                       map(x => x.split(",")).map(x => x(0).toString.stripPrefix("\"").stripSuffix("\"").replace("1","Loan originated"). 
+                         replace("2","Application approved but not accepted").
+                         replace("3","Application denied by financial institution").
+                         replace("4","Application withdrawn by applicant").
+                         replace("5","File closed for incompleteness").
+                         replace("6","Loan purchased by the institution").
+                         replace("7","Preapproval request denied by financial institution").
+                         replace("8","Preapproval request approved but not accepted")+","+x(1).toString.stripPrefix("\"").stripSuffix("\"")+","+x(2).toString.mkString(""))
+     
+    mrAmt.repartition(1).saveAsTextFile(outputPath+"/action-taken")
+    sc.stop()
+}
+
+
 def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) = {
 
     val dataForAnalysis = spark.read.format("csv").
@@ -366,13 +392,15 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     val path_hmda_codes = "/user/jjl359/project/data/HMDA_2007_to_2017_codes.csv"
     val smallFilePath_hmda_codes = "/user/jjl359/project/data/HMDA_codes_5000_lines.csv"
     val outputPath_hmda_codes = "/user/jjl359/project/profiling-hmda-codes"
+    val outputPathAnalysis_hmda_codes = "/user/jjl359/project/profiling-hmda-codes-analysis-v2"
     
     val path = "/user/jjl359/project/data/HMDA_2007_to_2017.csv"
     val smallFilePath = "/user/jjl359/project/data/top_1000.csv"
     //val outputPath = args(0)
     
     
-    dataProfilingHMDACode(path_hmda_codes,outputPath_hmda_codes)
+    //dataProfilingHMDACode(path_hmda_codes,outputPath_hmda_codes)
+    dataFilteringRDD(path_hmda_codes,outputPathAnalysis_hmda_codes)
     //dataProfiling(spark,path,outputPath)
     //dataFiltering(spark,path,outputPath)
   }
