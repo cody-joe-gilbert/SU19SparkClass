@@ -15,4 +15,4 @@ In order to use dataFrames type the following lines into the Dumbo shell (load m
 
     /opt/maven/bin/mvn package
     
-    nohup spark-submit --class DataProfiler --master yarn target/scala-0.0.1-SNAPSHOT.jar  /user/<network id>/<output_folder_name>  &
+    nohup spark2-submit --class DataProfiler --master yarn target/scala-0.0.1-SNAPSHOT.jar  &
