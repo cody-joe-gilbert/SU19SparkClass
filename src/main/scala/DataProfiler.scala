@@ -24,13 +24,13 @@ def mapReduceFunc(dataForAnalysis : RDD[String], colNum : Integer) : RDD[String]
   mrAmt
 }
 
-def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
+def dataProfilingHMDACode(sc : SparkContext, hdfsPath : String, outputPath : String) = {
     
-    val conf = new SparkConf().setAppName("DataProfiling").set("spark.driver.allowMultipleContexts", "true").setMaster("local")
-    val sc = new SparkContext(conf)
+    //val conf = new SparkConf().setAppName("DataProfiling").setMaster("local[2]")
+    //val sc = new SparkContext(conf)
     
     val dataForAnalysis = sc.textFile(hdfsPath)
-    
+/*    
     //Maximum-Minimum for Loan amount
     println("===========================")
     println("Loan Amount")
@@ -196,19 +196,20 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
     header_10.union(lender).saveAsTextFile(outputPath+"/lender")
     
     
+
     println("===========================")
     println("County")
     val header_11: RDD[String]= sc.parallelize(List("county,frequency"))
     val county = mapReduceFunc(dataForAnalysis, 12).
-                         map( x => x.split(",").
-                         map(_.replace("NA","0").replace("","0")).
-                         map(_.trim.toInt).
-                         mkString(",")).
+                         //map( x => x.split(",").
+                         //map(_.replace("NA","0").replace("","0")).
+                         //map(_.trim.toInt).
+                         //mkString(",")).
                          repartition(1)
                          
     header_11.union(county).saveAsTextFile(outputPath+"/county")
     
-    
+     
     println("===========================")
     println("State")
     val header_12: RDD[String]= sc.parallelize(List("state,frequency"))
@@ -220,15 +221,17 @@ def dataProfilingHMDACode(hdfsPath : String, outputPath : String) = {
                          repartition(1)
                          
     header_12.union(state).saveAsTextFile(outputPath+"/state")
+    
+    */
 
     println("===========================")
     println("Year")
     val header_13: RDD[String]= sc.parallelize(List("year,frequency"))
     val year = mapReduceFunc(dataForAnalysis, 0).
-                        map( x => x.split(",").
-                        map(_.replace("NA","0").replace("","0")).
-                        map(_.trim.toInt).
-                        mkString(",")).
+                        //map( x => x.split(",").
+                        //map(_.replace("NA","0").replace("","0")).
+                        //map(_.trim.toInt).
+                        //mkString(",")).
                         repartition(1)
                          
     header_13.union(year).saveAsTextFile(outputPath+"/year") 
@@ -332,10 +335,10 @@ def dataProfiling(spark : SparkSession, hdfsPath : String, outputPath : String) 
 }
 
 
-def dataFilteringRDD(hdfsPath : String, outputPath : String) = {
+def dataFilteringRDD(sc : SparkContext, hdfsPath : String, outputPath : String) = {
 
-    val conf = new SparkConf().setAppName("DataProfiling").set("spark.driver.allowMultipleContexts", "true").setMaster("local")
-    val sc = new SparkContext(conf)
+    //val conf = new SparkConf().setAppName("DataProfiling").setMaster("local[2]")
+    //val sc = new SparkContext(conf)
     
     val dataForAnalysis = sc.textFile(hdfsPath)
     
@@ -397,6 +400,8 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     //val spark = SparkSession.builder().appName("DataProfiling").getOrCreate()
     
 
+    val conf = new SparkConf().setAppName("DataProfiling").setMaster("local[2]")
+    val sc = new SparkContext(conf)
     
     val path_hmda_codes = "/user/jjl359/project/data/HMDA_2007_to_2017_codes.csv"
     val smallFilePath_hmda_codes = "/user/jjl359/project/data/HMDA_codes_5000_lines.csv"
@@ -408,9 +413,12 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     //val outputPath = args(0)
     
     
-    dataProfilingHMDACode(path_hmda_codes,outputPath_hmda_codes)
-    dataFilteringRDD(path_hmda_codes,outputPathAnalysis_hmda_codes)
+    dataProfilingHMDACode(sc,path_hmda_codes,outputPath_hmda_codes)
+    dataFilteringRDD(sc,path_hmda_codes,outputPathAnalysis_hmda_codes)
     //dataProfiling(spark,path,outputPath)
     //dataFiltering(spark,path,outputPath)
+
+    sc.stop()
+
   }
 }
