@@ -2,7 +2,7 @@ Column of Interest,  Description,    Used or Not Used in Analysis, Range of Valu
 as_of_year,         The year that the data represents,        Used in the analysis,  2007 to 2017, String or Integer
 respondent_id,      9 to 12 digit identifier of the lending institution (ID RSSD or Tax ID),  Used in analysis, 1-9 digit ID RSSD or 9 digit tax identifier (xx-xxxxxxx), String or Integer
 agency_code,        The agency that regulates the lender (for example the Fed or FDIC),  not used, one to nine representing different agencies, string or integer (string if NA is submitted)
-loan_type,           Whether the loan is conforming / not conforming / jumbo, Will be used, there four distinct values (Conventional, FHA, VA, FSA) however in some cases NA is submitted, string 
+loan_type,           Whether the loan is conforming / not conforming / jumbo, Will be used, there four distinct values (Conventional / FHA / VA / FSA) however in some cases NA is submitted, string 
 property_type,       1-4 family home / multifamily / manufactured, used, there are only three types of property types but NA is sometimes submitted, string or integer 
 loan_purpose,        purchase / home improvement / refinancing, not used , there are only three choices but NA if nothing is indicated on the application, string or integer 
 owner_occupancy,     owner occupied unit or buy to rend unit, not used, there are three options (Owner occupied / not owner occupied / not applicable), string or integer
