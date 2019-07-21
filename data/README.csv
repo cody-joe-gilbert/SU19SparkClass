@@ -1,45 +1,16 @@
-Column of Interest,  Description,    Used or Not Used in Analysis
-as_of_year,         The year that the data represents,        Used in the analysis
-respondent_id,      9 to 12 digit identifier of the lending institution (ID RSSD or Tax ID),  Used in analysis
-agency_code,        The agency that regulates the lender (for example the Fed or FDIC),  not used 
-loan_type,           Whether the loan is conforming / not conforming / jumbo, Will be used 
-property_type,       1-4 family home / multifamily / manufactured, used
-loan_purpose,        purchase / home improvement, not used 
-owner_occupancy,     owner occupied unit or buy to rend unit, not used
-loan_amount_000s,    the amount of the loan being applied for, used
-preapproval,         whether the loan application was pre-approved, not used
-action_taken,         whether the loan application was originated or denied,  used 
-msamd,               metropolitan district, not used
-state_code,          the state where the property is located, used 
-county_code,         the county where the loan is located, used
-census_tract_number, census tract number, not used
-applicant_ethnicity, white or Hispanic, used
-co_applicant_ethnicity, white or Hispanic, not used
-applicant_race_1, white or Hispanic, not used
-applicant_race_2, white or Hispanic, not used
-applicant_race_3, white or Hispanic, not used
-applicant_race_4, white or Hispanic, not used
-applicant_race_5, white or Hispanic, not used
-co_applicant_race_1, white or Hispanic, not used
-co_applicant_race_2, white or Hispanic, not used
-co_applicant_race_3, white or Hispanic, not used
-co_applicant_race_4, white or Hispanic, not used
-co_applicant_race_5, white or Hispanic, not used
-applicant_sex, gender, used 
-co_applicant_sex, gender, used 
-applicant_income_000s, income of the applicant, used 
-purchaser_type, the ultimate purchaser of the loan such as Fannie Mae or Freddie Mac, not used 
-denial_reason_1, the reason the loan was denied, not used 
-denial_reason_2, the reason the loan was denied, not used 
-denial_reason_3, the reason the loan was denied, not used 
-rate_spread, the amount of interest charged above the conventional or market rate, not used 
-lien_status, first lien or second lien or no lien mortgage, not used 
-edit_status, this signals whether the data failed a data quality check, not used 
-population, population of the census tract area where the loan application is made, not used 
-minority_population, the number of minorities in the census tract of the area where the application was made, not used 
-hud_median_family_income, the median income of the census tract of the area where application was made, not used
-tract_to_msamd_income, the ratio of income in the census tract to the metropolitan area, not used 
-number_of_owner_occupied_units, number of owner occupied units in the census tract, not used
-number_of_1_to_4_family_units, number of 1 to 4 family units in the census tract, not used
-application_date_indicator, whether the application was made prior to 2004 or after 2004 and 2010, not used 
-
+Column of Interest,  Description,    Used or Not Used in Analysis, Range of Values, Data Type
+as_of_year,         The year that the data represents,        Used in the analysis,  2007 to 2017, String or Integer
+respondent_id,      9 to 12 digit identifier of the lending institution (ID RSSD or Tax ID),  Used in analysis, 1-9 digit ID RSSD or 9 digit tax identifier (xx-xxxxxxx), String or Integer
+agency_code,        The agency that regulates the lender (for example the Fed or FDIC),  not used, one to nine representing different agencies, string or integer (string if NA is submitted)
+loan_type,           Whether the loan is conforming / not conforming / jumbo, Will be used, there four distinct values (Conventional, FHA, VA, FSA) however in some cases NA is submitted, string 
+property_type,       1-4 family home / multifamily / manufactured, used, there are only three types of property types but NA is sometimes submitted, string or integer 
+loan_purpose,        purchase / home improvement / refinancing, not used , there are only three choices but NA if nothing is indicated on the application, string or integer 
+owner_occupancy,     owner occupied unit or buy to rend unit, not used, there are three options (Owner occupied / not owner occupied / not applicable), string or integer
+loan_amount_000s,    the amount of the loan being applied for, used, the range is from 1000 dollars to 99 million dollars and there are some NA or blank values. However it appears that the loan amount is normally distributed between 1000 dollars to 500000 dollars, integer unless NA
+preapproval,         whether the loan application was pre-approved, not used, three options, integer or string
+action_taken,         whether the loan application was originated or denied,  used, there are 8 distinct actions that can be taken (such as loan originated or application denied), string or integer
+state_code,          the state where the property is located, used, string or integer of the abbreviations or FIPS number of the state (Federal Information Processing Standard), string or integer
+county_code,         the county where the loan is located, used, the name of the county or a three digit FIPS number, string or integer 
+applicant_sex, gender, used , male or female are the options, string or integer 
+applicant_income_000s, income of the applicant, used , the range of incomes are 1000 to 99 million and the average income over the 11 year period is 3.3 million / however the weighted average income by frequency of applications per income listed is 98 thousand, string or integer 
+rate_spread, the amount of interest charged above the conventional or market rate, not used, , 
