@@ -26,11 +26,9 @@ def mapReduceFunc(dataForAnalysis : RDD[String], colNum : Integer) : RDD[String]
 
 def dataProfilingHMDACode(sc : SparkContext, hdfsPath : String, outputPath : String) = {
     
-    //val conf = new SparkConf().setAppName("DataProfiling").setMaster("local[2]")
-    //val sc = new SparkContext(conf)
-    
+   
     val dataForAnalysis = sc.textFile(hdfsPath)
-/*    
+    
     //Maximum-Minimum for Loan amount
     println("===========================")
     println("Loan Amount")
@@ -222,7 +220,6 @@ def dataProfilingHMDACode(sc : SparkContext, hdfsPath : String, outputPath : Str
                          
     header_12.union(state).saveAsTextFile(outputPath+"/state")
     
-    */
 
     println("===========================")
     println("Year")
@@ -337,8 +334,6 @@ def dataProfiling(spark : SparkSession, hdfsPath : String, outputPath : String) 
 
 def dataFilteringRDD(sc : SparkContext, hdfsPath : String, outputPath : String) = {
 
-    //val conf = new SparkConf().setAppName("DataProfiling").setMaster("local[2]")
-    //val sc = new SparkContext(conf)
     
     val dataForAnalysis = sc.textFile(hdfsPath)
     
@@ -410,7 +405,7 @@ def dataFiltering(spark : SparkSession, hdfsPath : String, outputPath : String) 
     
     val path = "/user/jjl359/project/data/HMDA_2007_to_2017.csv"
     val smallFilePath = "/user/jjl359/project/data/top_1000.csv"
-    //val outputPath = args(0)
+    val outputPath = "/user/jjl359/project/profiling-hmda-codes-analysis"
     
     
     dataProfilingHMDACode(sc,path_hmda_codes,outputPath_hmda_codes)
