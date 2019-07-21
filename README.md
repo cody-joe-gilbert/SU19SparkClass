@@ -1,25 +1,18 @@
-The scripts are a pipeline that are meant to be executed in the following order: 
+# SU19SparkClass
+Repository for the team project in the Summer 2019 Spark Class.
 
-  1.  Get/download the zip files
-  2.  Unzip the files into the target folder 
-  3.  Concatenate the files together 
- 
-Once the files are ready in scratch, then they can be put into hdfs by: 
+In order to use dataFrames type the following lines into the Dumbo shell (load modules and spark shell with databricks package): 
 
-````hdfs dfs -put <filename> /user/jjl359/<target-folder>````
+````module load java/1.8.0_72 ````
 
+````module load spark/2.2.0 ````
 
-There are two sets of download, unzip, and concatenate scripts.  This is because there are two ways of representing the data set.  The representation with larger amounts of memory has extensive string representations of the data.  The representation that takes less memory is an integer representation of the text options. 
+````spark-shell --packages com.databricks:spark-csv_2.11:1.2.0 --master local -deprecation````
 
 
-How to execute the following scripts:
 
-```chmod +x *.bash```
+**Running** ````spark-submit````:
 
-```./<script_name> netID```
-
-Example:
-
-````./unzip_data.bash jjl359````
-
-This should download the zip and subsequently unzip the LAR files into your scratch workspace.
+    /opt/maven/bin/mvn package
+    
+    nohup spark2-submit --class DataProfiler --master yarn target/scala-0.0.1-SNAPSHOT.jar  &
