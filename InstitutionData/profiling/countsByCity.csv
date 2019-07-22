@@ -1,4 +1,4 @@
-"regexp_extract(RespondentCity,([\w]+(\s[\w]+)*),1)",count
+RespondentCity,count
 HOMESTEAD,25
 HILLSDALE,16
 BLUEFIELD,14
