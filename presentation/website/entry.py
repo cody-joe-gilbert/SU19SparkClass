@@ -47,6 +47,13 @@ def visualization():
     """
     return render_template('HMDACounties.html', title='Visualization')
 
+@app.route("/paper", methods=['GET'])
+def paper():
+    """
+    TODO 
+    fix relative path of paper
+    """
+    return render_template('paper.html', title="Paper")
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():

@@ -29,6 +29,10 @@ class RegistrationForm(FlaskForm):
                                 choices=[('hispanic', 'Hispanic or Latino'), ('notHispanic', 'Not Hispanic or Latino'),
                                 ('na', 'Not Applicable')])
 
+    """
+    TODO
+    delete email field if not using database
+    """
     email = StringField('Email', validators=[DataRequired(), Email()])
 
     submit = SubmitField('Submit')
