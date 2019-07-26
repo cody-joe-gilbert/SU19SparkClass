@@ -18,7 +18,6 @@ import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
 import org.apache.spark.rdd.RDD
 import scala.util.{Try, Success, Failure}
 
