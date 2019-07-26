@@ -39,9 +39,13 @@ def home():
     return render_template('home.html', posts=posts)
 
 
-@app.route("/about")
-def about():
-    return render_template('about.html', title='About')
+@app.route("/visualization")
+def visualization():
+    """
+    TODO
+    waiting on data
+    """
+    return render_template('HMDACounties.html', title='Visualization')
 
 
 @app.route("/register", methods=['GET', 'POST'])
