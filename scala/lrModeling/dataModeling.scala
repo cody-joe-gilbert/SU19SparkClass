@@ -1,3 +1,13 @@
+// CSCI-GA.3033-001: Big Data Application Development
+// Team Project Code
+// Cody Gilbert, Fan Han, Jeremy Lao
+
+// This code takes in the cleaned and pre-joined HMDA data and saves a logistic regression model for use within the UI driverCode.py
+
+// CURRENT DRAFT: UNFINISHED
+
+// @author: Cody Gilbert
+
 import org.apache.spark.ml.feature.OneHotEncoderEstimator
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.Pipeline
@@ -15,6 +25,8 @@ import org.apache.spark.ml.feature.OneHotEncoder
 
 
 val path = "/user/jjl359/project/data/HMDA_2007_to_2017.csv"
+
+// This sets the fields used for the modeling. Commented out fields are not included
 val bigFileSchema: Array[String] = Array(
 // "tract_to_msamd_income",
 //  "rate_spread",
@@ -87,8 +99,6 @@ col("applicant_income_000s").isNotNull &&
 col("loan_amount_000s").isNotNull
 )
 
-
-
 // Bucket the actions by overall value
 val actionBuckets = Seq(
 ("Application denied by financial institution", "Denied"),
@@ -98,36 +108,19 @@ val actionBuckets = Seq(
 ("Preapproval request denied by financial institution", "Denied"),
 ("Loan purchased by the institution", "Approved")
  )
- 
 val actionBucketsDF = actionBuckets.toDF("action_taken_name", "action_bucket")
 
 // join the HMDA data with the bucket definition to get only binary classifications
 val hmdaBucketed = hmdaFiltered.join(actionBucketsDF, Seq("action_taken_name", "action_taken_name"),
 "inner")
 
-
 // Here I take a very small sample for testing purposes
 val hmdaBucketedSample = hmdaBucketed.sample(false, 0.002).persist()
-
 
 // split up the training and testing data
 val randomSplit = hmdaBucketedSample.randomSplit(Array(0.8, 0.2), 42)
 val trainingSet = randomSplit(0)
 val testSet = randomSplit(1)
-
-// df.write.partitionBy("agency_name").saveAsTable("agencyTables")  //splits data up by group
-
-// hmdaBucketed.groupBy("action_bucket").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_action_taken_name.csv")
-// hmdaBucketed.groupBy("applicant_race_name_1").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_applicant_race_name_1.csv")
-// hmdaBucketed.groupBy("applicant_ethnicity_name").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_applicant_ethnicity_name.csv")
-// hmdaBucketed.groupBy("state_abbr").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_state_abbr.csv")
-// hmdaBucketed.groupBy("applicant_sex_name").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_applicant_sex_name.csv")
-// hmdaBucketed.groupBy("applicant_income_000s").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_applicant_income_000s.csv")
-// hmdaBucketed.groupBy("loan_amount_000s").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_loan_amount_000s.csv")
-// hmdaBucketed.groupBy("hud_median_family_income").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_hud_median_family_income.csv")
-// hmdaBucketed.groupBy("minority_population").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_minority_population.csv")
-// hmdaBucketed.groupBy("population").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_population.csv")
-// hmdaBucketed.groupBy("tract_to_msamd_income").count.write.mode("overwrite").format("csv").save("/user/cjg507/sparkproject/bucket_tract_to_msamd_income.csv")
 
 // index the buckets to a binary index
 val indexer = new StringIndexer().
@@ -160,7 +153,6 @@ val encoder4 = new OneHotEncoder().
 setInputCol("applicant_sex_index").
 setOutputCol("applicant_sex_vec")
 
-
 // Assemble the features into a features vector
 val assembler = new VectorAssembler().
 setInputCols(Array(
@@ -173,7 +165,6 @@ setInputCols(Array(
 "loan_amount_000s"
 )).
 setOutputCol("features")
-
 
 // Set the log regression
 val lr = new LogisticRegression().
@@ -205,11 +196,13 @@ val cv = new CrossValidator().
 setEstimator(pipeline).
 setEvaluator(new BinaryClassificationEvaluator).
 setEstimatorParamMaps(paramGrid).
-setNumFolds(4)  // Use 3+ in practice
+setNumFolds(3) 
 
+// call the model for fitting the test (analyzed) model
+val cvTestModel = cv.fit(trainingSet)
+cvTestModel.save("testModel")
 
-// finally call the model for fitting
-val cvModel = cv.fit(trainingSet)
-cvModel.save("testModel")
-
+// now create the actual model using the full data set
+val cvFullModel = cv.fit(hmdaBucketedSample)
+cvFullModel.save("/user/cjg507/sparkproject/HMDAModel")
 

@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, Selec
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from wtforms.fields import SelectField
 
+
 class RegistrationForm(FlaskForm):
     STATE_CHOICES = [('AK', 'Alaska'),('AL', 'Alabama'), ('AR','Arkansas'),('AS', 'American Samoa'),('AZ', 'Arizona'),('CA', 'California'),('CO', 'Colorado'),
         ('CT', 'Connecticut'),('DC', 'District of Columbia'),('DE', 'Delaware'),('FL', 'Florida'),('GA', 'Georgia'),('GU', 'Guam'),('HI', 'Hawaii'),('IA', 'Iowa'),('ID', 'Idaho'),('IL', 'Illinois'),
@@ -16,16 +17,18 @@ class RegistrationForm(FlaskForm):
     state = SelectField(label='State', validators=[DataRequired()], choices=STATE_CHOICES)
 
     income = IntegerField('Income', validators=[DataRequired()])
-    
-    gender = SelectField(u'Gender', validators=[DataRequired()], 
+
+    loanAmnt = IntegerField('Loan Amount', validators=[DataRequired()])
+
+    gender = SelectField(u'Gender', validators=[DataRequired()],
                                 choices=[('f', 'Female'), ('m', 'Male'), ('na', 'Not Applicable')])
 
-    race = SelectField(u'Race', validators=[DataRequired()], 
+    race = SelectField(u'Race', validators=[DataRequired()],
                                 choices=[('nativeAmerican', 'American Indian or Alaska Native'), ('asian', 'Asian'),
-                                ('africanAmerican' ,'Black or African American'), ('pacificIslander', 'Native Hawaiian or Other Pacific Islander'), 
+                                ('africanAmerican' ,'Black or African American'), ('pacificIslander', 'Native Hawaiian or Other Pacific Islander'),
                                 ('white', 'White'), ('na', 'Not Applicable')])
-    
-    ethnicity = SelectField(u'Ethnicity', validators=[DataRequired()], 
+
+    ethnicity = SelectField(u'Ethnicity', validators=[DataRequired()],
                                 choices=[('hispanic', 'Hispanic or Latino'), ('notHispanic', 'Not Hispanic or Latino'),
                                 ('na', 'Not Applicable')])
 
