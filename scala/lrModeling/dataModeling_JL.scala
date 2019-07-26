@@ -68,7 +68,7 @@ val pass_two = pass_one.
                      replace("21","KY").replace("22","LA").replace("23","ME").replace("24","MD").
                      replace("25","MD").replace("26","MI").replace("27","MN").replace("28","MS").
                      replace("29","MO").replace("30","MT").replace("31","NE").replace("32","NV").
-                     replace("33","NH").replace("NJ","34").replace("35","NM").replace("36","NY").
+                     replace("33","NH").replace("34","NJ").replace("35","NM").replace("36","NY").
                      replace("37","NC").replace("38","ND").replace("39","OH").replace("40","OK").
                      replace("41","OR").replace("42","PA").replace("44","RI").replace("45","SC").
                      replace("46","SD").replace("47","TN").replace("48","TX").replace("49","UT").
