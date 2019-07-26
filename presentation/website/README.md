@@ -1,7 +1,8 @@
 ### SETUP
-make sure flask is installed
+make sure flask & flask_sqlalchemy is installed
 ```
 pip install -U Flask
+pip install flask_sqlalchemy
 ```
 
 ### RUN
