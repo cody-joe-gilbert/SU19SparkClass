@@ -8,13 +8,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    #id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     income = db.Column(db.Integer, unique=False, nullable=False)
-    state = db.Column(db.String(20), unique=True, nullable=False)
+    state = db.Column(db.String(20), unique=False, nullable=False)
     gender = db.Column(db.String(10), unique=False, nullable=False)
     ethnicity = db.Column(db.String(30), unique=False, nullable=False)
     race = db.Column(db.String(30), unique=False, nullable=False)
-    email = db.Column(db.String(120), unique=True,primary_key=True, nullable=False)
+    email = db.Column(db.String(120), unique=False, nullable=False)
 
     def __repr__(self):
         return f"User('{self.income}', '{self.state}','{self.gender}', '{self.race}', '{self.ethninicity}', '{self.email}')"
@@ -32,7 +32,6 @@ posts = [
         'content': '<Link to HMDA website>',
     }
 ]
-
 
 @app.route("/")
 @app.route("/home")
@@ -52,8 +51,13 @@ def register():
         user = User(state=form.state.data, gender = form.gender.data, income=form.income.data, email=form.email.data, race=form.race.data, ethnicity=form.ethnicity.data)
         db.session.add(user)
         db.session.commit()
-        flash(f'User profile created for {form.email.data}!', 'success')
-        return redirect(url_for('mapping'))
+        flash(f'User information of {form.email.data} has been plugged into the model, generating result...', 'success')
+        
+        """
+        TODO
+        plug user info into model, whose result will be visualized in /modeling 
+        """
+        return redirect(url_for('modeling'))
     return render_template('findLender.html', title='Register', form=form)
 
 @app.route("/mapping", methods=['GET'])
@@ -62,6 +66,11 @@ def mapping():
 
 @app.route("/modeling", methods=['GET', 'POST'])
 def modeling():
+    """
+    TODO
+    visualize modeling result
+    add button to redirect to mapping
+    """
     return render_template('modeling.html', title='Modeling')
 
 
