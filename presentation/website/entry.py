@@ -34,9 +34,12 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         flash(f'User profile created for {form.email.data}!', 'success')
-        return redirect(url_for('modeling'))
+        return redirect(url_for('mapping'))
     return render_template('findLender.html', title='Register', form=form)
 
+@app.route("/mapping", methods=['GET'])
+def mapping():
+    return render_template('HMDACounties.html', title='Mapping')
 
 @app.route("/modeling", methods=['GET', 'POST'])
 def modeling():
