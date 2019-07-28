@@ -16,6 +16,9 @@ import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.ml.feature.{OneHotEncoder, StringIndexer}
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.feature._
+import org.apache.spark.ml.classification.NaiveBayes
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.classification.LinearSVC
 
 
 val rdd = sc.textFile("project/df_for_logistic_regression/part*")
@@ -104,3 +107,91 @@ predictions.show
 val evaluator = new BinaryClassificationEvaluator().setLabelCol("label").setRawPredictionCol("rawPrediction").setMetricName("areaUnderROC")
 // Evaluates predictions and returns a scalar metric areaUnderROC(larger is better).**
 val accuracy = evaluator.evaluate(predictions)
+
+
+
+
+
+//SVM 
+
+
+val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
+  
+val lsvcModel = lsvc.fit(trainingData)
+
+println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
+
+
+// run the  model on test features to get predictions**
+val predictions = lsvcModel.transform(testData)
+//As you can see, the previous model transform produced a new columns: rawPrediction, probablity and prediction.**
+predictions.show
+
+
+val evaluator = new BinaryClassificationEvaluator().setLabelCol("label").setRawPredictionCol("rawPrediction").setMetricName("areaUnderROC")
+// Evaluates predictions and returns a scalar metric areaUnderROC(larger is better).**
+val accuracy = evaluator.evaluate(predictions)
+
+
+
+//NaiveBayes
+
+val model = new NaiveBayes().fit(trainingData)
+
+// Select example rows to display.
+val predictions = model.transform(testData)
+
+predictions.show()
+
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("label").setPredictionCol("prediction").setMetricName("accuracy")
+val accuracy = evaluator.evaluate(predictions)
+println("Test set accuracy = " + accuracy)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+// Train a RandomForest model.
+val rf = new RandomForestRegressor()
+  .setLabelCol("label")
+  .setFeaturesCol("indexedFeatures")
+
+// Chain indexer and forest in a Pipeline.
+val pipeline = new Pipeline()
+  .setStages(Array(featureIndexer, rf))
+
+// Train model. This also runs the indexer.
+val model = pipeline.fit(trainingData)
+
+// Make predictions.
+val predictions = model.transform(testData)
+
+// Select example rows to display.
+predictions.select("prediction", "label", "features").show(5)
+
+// Select (prediction, true label) and compute test error.
+val evaluator = new RegressionEvaluator()
+  .setLabelCol("label")
+  .setPredictionCol("prediction")
+  .setMetricName("rmse")
+val rmse = evaluator.evaluate(predictions)
+  */
+  
+
+  
