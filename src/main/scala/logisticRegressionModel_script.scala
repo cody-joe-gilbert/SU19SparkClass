@@ -19,7 +19,8 @@ import org.apache.spark.ml.feature._
 import org.apache.spark.ml.classification.NaiveBayes
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.classification.LinearSVC
-
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 
 val rdd = sc.textFile("project/df_for_logistic_regression/part*")
 val data = rdd.
@@ -41,7 +42,7 @@ val dataDF = data.map(row => row.split(",")).
                   where(($"applicant_income_000s" < 100)).
                   where(($"loan_amount_000s" > 50)).
                   where(($"applicant_income_000s" > 25)).
-                  where(($"year" > 2013))//.
+                  where(($"year" > 2010))//.
                   //persist
 
 
@@ -112,7 +113,12 @@ val accuracy = evaluator.evaluate(predictions)
 
 
 
-//SVM 
+/************************************SVM********************************************
+*
+*
+*
+*
+************************************************************************************/
 
 
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
@@ -134,7 +140,12 @@ val accuracy = evaluator.evaluate(predictions)
 
 
 
-//NaiveBayes
+/************************************NaiveBayes**************************************
+*
+*
+*
+*
+************************************************************************************/
 
 val model = new NaiveBayes().fit(trainingData)
 
@@ -164,20 +175,22 @@ println("Test set accuracy = " + accuracy)
 
 
 
-
-
 /*
+
+RANDOM FOREST - REALLY POOR RESULTS
+
+import org.apache.spark.ml.evaluation.RegressionEvaluator
+import org.apache.spark.ml.feature.VectorIndexer
+import org.apache.spark.ml.regression.{RandomForestRegressionModel, RandomForestRegressor}
+
+
 // Train a RandomForest model.
-val rf = new RandomForestRegressor()
-  .setLabelCol("label")
-  .setFeaturesCol("indexedFeatures")
+val rf = new RandomForestRegressor().setLabelCol("label").setFeaturesCol("features")
 
 // Chain indexer and forest in a Pipeline.
-val pipeline = new Pipeline()
-  .setStages(Array(featureIndexer, rf))
 
 // Train model. This also runs the indexer.
-val model = pipeline.fit(trainingData)
+val model = rf.fit(trainingData)
 
 // Make predictions.
 val predictions = model.transform(testData)
@@ -186,12 +199,8 @@ val predictions = model.transform(testData)
 predictions.select("prediction", "label", "features").show(5)
 
 // Select (prediction, true label) and compute test error.
-val evaluator = new RegressionEvaluator()
-  .setLabelCol("label")
-  .setPredictionCol("prediction")
-  .setMetricName("rmse")
+val evaluator = new RegressionEvaluator().setLabelCol("label").setPredictionCol("prediction").setMetricName("rmse")
 val rmse = evaluator.evaluate(predictions)
-  */
-  
 
-  
+
+*/
