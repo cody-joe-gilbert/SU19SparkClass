@@ -26,19 +26,20 @@ val data = rdd.
                             columns(2).toDouble + "," +
                             columns(6).toString + "-" + columns(7).toString +","+
                             columns(5).toString +","+
+                            columns(3).toString +","+
                             columns(8).replace("Approved","1").replace("Denied","0").toInt)
 
-val header = "year" +","+"loan_amount_000s" +","+ "applicant_income_000s"+","+"race"+","+"gender"  +","+"action"
+val header = "year" +","+"loan_amount_000s" +","+ "applicant_income_000s"+","+"race"+","+"gender" +","+ "state" + "," +"action"
 
 val dataDF = data.map(row => row.split(",")).
-                  map{ case Array(year,loan_amount_000s, applicant_income_000s,race, gender, action) => (year.toInt,loan_amount_000s.toDouble, applicant_income_000s.toDouble, race.toString,gender, action.toInt)}.
+                  map{ case Array(year,loan_amount_000s, applicant_income_000s,race, gender, state, action) => (year.toInt,loan_amount_000s.toDouble, applicant_income_000s.toDouble, race.toString,gender, state,action.toInt)}.
                   toDF(header.split(","):_*).
                   where(($"loan_amount_000s" < 500)).
                   where(($"applicant_income_000s" < 100)).
                   where(($"loan_amount_000s" > 50)).
                   where(($"applicant_income_000s" > 25)).
-                  where(($"year" > 2015)).
-                  persist
+                  where(($"year" > 2013))//.
+                  //persist
 
 
                   
@@ -50,14 +51,18 @@ val indexer_2 = new StringIndexer().setInputCol("gender").setOutputCol("genderIn
 val test_2 = indexer_2.fit(encoded)
 val encoded_2 = test_2.transform(encoded)
 
+val indexer_st = new StringIndexer().setInputCol("state").setOutputCol("stateIndex")
+val test_st = indexer_st.fit(encoded_2)
+val encoded_st = test_st.transform(encoded_2)
 
-val encoder = new OneHotEncoderEstimator().setInputCols(Array("raceIndex","genderIndex")).setOutputCols(Array("race_vec","gender_vec"))
 
-val test_3 = encoder.fit(encoded_2)
+val encoder = new OneHotEncoderEstimator().setInputCols(Array("raceIndex","genderIndex","stateIndex")).setOutputCols(Array("race_vec","gender_vec","stateVec"))
 
-val encoded_3 = test_3.transform(encoded_2)
+val test_3 = encoder.fit(encoded_st)
 
-val featureCols = Array("loan_amount_000s", "applicant_income_000s", "race_vec","gender_vec")
+val encoded_3 = test_3.transform(encoded_st)
+
+val featureCols = Array("loan_amount_000s", "applicant_income_000s", "race_vec","gender_vec","stateVec")
 
 //set the input and output column names**
 val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
@@ -65,7 +70,7 @@ val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("fe
 
 
 //return a dataframe with all of the  feature columns in  a vector column**
-val df = assembler.transform(encoded_3).persist
+val df = assembler.transform(encoded_3)//.persist
 
 // the transform method produced a new column: features.**
 df.show
@@ -82,7 +87,7 @@ val Array(trainingData, testData) = df2.randomSplit(Array(0.7, 0.3))
 
 
 // create the classifier,  set parameters for training**
-val lr = new LogisticRegression().setMaxIter(100000).setElasticNetParam(1)
+val lr = new LogisticRegression().setMaxIter(20).setElasticNetParam(1)
 //  use logistic regression to train (fit) the model with the training data**
 val model = lr.fit(trainingData)    
 
