@@ -36,7 +36,41 @@ df.select("RespondentID").distinct.count
 df.select("ParentID").distinct.count
 df.select("RespondentName").distinct.count
 
+df.groupBy("RespondentID").count().orderBy($"count".desc).show()
+/*
++------------+-----+                                                            
+|RespondentID|count|
++------------+-----+
+|  0000009788|   12|
+|  0000007748|   12|
+|  0000024540|   12|
+|  0000022769|   12|
+|  0000008145|   11|
+|  0000020448|   10|
+|  0000005636|    9|
+|  0000001427|    9|
+|  0000008854|    9|
+|  0000000644|    9|
+|  0000003218|    9|
+|  0000018710|    8|
+|  0000016401|    8|
+|  0000016402|    8|
+|  0000000340|    8|
+|  0000022141|    8|
+|  0000010375|    8|
+|  0000005885|    8|
+|  0000016629|    8|
+|  0000034153|    8|
++------------+-----+
+
+*/
+
+
 // filter valid parentIDs
 val validParents = df.filter($"ParentID" rlike "[0-9]+-?[0-9]+")
 
 df.write.mode("overwrite").format("csv").save("/user/fh643/InstitutionData/data/merged")
+
+// lots of duplicates
+val distinct = df.distinct
+distinct.orderBy($"RespondentID".asc).write.mode("overwrite").format("csv").save("/user/fh643/InstitutionData/data/distinct")
