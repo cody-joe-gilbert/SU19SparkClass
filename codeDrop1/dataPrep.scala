@@ -71,6 +71,7 @@ val csv07_09 = spark.read.option("header", "true").
 //*********** Read In HMDA Data ***********
 val hmdaPath = "/user/jjl359/project/data/HMDA_2007_to_2017_codes.csv"
 
+//*********** Join with HMDA Data ***********
 // join 1 -- csv10_17 joined with hmda in its entirety 
 val hmda = spark.read.option("header", "true").option("inferSchema", "true").csv(hmdaPath)
 val bigJoin = hmda.join(csv10_17, $"respondent_id" === $"Respondent ID")
