@@ -74,3 +74,12 @@ df.write.mode("overwrite").format("csv").save("/user/fh643/InstitutionData/data/
 // lots of duplicates
 val distinct = df.distinct
 distinct.orderBy($"RespondentID".asc).write.mode("overwrite").format("csv").save("/user/fh643/InstitutionData/data/distinct")
+
+// join 1 -- csv10_17 joined with hmda in its entirety 
+val hmda = spark.read.option("header", "true").option("inferSchema", "true").csv("/user/jjl359/project/data/HMDA_2007_to_2017_codes.csv")
+val bigJoin = hmda.join(csv10_17, $"respondent_id" === $"Respondent ID")
+bigJoin.repartition(1).write.mode("overwrite").format("csv").save("/user/fh643/InstitutionData/joinedData/bigJoin")
+
+// join 2 -- selected columns from 2007-2017 joined with hmda
+val smallJoin = hmda.join(df, $"respondent_id" === $"RespondentID")
+smallJoin.repartition(1).write.mode("overwrite").format("csv").save("/user/fh643/InstitutionData/joinedData/smallJoin")
