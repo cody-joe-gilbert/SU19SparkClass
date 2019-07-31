@@ -45,11 +45,11 @@ object JoinData {
         val joined = chainedJoins(frames)
 
         //*************** Save Joined Institution Data ***************
-        joined.write.mode("overwrite").format("csv").save(savePath)
+        //joined.write.mode("overwrite").format("csv").save(savePath)
 
         //*************** Convert State to Numerical Value (Consistent with HMDA) and Save ***************
         val numJoined = convertFields(joined, names)
-        numJoined.write.mode("overwrite").format("csv").save(numericalSavePath)
+        //numJoined.write.mode("overwrite").format("csv").save(numericalSavePath)
 
         //*************** Read In HMDA Data, Join with Instituions, Save ***************
         val hmda = spark.read.option("header", "true").option("inferSchema", "true").csv(hmdaPath)
