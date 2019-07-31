@@ -53,9 +53,9 @@ object JoinData {
 
         //*************** Read In HMDA Data, Join with Instituions, Save ***************
         val hmda = spark.read.option("header", "true").option("inferSchema", "true").csv(hmdaPath)
-        val hmdaJoined = hmda.join(joined, hmda("respondent_id") <=> joined("RespondentID") &&
-                            hmda("agency_code") <=> joined("AgencyCode") &&
-                            hmda("state_code") <=> joined("RespondentState"))
+        val hmdaJoined = hmda.join(numJoined, hmda("respondent_id") <=> numJoined("RespondentID") &&
+                            hmda("agency_code") <=> numJoined("AgencyCode") &&
+                            hmda("state_code") <=> numJoined("RespondentState"))
         hmdaJoined.write.mode("overwrite").format("csv").save(hmdaJoinPath)
     }
 
