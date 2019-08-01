@@ -96,4 +96,9 @@ out.groupBy("State").count.orderBy($"count".asc).show
 out.groupBy("Year").count.orderBy($"count".asc).show
 
 val outPath = "/user/fh643/VisualPrep/denialCount"
-out.write.mode("overwrite").format("csv").save(outPath)
+out.coalesce(1).write.
+    mode("overwrite").
+    option("mapreduce.fileoutputcommitter.marksuccessfuljobs","false").
+    option("header","true").
+    format("csv").
+    save(outPath)
