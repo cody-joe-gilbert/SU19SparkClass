@@ -60,7 +60,7 @@ val race_parsed = race.rdd.map(x => x.toString).
                     map({case Row(v1: String, v2: String, v3: String) => (v1, v2, v3)}).
                     toDF("year", "race", "action")
 val racePath = "/user/fh643/VisualPrep/raceData"
-race_parsed.coalesce(1).write.mode("overwrite").option("header","true").format("csv").save(racePath)
+race_parsed.write.mode("overwrite").option("header","true").format("csv").save(racePath)
 
 //----------------- parse ethnicity --------------------------
 val eth = hmda.select("as_of_year", "applicant_ethnicity", "action_taken")
@@ -98,7 +98,8 @@ val income_parsed = income.rdd.map(x => x.toString).
                                 x(2) == "3" ||
                                 x(2) == "7").
                     // MAP ACTIONS TO DENIAL/ACCEPTANCE
-                    map(x => Row(
+                    filter(x => !x(1).contains("NA")).
+		    map(x => Row(
                        x(0),
                        x(1),
                        x(2).
@@ -107,7 +108,7 @@ val income_parsed = income.rdd.map(x => x.toString).
                     map({case Row(v1: String, v2: String, v3: String) => (v1, v2, v3)}).
                     toDF("year", "income", "action")
 val incomePath = "/user/fh643/VisualPrep/incomeData"
-income_parsed.coalesce(1).write.mode("overwrite").option("header","true").format("csv").save(incomePath)
+income_parsed.write.mode("overwrite").option("header","true").format("csv").save(incomePath)
 
 
 
