@@ -64,7 +64,7 @@ race_parsed.coalesce(1).write.mode("overwrite").option("header","true").format("
 
 //----------------- parse ethnicity --------------------------
 val eth = hmda.select("as_of_year", "applicant_ethnicity", "action_taken")
-val eth_parsed = race.rdd.map(x => x.toString).
+val eth_parsed = eth.rdd.map(x => x.toString).
                     map(x => x.substring(1, x.length - 1).split(",")).
                     // FILTER USEFUL ACTION RECORDS [1, 2, 8] approve, [3, 7] deny
                     filter(x => x(2) == "1" ||
@@ -88,8 +88,8 @@ val ethPath = "/user/fh643/VisualPrep/ethData"
 eth_parsed.write.mode("overwrite").option("header","true").format("csv").save(ethPath)
 
 //----------------- parse income --------------------------
-val eth = hmda.select("as_of_year", "applicant_income_000s", "action_taken")
-val eth_parsed = race.rdd.map(x => x.toString).
+val income = hmda.select("as_of_year", "applicant_income_000s", "action_taken")
+val income_parsed = income.rdd.map(x => x.toString).
                     map(x => x.substring(1, x.length - 1).split(",")).
                     // FILTER USEFUL ACTION RECORDS [1, 2, 8] approve, [3, 7] deny
                     filter(x => x(2) == "1" ||
