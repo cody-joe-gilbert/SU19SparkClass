@@ -107,7 +107,7 @@ val income_parsed = income.rdd.map(x => x.toString).
                     map({case Row(v1: String, v2: String, v3: String) => (v1, v2, v3)}).
                     toDF("year", "income", "action")
 val incomePath = "/user/fh643/VisualPrep/incomeData"
-income_parsed.coalesce(1).write.mode("overwrite").option("header","true").format("csv").save(incomePath)
+income_parsed.write.mode("overwrite").option("header","true").format("csv").save(incomePath)
 
 
 
