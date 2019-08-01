@@ -27,7 +27,7 @@ import os
 sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
 
 from pyspark.sql import SparkSession
-from pyspark.ml import Pipeline
+from pyspark.ml import Pipeline, PipelineModel
 from pyspark.ml.classification import LogisticRegression
 from pyspark.ml.evaluation import BinaryClassificationEvaluator
 from pyspark.ml.feature import HashingTF, Tokenizer
@@ -41,9 +41,8 @@ class runModel():
         self.MDFolder = os.path.join(os.getcwd(), "modelData")
         self.modelFolder = os.path.join(self.MDFolder, "HMDAModel")
         self.lenderFile = os.path.join(self.MDFolder, "lenders.csv")
-        print(self.MDFolder)
-        print(self.modelFolder)
-        print(self.lenderFile)
+        self.modelFolder = r"C:\spark\modelData\HMDAModel\bestModel"
+
 
     def runPrediction(self, form):
         '''
@@ -73,7 +72,8 @@ class runModel():
         visualization
         '''
         # Load in the pre-fit model
-        model = CrossValidatorModel.load(self.modelFolder)
+        model = PipelineModel.load(self.modelFolder)
+
 
         # Load in lender-Year matrix
         inputDF = pd.read_csv(self.lenderFile)
