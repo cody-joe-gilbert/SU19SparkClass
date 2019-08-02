@@ -129,11 +129,13 @@ val overall = df.
                    as("total")).withColumn("denRate",col("Denied").
                                            divide(col("total")))
 
-df_rich.repartition(1).write.mode("overwrite").format("csv").save(outputPath+"/low_level")
+df_rich.repartition(1).write.
+  mode("overwrite").format("csv").option("header","true").save(outputPath+"/low_level")
 
-df_high.repartition(1).write.mode("overwrite").format("csv").save(outputPath+"/high_level")
+df_high.repartition(1).write.
+ mode("overwrite").option("header","true").format("csv").save(outputPath+"/high_level")
 
-overall.repartition(1).write.mode("overwrite").format("csv").save(outputPath+"/denial_overall")
+overall.repartition(1).write.mode("overwrite").option("header","true").format("csv").save(outputPath+"/denial_overall")
 
 }
 
