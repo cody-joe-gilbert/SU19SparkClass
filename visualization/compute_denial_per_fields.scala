@@ -71,7 +71,7 @@ eth_out.coalesce(1).write.
     format("csv").
     save(ethOut)
 
-/*************************  Compute Denial Rate Per Income Quantile *************************/
+/*************************  Compute Denial Rate Per Income Percentile *************************/
 // transform income to Int
 val numerical = income.rdd.
               map(x => x.toString.drop(1).stripSuffix("]").  // drop the left/right bracket
@@ -95,6 +95,7 @@ val numerical = income.rdd.
 +-------+------------------+
 */
 
+// --- get approximate percentile
 numerical.stat.approxQuantile("income", Array(0.20, 0.40, 0.60, 0.80, 0.90), 0.1)
 //Array[Double] = Array(58.0, 77.0, 128.0, 186.0, 610715.0)
 
@@ -135,7 +136,7 @@ val joined = income_count.filter($"action" === "deny").
                 toDF("year", "percentile", "action", "count", "y", "r", "sum").
                 select("year", "percentile", "count", "sum")
 
-val income_out = joined.withColumn("denial", divUDF(col("count"), col("sum"))).orderBy("year".asc).select("year", "percentile", "denial")
+val income_out = joined.withColumn("denial", divUDF(col("count"), col("sum"))).orderBy($"year".asc).orderBy($"percentile".asc).select("year", "percentile", "denial")
 income_out.coalesce(1).write.
     mode("overwrite").
     option("header","true").
