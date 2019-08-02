@@ -121,10 +121,19 @@ val df_high = df.
                    as("total")).withColumn("denRate",col("Denied").
                                            divide(col("total")))
 
+val overall = df.
+               groupBy("year","state").
+               agg(sum(when($"outcome"==="Approved",$"count")).
+                   as("approved"),sum(when($"outcome"==="Denied",$"count")).
+                   as("Denied"),sum($"count").
+                   as("total")).withColumn("denRate",col("Denied").
+                                           divide(col("total")))
+
 df_rich.repartition(1).write.mode("overwrite").format("csv").save(outputPath+"/low_level")
 
-
 df_high.repartition(1).write.mode("overwrite").format("csv").save(outputPath+"/high_level")
+
+overall.repartition(1).write.mode("overwrite").format("csv").save(outputPath+"/denial_overall")
 
 }
 
