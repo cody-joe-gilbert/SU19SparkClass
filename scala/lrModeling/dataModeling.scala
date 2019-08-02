@@ -15,7 +15,7 @@ import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
 import org.apache.spark.ml.feature.{HashingTF, Tokenizer}
 import org.apache.spark.ml.linalg.Vector
-import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}
+import org.apache.spark.ml.tuning._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import org.apache.spark.sql._
@@ -115,7 +115,7 @@ val hmdaBucketed = hmdaFiltered.join(actionBucketsDF, Seq("action_taken_name", "
 "inner")
 
 // Here I take a very small sample for testing purposes
-val hmdaBucketedSample = hmdaBucketed.sample(false, 0.002).persist()
+val hmdaBucketedSample = hmdaBucketed.sample(false, 0.0002).persist()
 
 // split up the training and testing data
 val randomSplit = hmdaBucketedSample.randomSplit(Array(0.8, 0.2), 42)
@@ -152,6 +152,12 @@ setOutputCol("applicant_sex_index")
 val encoder4 = new OneHotEncoder().
 setInputCol("applicant_sex_index").
 setOutputCol("applicant_sex_vec")
+val indexer5 = new StringIndexer().
+setInputCol("as_of_year").
+setOutputCol("as_of_year_index")
+val encoder5 = new OneHotEncoder().
+setInputCol("as_of_year_index").
+setOutputCol("as_of_year_vec")
 
 // Assemble the features into a features vector
 val assembler = new VectorAssembler().
@@ -160,15 +166,14 @@ setInputCols(Array(
 "applicant_ethnicity_vec",
 "state_vec",
 "applicant_sex_vec",
-"as_of_year",
+"as_of_year_vec",
 "applicant_income_000s",
 "loan_amount_000s"
 )).
 setOutputCol("features")
 
 // Set the log regression
-val lr = new LogisticRegression().
-setMaxIter(10)
+val nb = new NaiveBayes()
 
 // Setting up a modeling pipeline
 val pipeline = new Pipeline().
@@ -178,24 +183,20 @@ indexer1,
 indexer2,
 indexer3,
 indexer4,
+indexer5,
 encoder1,
 encoder2,
 encoder3,
 encoder4,
+encoder5,
 assembler,
-lr))
+nb))
 
-// Setting up tuning grid
-val paramGrid = new ParamGridBuilder().
-addGrid(lr.regParam, Array(0.1, 0.01)).
-addGrid(lr.elasticNetParam, Array(0.0, 0.5, 1.0)).
-build()
 
 // Setting up the cross-validation fitter
 val cv = new CrossValidator().
 setEstimator(pipeline).
 setEvaluator(new BinaryClassificationEvaluator).
-setEstimatorParamMaps(paramGrid).
 setNumFolds(3) 
 
 // call the model for fitting the test (analyzed) model
