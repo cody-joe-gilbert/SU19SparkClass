@@ -53,18 +53,18 @@ val mrAmt = keyAmt.map(x => x._1.stripPrefix("\"").stripSuffix("\"") + "," + x._
                          x(2).toString.stripPrefix("\"").stripSuffix("\"").
                            replace("01","AL").replace("02","AK").replace("04","AZ").replace("05","AR").
                            replace("06","CA").replace("08","CO").replace("09","CT").replace("10","DE").
-                           replace("12","FL").replace("13","GA").replace("15","HI").replace("16","ID").
-                           replace("17","IL").replace("18","IN").replace("19","IA").replace("20","KS").
-                           replace("21","KY").replace("22","LA").replace("23","ME").replace("24","MD").
-                           replace("25","MD").replace("26","MI").replace("27","MN").replace("28","MS").
-                           replace("29","MO").replace("30","MT").replace("31","NE").replace("32","NV").
-                           replace("33","NH").replace("NJ","34").replace("35","NM").replace("36","NY").
-                           replace("37","NC").replace("38","ND").replace("39","OH").replace("40","OK").
-                           replace("41","OR").replace("42","PA").replace("44","RI").replace("45","SC").
-                           replace("46","SD").replace("47","TN").replace("48","TX").replace("49","UT").
-                           replace("50","VT").replace("51","VA").replace("WA","53").replace("55","WI").
-                           replace("56","WY").replace("60","AS").replace("66","GU").replace("69","MP").
-                           replace("72","PR").replace("78","VI") +","+
+                           replace("11","DC").replace("12","FL").replace("13","GA").replace("15","HI").
+                           replace("16","ID").replace("17","IL").replace("18","IN").replace("19","IA").
+                           replace("20","KS").replace("21","KY").replace("22","LA").replace("23","ME").
+                           replace("24","MD").replace("25","MA").replace("26","MI").replace("27","MN").
+                           replace("28","MS").replace("29","MO").replace("30","MT").replace("31","NE").
+                           replace("32","NV").replace("33","NH").replace("NJ","34").replace("35","NM").
+                           replace("36","NY").replace("37","NC").replace("38","ND").replace("39","OH").
+                           replace("40","OK").replace("41","OR").replace("42","PA").replace("44","RI").
+                           replace("45","SC").replace("46","SD").replace("47","TN").replace("48","TX").
+                           replace("49","UT").replace("50","VT").replace("51","VA").replace("53","WA").
+                           replace("55","WI").replace("54","WV").replace("56","WY").replace("60","AS").
+                           replace("66","GU").replace("69","MP").replace("72","PR").replace("78","VI") +","+
                          x(3).toString.stripPrefix("\"").stripSuffix("\"").
                            replace("1","American Indian or Alaska Native").
                            replace("2","Asian").
@@ -97,14 +97,29 @@ import sqlContext.implicits._
 
 val header = "year"+","+"outcome"+","+"state"+","+"race"+","+"ethnicity"+","+"count";
 
-val df = mrAmt.map(row => row.split(",")).map{ case Array(year, outcome, state, race, ethnicity, count) => (year, outcome, state, race, ethnicity, count.toInt)}.toDF(header.split(","):_*)                     
+val df = mrAmt.
+          map(row => row.split(",")).
+          map{ case Array(year, outcome, state, race, ethnicity, count) => (year, outcome, state, race, ethnicity, count.toInt)}.
+          toDF(header.split(","):_*)                     
                     
 //val df2 = df.groupBy("year","state","race","ethnicity").agg(sum("count").alias("sum")).withColumn("fraction", col("sum") /  sum("sum").over())
 
 
-val df_rich = df.groupBy("year","state","race","ethnicity").agg(sum(when($"outcome"==="Approved",$"count")).as("approved"),sum(when($"outcome"==="Denied",$"count")).as("Denied"),sum($"count").as("total")).withColumn("denRate",col("Denied").divide(col("total")))
+val df_rich = df.
+                groupBy("year","state","race","ethnicity").
+                agg(sum(when($"outcome"==="Approved",$"count")).
+                    as("approved"),sum(when($"outcome"==="Denied",$"count")).
+                    as("Denied"),sum($"count").
+                    as("total")).withColumn("denRate",col("Denied").
+                                            divide(col("total")))
 
-val df_high = df.groupBy("race","ethnicity").agg(sum(when($"outcome"==="Approved",$"count")).as("approved"),sum(when($"outcome"==="Denied",$"count")).as("Denied"),sum($"count").as("total")).withColumn("denRate",col("Denied").divide(col("total")))
+val df_high = df.
+               groupBy("race","ethnicity").
+               agg(sum(when($"outcome"==="Approved",$"count")).
+                   as("approved"),sum(when($"outcome"==="Denied",$"count")).
+                   as("Denied"),sum($"count").
+                   as("total")).withColumn("denRate",col("Denied").
+                                           divide(col("total")))
 
 df_rich.repartition(1).write.mode("overwrite").format("csv").save(outputPath+"/low_level")
 
