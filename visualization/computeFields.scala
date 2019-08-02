@@ -105,8 +105,22 @@ numerical.stat.approxQuantile("income", Array(0.05, 0.1, 0.15, 0.20, 0.25, 0.3,0
 //Array[Double] = Array(26.0, 33.0, 38.0, 43.0, 48.0, 54.0, 59.0, 64.0, 70.0, 76.0, 83.0, 90.0, 98.0, 108.0, 120.0, 134.0, 154.0, 186.0, 257.0, 610715.0)
 
 
+(33.0, 43.0, 54.0, 64.0, 76.0, 90.0, 108.0, 134.0, 186.0)
 
+val p10 = numerical.where($"income" < 33).withColumn("percentile", lit(10))
+val p20 = numerical.where($"income" < 43 && $"income" >= 33).withColumn("percentile", lit(20))
+val p30 = numerical.where($"income" < 54 && $"income" >= 43).withColumn("percentile", lit(30))
+val p40 = numerical.where($"income" < 64 && $"income" >= 54).withColumn("percentile", lit(40))
+val p50 = numerical.where($"income" < 76 && $"income" >= 64).withColumn("percentile", lit(50))
+val p60 = numerical.where($"income" < 90 && $"income" >= 76).withColumn("percentile", lit(60))
+val p70 = numerical.where($"income" < 108 && $"income" >= 90).withColumn("percentile", lit(70))
+val p80 = numerical.where($"income" < 134 && $"income" >= 108).withColumn("percentile", lit(80))
+val p90 = numerical.where($"income" < 186 && $"income" >= 134).withColumn("percentile", lit(90))
+val p100 = numerical.where($"income" >= 186).withColumn("percentile", lit(100))
 
-
-
-
+val union = p10.union(p20).union(p30).union(p40).union(p50).union(p60).union(p70).union(p80).union(p90).union(p100)
+union.write.
+    mode("overwrite").
+    option("header","true").
+    format("csv").
+    save("/user/fh643/VisualPrep/income_with_percentile")
