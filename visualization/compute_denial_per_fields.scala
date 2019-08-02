@@ -27,8 +27,8 @@ val joined = sex_count.join(tmp,
 		       select("year", "sex", "count", "sum")
 
 // ---- USER DEFINED FUNCTION TO TAKE DIVISION
-val myUDF = udf((num: Long, denom: Long) => (num.toDouble/denom.toDouble))
-val sex_out = joined.withColumn("denial", myUDF(col("count"), col("sum"))).select("year", "sex", "denial")
+val divUDF = udf((num: Long, denom: Long) => (num.toDouble/denom.toDouble))
+val sex_out = joined.withColumn("denial", divUDF(col("count"), col("sum"))).select("year", "sex", "denial")
 sex_out.coalesce(1).write.
     mode("overwrite").
     option("header","true").
@@ -47,7 +47,7 @@ val joined = race_count.filter($"action" === "deny").
                        toDF("year", "race", "action", "count", "y", "r", "sum").
                        select("year", "race", "count", "sum")
 
-val race_out = joined.withColumn("denial", myUDF(col("count"), col("sum"))).select("year", "race", "denial")
+val race_out = joined.withColumn("denial", divUDF(col("count"), col("sum"))).select("year", "race", "denial")
 race_out.coalesce(1).write.
     mode("overwrite").
     option("header","true").
@@ -64,7 +64,7 @@ val joined = eth_count.filter($"action" === "deny").
                        toDF("year", "eth", "action", "count", "y", "r", "sum").
                        select("year", "eth", "count", "sum")
 
-val eth_out = joined.withColumn("denial", myUDF(col("count"), col("sum"))).select("year", "eth", "denial")
+val eth_out = joined.withColumn("denial", divUDF(col("count"), col("sum"))).select("year", "eth", "denial")
 eth_out.coalesce(1).write.
     mode("overwrite").
     option("header","true").
@@ -124,3 +124,20 @@ union.write.
     option("header","true").
     format("csv").
     save("/user/fh643/VisualPrep/income_with_percentile")
+
+//val union = spark.read.option("header", "true").option("inferSchema", "true").csv("/user/fh643/VisualPrep/income_with_percentile")
+val income_count = union.groupBy("year", "percentile", "action").count
+val tmp = income_count.groupBy("year", "percentile").agg(sum($"count"))
+val joined = income_count.filter($"action" === "deny").
+			join(tmp,
+                income_count("year") <=> tmp("year") &&   
+                income_count("percentile") <=> tmp("percentile")).
+                toDF("year", "percentile", "action", "count", "y", "r", "sum").
+                select("year", "percentile", "count", "sum")
+
+val income_out = joined.withColumn("denial", divUDF(col("count"), col("sum"))).orderBy("year".asc).select("year", "percentile", "denial")
+income_out.coalesce(1).write.
+    mode("overwrite").
+    option("header","true").
+    format("csv").
+    save(incomeOut)
