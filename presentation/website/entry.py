@@ -47,13 +47,21 @@ def home():
     return render_template('home.html', posts=posts)
 
 
-@app.route("/visualization")
-def visualization():
+@app.route("/visualizeByState")
+def visualizeByState():
     """
     TODO
     waiting on data
     """
-    return render_template('HMDACounties.html', title='Visualization')
+    return render_template('heatMap_slider.html', title='VisualizeByState')
+
+@app.route("/visualizeByKeyParam")
+def visualizeByKeyParam():
+    """
+    TODO
+    waiting on data
+    """
+    return render_template('plotsByParam.html', title='VisualizeByKeyParam')
 
 @app.route("/paper", methods=['GET'])
 def paper():
