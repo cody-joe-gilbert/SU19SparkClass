@@ -40,7 +40,7 @@ class runModel():
         self.sc = SparkSession.builder.master("local[*]").getOrCreate()
         #self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
         self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
-        self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelData/HMDAModel/bestModel"
+        self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel"
 
     def runPrediction(self, form):
         '''
