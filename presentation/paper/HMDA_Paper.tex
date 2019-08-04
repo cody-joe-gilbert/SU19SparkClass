@@ -483,11 +483,9 @@ In the process of validating the HMDA to state and county join, an anti-join was
 The application returns to the loan applicant the lender with the loan applicant will have the highest probability of obtaining a loan given certain characteristics of a loan applicant.  
 
 \begin{eqnarray*}
-P(y=k) & = & \ \beta_0 loanAmt_{obs}  \\
-& &  + \beta_1 applicantIncome_{obs} \\
-& & + \delta_0 race  \\ 
-& &  + \delta_1 gender \\
-& & +  \delta_2 lender 
+P(y=k) & = & \ \beta_0 loanAmt_{obs}  + \beta_1 applicantIncome_{obs} \\
+& & + \delta_0 race + \delta_1 ethnicity  + \delta_2 gender  \\
+& & + \delta_3 lender  +  \delta_4 state + \delta_5 year
 \end{eqnarray*}
 
 Where $\delta$ are dummy variables for the categorical variables and $\beta$ are coefficients. The outcome (approve or deny), $k \in 0,1$
