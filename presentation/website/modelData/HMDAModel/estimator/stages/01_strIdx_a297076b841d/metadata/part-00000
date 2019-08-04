@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.StringIndexer","timestamp":1564078893553,"sparkVersion":"2.2.0","uid":"strIdx_a297076b841d","paramMap":{"outputCol":"applicant_race_index","handleInvalid":"error","inputCol":"applicant_race_name_1"}}

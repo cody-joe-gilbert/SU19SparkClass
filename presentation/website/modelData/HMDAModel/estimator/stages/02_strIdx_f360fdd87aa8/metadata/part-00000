@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.StringIndexer","timestamp":1564078894078,"sparkVersion":"2.2.0","uid":"strIdx_f360fdd87aa8","paramMap":{"inputCol":"applicant_ethnicity_name","outputCol":"applicant_ethnicity_index","handleInvalid":"error"}}

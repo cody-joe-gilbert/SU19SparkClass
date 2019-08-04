@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1564779121840,"sparkVersion":"2.2.0","uid":"vecAssembler_ba2179d42eee","paramMap":{"outputCol":"features","inputCols":["loan_amount_000s","applicant_income_000s","state_code_vec","as_of_year_vec","applicant_sex_vec","applicant_race_1_vec","applicant_ethnicity_vec","agency_code_vec","respondent_id_vec"]}}
