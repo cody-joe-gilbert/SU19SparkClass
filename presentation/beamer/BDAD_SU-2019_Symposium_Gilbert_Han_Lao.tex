@@ -1,0 +1,276 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{NYU}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Scala,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+  mathescape=true
+}
+
+
+
+\title[BDAD Summer 2019 Symposium]{BDAD Summer 2019 Symposium}
+%\author{Team: Cody Gilbert, Fang Han, Jeremy Lao}
+\institute{NYU Courant, Computer Science}
+\date{August 8, 2019}
+\titlegraphic{\hfill\includegraphics[height=1.5cm]{nyu_stacked_color}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\section{Big Data Applications Symposium}
+
+\begin{frame}{Big Data Applications Symposium}
+
+Project Name: Fair Lending Finder \vspace{3mm}
+
+Team: 
+
+\begin{itemize}
+  \item Cody Gilbert
+  \item Fang Han
+  \item Jeremy Lao
+\end{itemize}
+
+Abstract:  \textit{We want to help people increase their chances of securing a mortgage related loan.  Our application will ask you for your details and provide you with the lender that is most likely to lend to you.  We trained our application using publicly available anonymized mortgage application information.}
+
+\vskip 0.5cm
+
+\end{frame}
+
+\section{Fair Lending Finder}
+
+\subsection{Motivation}
+
+\begin{frame}{Motivation}
+
+Who are the users of this application? 
+
+\begin{itemize}
+  \item General Public
+  \item Banking Regulators 
+\end{itemize}
+
+Who will benefit from this application? 
+
+\begin{itemize}
+   \item Anyone that is looking for a mortgage loan
+    \item Low to moderate income (LMI) borrowers
+    \item People in states with high loan denial rates
+\end{itemize}
+
+Why is this application important? \vspace{2mm}
+
+\begin{itemize}
+  \item While there have been improvements in the mortgage lending process over the last decade, unconscious bias remains a factor in provisioning credit to average income borrowers.  Our application will help borrowers use that unconscious bias in their favor. 
+\end{itemize}
+
+
+
+\end{frame}
+
+\begin{frame}{Goodness}
+
+What steps were taken to assess the ''goodness`` of the analytic itself? \vspace{2mm}
+
+We utilized publicly available Home Mortgage Disclosure Act (HMDA) data from 2007-2017 that contains over 207 million anonymized home mortgage application records to train a machine learning model on ''approved`` or ''denied`` mortgage applications.  \vspace{2mm}
+
+We use the following features to train a Naive Bayes model:
+
+    \begin{multicols}{3}
+\begin{itemize}
+  \item Loan Amount
+  \item Applicant Income
+  \item Race
+  \item Gender
+  \item Lender
+  \item State
+\end{itemize}
+\end{multicols}
+
+\end{frame}
+
+\begin{frame}{Goodness (contd.)}
+
+\begin{eqnarray*}
+P(y=k) & = & \ \beta_0 loanAmt_{obs}  + \beta_1 applicantIncome_{obs} \\
+& & + \delta_0 race  + \delta_1 gender +  \delta_2 lender  +  \delta_3 state
+\end{eqnarray*}
+
+Where $\delta$ are dummy variables for the categorical variables and $\beta$ are coefficients. The outcome (k), approve or deny, $k \in 0,1$
+
+\begin{table}[]
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{MLModel}    & \textbf{Training/Test} & \textbf{AUC} \\ \hline
+Logistic Regression & 80/20                  & 60\%         \\ \hline
+SVM                 & 80/20                  & 59\%         \\ \hline
+Naive Bayes         & 80/20                  & 79\%         \\ \hline
+\end{tabular}
+\caption{Model Evaluation}
+\label{tab:my-table}
+\end{table}
+
+
+
+\end{frame}
+
+\begin{frame}{Actuation/Remediation}
+
+What actuation or remediation actions are/could be performed by this application?  \vspace{3mm}
+
+\begin{itemize}
+  \item The loan applicant will use this application to determine the lender that will most likely extend credit, and the applicant can apply directly to that lender. 
+  \item A banking regulator can use this to determine the lenders that are least likely to extend credit to LMI and minority communities 
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}{Data Sources}
+
+\begin{table}[]
+\begin{tabular}{|c|c|}
+\hline
+Name & HMDA Data Set         \\ \hline
+Description                 & Anonymized mortgage loan application information          \\ \hline
+Size of data        & $> 120$ GB              \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|c|c|}
+\hline
+Name & Geospatial Data         \\ \hline
+Description                 & Latitude and Longitude of States and Counties       \\ \hline
+Size of data        & $> 100$ MB              \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[]
+\begin{tabular}{|c|c|}
+\hline
+Name & HMDA Panel Information         \\ \hline
+Description                 & Lender metadata, such as parent ID and head office          \\ \hline
+Size of data        & $> 100$ MB              \\ \hline
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}{Design Diagram}
+
+\includegraphics[width=\linewidth]{SparkDesignDiagram.png}
+
+Platform(s) on which the application runs: \vspace{2mm}
+
+NYU HPC Cluster (DUMBO)
+
+\end{frame}
+
+\begin{frame}[fragile]{Code Walkthrough}
+\textbf{HMDA}
+
+
+For data profiling, we originally ingested the data into a dataframe.  The entire profiling exercise would take 5-7 hours. 
+\begin{lstlisting}
+
+val dataForAnalysis = spark.read.format("csv").option("header", "true").  
+                  option("inferSchema", "true").load(hdfsPath).
+                  select("loan_amount_000s",...)
+\end{lstlisting}
+
+We changed our strategy and leveraged Spark Context RDDs to profile the data, reducing run-time to 1.5 hour: 
+
+\begin{lstlisting}
+   val dataForAnalysis = sc.textFile(hdfsPath)
+   val reducedLoanAmtData = mapReduceFunc(dataForAnalysis, 7)
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Code Walkthrough (contd.)}
+\textbf{HMDA}
+
+While dataframes have the .count() function, we had to write a custom function to perform count(): 
+
+\begin{lstlisting}
+
+def mapReduceFunc(dataForAnalysis : RDD[String], colNum : Integer) : RDD[String] = {
+  val firstLine = dataForAnalysis.first() 
+  val data = dataForAnalysis.filter(row => row != firstLine)
+  val keyAmt = data.map(_.split(",")). map(c => (c(colNum),1)). reduceByKey((x,y) => x+y)
+  val mrAmt = keyAmt.map(x => x._1.stripPrefix("\"").stripSuffix("\"") + "," + x._2)
+  mrAmt
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Code Walkthrough (contd.)}
+\textbf{HMDA}
+
+While dataframes preserve column names, you have to manually incorporate them in the RDD before saving as a .csv file:
+
+\begin{lstlisting}
+
+    val header: RDD[String]= sc.parallelize(List("loan_amount,frequency"))
+     header.union(reducedLoanAmtData).saveAsTextFile(<path>)
+
+\end{lstlisting}
+
+\end{frame}
+
+
+\end{document}

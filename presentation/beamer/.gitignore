@@ -1,1 +1,9 @@
 *.gz
+*.*.gz
+*.log
+*.out
+*.aux
+*.un
+*.swp
+.gitignore.un~
+.gitignore~
