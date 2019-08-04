@@ -2,7 +2,6 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from forms import RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
 
-
 # runSpark flag: If you have all the spark and PySpark directories setup,
 #   set to True, otherwise False. If you set to True and don't have all the
 #   spark configurations, then you will get many, many errors.
@@ -18,6 +17,7 @@ db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     income = db.Column(db.Integer, unique=False, nullable=False)
+    loanAmnt = db.Column(db.Integer, unique=False, nullable=False)
     state = db.Column(db.String(20), unique=False, nullable=False)
     gender = db.Column(db.String(10), unique=False, nullable=False)
     ethnicity = db.Column(db.String(30), unique=False, nullable=False)
@@ -25,7 +25,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=False, nullable=False)
 
     def __repr__(self):
-        return f"User('{self.income}', '{self.state}','{self.gender}', '{self.race}', '{self.ethninicity}', '{self.email}')"
+        return f"User('{self.income}', '{self.state}','{self.gender}', '{self.race}', '{self.loanAmnt}', '{self.ethninicity}', '{self.email}')"
 
 db.create_all()
 posts = [
@@ -42,25 +42,17 @@ posts = [
 ]
 
 @app.route("/")
-@app.route("/home")
-def home():
-    return render_template('home.html', posts=posts)
+@app.route("/index")
+def index():
+    return render_template('index.html', posts=posts)
 
 
 @app.route("/visualizeByState")
 def visualizeByState():
-    """
-    TODO
-    waiting on data
-    """
     return render_template('heatMap_slider.html', title='VisualizeByState')
 
 @app.route("/visualizeByKeyParam")
 def visualizeByKeyParam():
-    """
-    TODO
-    waiting on data
-    """
     return render_template('plotsByParam.html', title='VisualizeByKeyParam')
 
 @app.route("/paper", methods=['GET'])
@@ -74,19 +66,23 @@ def paper():
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit():
+    # TODO: ISSUE: doesn't validate! 
+    if request.method == 'POST': #and form.validate(): #form.validate_on_submit():
+        flash('We\'re working hard to find you some good lenders!')
         if runSpark:
             modeler = runModel()
             modeler.runPrediction(form)
             visTable = modeler.predData  # Output for visualization
-        flash(f'User profile created for {form.email.data}!', 'success')
-        return redirect(url_for('mapping'))
+            #flash(f'User profile created for {form.email.data}!', 'success')
+            #return redirect(url_for('mapping'))
+            return redirect(url_for('modeling'))
     return render_template('findLender.html', title='Register', form=form)
 
+"""
 @app.route("/mapping", methods=['GET'])
 def mapping():
     return render_template('HMDACounties.html', title='Mapping')
-
+"""
 @app.route("/modeling", methods=['GET', 'POST'])
 def modeling():
     """

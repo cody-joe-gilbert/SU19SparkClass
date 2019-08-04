@@ -23,7 +23,8 @@ CURRENT DRAFT: UNFINISHED
 """
 import pandas as pd
 import sys
-sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
+#sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
+#sys.path.insert(0, r:'/Users/fanghan/anaconda3/bin/python')
 
 from pyspark.sql import SparkSession
 from pyspark.ml import Pipeline, PipelineModel
@@ -37,8 +38,9 @@ from forms import RegistrationForm
 class runModel():
     def __init__(self):
         self.sc = SparkSession.builder.master("local[*]").getOrCreate()
-        self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
-        self.modelFolder = r"C:\spark\modelData\lenderModel"
+        #self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
+        self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
+        self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelData/HMDAModel/bestModel"
 
     def runPrediction(self, form):
         '''
@@ -71,12 +73,12 @@ class runModel():
                                    "agency_code",
                                    "Respondent Name (Panel)",
                                    "as_of_year"]
-        self.inputDF["applicant_sex"] = form.gender.data[1]
+        self.inputDF["applicant_sex"] = form.gender.data#[1]
         self.inputDF["state_code"] = form.state.data[0]
-        self.inputDF["loan_amount_000s"] = form.loan.data
+        self.inputDF["loan_amount_000s"] = form.loanAmnt.data
         self.inputDF["applicant_income_000s"] = form.income.data
-        self.inputDF["applicant_race_1"] = form.race.data[1]
-        self.inputDF["applicant_ethnicity"] = form.ethnicity.data[1]
+        self.inputDF["applicant_race_1"] = form.race.data#[1]
+        self.inputDF["applicant_ethnicity"] = form.ethnicity.data#[1]
 
         # Create the Spark dataframe from the user input
         self.modeledDF = self.sc.createDataFrame(self.inputDF)
