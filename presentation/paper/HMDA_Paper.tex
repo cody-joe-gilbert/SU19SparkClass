@@ -279,6 +279,10 @@ Previous research on this topic are primarily based on the regulator’s perspec
 The Federal Reserve publishes analysis performed on the HMDA dataset, and have highlighted both the rich analysis that can be obtained from the data along with the shortcomings of the dataset.  For example, in \cite{FED} Federal Reserve economists highlight the importance of modeling and controlling for various loan application characteristics when interpreting the denial rate of a loan application by race and gender. 
 Current regulatory research on the topic shows that the HMDA dataset contains valuable insight that can be analyzed and modeled to reveal patterns of discriminatory behavior. It is this insight that motivates the construction of the tool created in this project.
 
+Based on the challenges of using geographic data in \cite{FED} due to the 2010 census update to Metropolitan Statistical Areas in 2014, we focused on analyzing data at the state and county level using FIPS (Federal Information Processing Standard) data.  The authors at the Fed \cite{FED} also raised the issue of applications filed under HMDA identificaiton number of whatever entity owns the lender (i.e. regulator), if there is an acquisition in the middle of the year, the applications are filed under one lender.  In addition, we found that additional external information is required to find the ''high holder`` of a lender from the panel data.  This drove our decision to focus on the largest lenders in our application.  
+
+We found in \cite{CRA} that the decrease in number of loan applications per annum between 2007 and 2010 is likely due to the mortgage meltdown of 2008.  While we visualize denial rates from 2007-2017, our analytic \& machine learning model looks at mortgage application data after 2010.  
+
 \section{Datasets}
 
 
@@ -305,12 +309,72 @@ he Home Mortgage Disclosure Act (HMDA) was originally enacted by Congress in 197
 \caption{HMDA Data Summary}
 \end{table}
 
+\subsubsection{HMDA Data Schema}
+
+\vspace{2mm}
+
+
+This is the HMDA data schema: 
+
+
+\begin{table}[h!]
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|c|}{\textbf{Column of Interest}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Range\\   of Values\end{tabular}}}                                                                                                                                                                                                    \\ \hline
+\multicolumn{1}{|c|}{as\_of\_year}                & \multicolumn{1}{l|}{2007 to 2017}                                                                                                                                                                                                                                                            \\ \hline
+\multicolumn{1}{|c|}{respondent\_id}              & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}1-9 digit ID RSSD or 9 digit tax\\   identifier (xx-xxxxxxx)\end{tabular}}                                                                                                                                                                    \\ \hline
+\multicolumn{1}{|c|}{agency\_code}                & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}one to nine representing different\\   agencies\end{tabular}}                                                                                                                                                                                 \\ \hline
+\multicolumn{1}{|l|}{loan\_type}                  & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}there four distinct values\\   (Conventional / FH / VA / FSA) \\ however in some cases NA is submitted\end{tabular}}                                                                                                                          \\ \hline
+\multicolumn{1}{|l|}{property\_type}              & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}there are only three types of\\   property types but NA is \\ sometimes submitted\end{tabular}}                                                                                                                                               \\ \hline
+\multicolumn{1}{|l|}{loan\_purpose}               & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}there are only three choices but\\   NA if nothing is indicated \\ on the application\end{tabular}}                                                                                                                                           \\ \hline
+\multicolumn{1}{|l|}{owner\_occupancy}            & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}there are three options (Owner\\   occupied / not \\ owner occupied / not applicable)\end{tabular}}                                                                                                                                           \\ \hline
+\multicolumn{1}{|l|}{loan\_amount\_000s}          & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}the range is from 1000 dollars to\\   99 million dollars and there are some \\ NA or blank values. However it appears\\   that the loan amount is normally \\ distributed between \\ 1000 dollars to 500000 dollars\end{tabular}}             \\ \hline
+\multicolumn{1}{|l|}{preapproval}                 & \multicolumn{1}{l|}{three options}                                                                                                                                                                                                                                                           \\ \hline
+\multicolumn{1}{|l|}{action\_taken}               & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}there are 8 distinct actions that\\   can be taken (such as \\ loan originated or application denied)\end{tabular}}                                                                                                                           \\ \hline
+\multicolumn{1}{|l|}{state\_code}                 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}string or integer of the\\   abbreviations or FIPS number of the state \\ (Federal Information Processing Standard)\end{tabular}}                                                                                                             \\ \hline
+\multicolumn{1}{|l|}{county\_code}                & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}the name of the county or a three\\   digit FIPS number\end{tabular}}                                                                                                                                                                         \\ \hline
+\multicolumn{1}{|l|}{applicant\_sex}              & \multicolumn{1}{l|}{male or female are the options}                                                                                                                                                                                                                                          \\ \hline
+\multicolumn{1}{|l|}{applicant\_income\_000s}     & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}the range of incomes are 1000 to\\   99 million and the average income over \\ the 11 year period is 3.3 million /\\   however the weighted average income \\ by frequency of applications per income\\   listed is 98 thousand\end{tabular}} \\ \hline
+                                                  &                                                                                                                                                                                                                                                                                             
+\end{tabular}
+\caption{}
+\label{tab:my-table}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|c|}{\textbf{Column of Interest}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Data\\   Type\end{tabular}}}                            \\ \hline
+\multicolumn{1}{|c|}{as\_of\_year}                & \multicolumn{1}{l|}{String or Integer}                                                                         \\ \hline
+\multicolumn{1}{|c|}{respondent\_id}              & \multicolumn{1}{l|}{String or Integer}                                                                         \\ \hline
+\multicolumn{1}{|c|}{agency\_code}                & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}string or integer (string if NA is\\   submitted)\end{tabular}} \\ \hline
+\multicolumn{1}{|l|}{loan\_type}                  & \multicolumn{1}{l|}{string}                                                                                    \\ \hline
+\multicolumn{1}{|l|}{property\_type}              & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+\multicolumn{1}{|l|}{loan\_purpose}               & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+\multicolumn{1}{|l|}{owner\_occupancy}            & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+\multicolumn{1}{|l|}{loan\_amount\_000s}          & \multicolumn{1}{l|}{integer unless NA}                                                                         \\ \hline
+\multicolumn{1}{|l|}{preapproval}                 & \multicolumn{1}{l|}{integer or string}                                                                         \\ \hline
+\multicolumn{1}{|l|}{action\_taken}               & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+\multicolumn{1}{|l|}{state\_code}                 & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+\multicolumn{1}{|l|}{county\_code}                & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+\multicolumn{1}{|l|}{applicant\_sex}              & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+\multicolumn{1}{|l|}{applicant\_income\_000s}     & \multicolumn{1}{l|}{string or integer}                                                                         \\ \hline
+                                                  &                                                                                                               
+\end{tabular}
+\caption{}
+\label{tab:my-table}
+\end{table}
+
 \subsection{Nationwide Institution Data}
 In close relation to the HMDA data, the nationwide institution data is a series of fixed format flat files of all lending institutions that reported HMDA data from 2007 to 2017. These files come in two different schemas, offering information regarding the lending institution, its parent institution and its top holder, including ID, name, and state. 
 
 \subsection{Mapping Data}
 
 Data was acquired to validate the geographic distribution of HMDA data as well as provide enhanced visualizations within the output tool. The data used to map the geography of the loan data was taken from two source files for US County \cite{USCensusOne} and US State \cite{USCensusTwo} geometry data. The geometry data was compiled by the US Census Bureau as a collection of TIGER/Line shapefiles and related database files. These files are extracts of selected geographic and cartographic information from the U.S. Census Bureau's Master Address File / Topologically Integrated Geographic Encoding and Referencing (MAF/TIGER) Database (MTDB). 
+
 
 
 \section{Description of Analytic}
@@ -483,11 +547,9 @@ In the process of validating the HMDA to state and county join, an anti-join was
 The application returns to the loan applicant the lender with the loan applicant will have the highest probability of obtaining a loan given certain characteristics of a loan applicant.  
 
 \begin{eqnarray*}
-P(y=k) & = & \ \beta_0 loanAmt_{obs}  \\
-& &  + \beta_1 applicantIncome_{obs} \\
-& & + \delta_0 race  \\ 
-& &  + \delta_1 gender \\
-& & +  \delta_2 lender 
+P(y=k) & = & \ \beta_0 loanAmt_{obs}  + \beta_1 applicantIncome_{obs} \\
+& & + \delta_0 race + \delta_1 ethnicity  + \delta_2 gender  \\
+& & + \delta_3 lender  +  \delta_4 state + \delta_5 year
 \end{eqnarray*}
 
 Where $\delta$ are dummy variables for the categorical variables and $\beta$ are coefficients. The outcome (approve or deny), $k \in 0,1$
@@ -677,6 +739,10 @@ Bissmark, Johan and Warnling, Oscar. \href{http://www.diva-portal.se/smash/get/d
 \bibitem{hmdalink}
 
 HMDA: \href{https://www.consumerfinance.gov/data-research/hmda/historic-data/}{Consumer Financial Protection Bureau public website of HMDA data}
+
+\bibitem{CRA}
+
+Darolia and Skanderson.  \href{https://www.crai.com/sites/default/files/publications/impact-of-the-mortgage-meltdown-on-the-hmda-data.pdf}{Impact of the Mortgage Meltdown on the HMDA Data}. Charles River Associates. January 2010.
 
 
 \end{thebibliography}
