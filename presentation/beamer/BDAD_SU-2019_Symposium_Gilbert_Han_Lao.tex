@@ -141,7 +141,8 @@ We use the following features to train a Naive Bayes model:
 
 \begin{eqnarray*}
 P(y=k) & = & \ \beta_0 loanAmt_{obs}  + \beta_1 applicantIncome_{obs} \\
-& & + \delta_0 race  + \delta_1 gender +  \delta_2 lender  +  \delta_3 state
+& & + \delta_0 race + \delta_1 ethnicity  + \delta_2 gender  \\
+& & + \delta_3 lender  +  \delta_4 state + \delta_5 year
 \end{eqnarray*}
 
 Where $\delta$ are dummy variables for the categorical variables and $\beta$ are coefficients. The outcome (k), approve or deny, $k \in 0,1$
@@ -273,4 +274,129 @@ While dataframes preserve column names, you have to manually incorporate them in
 \end{frame}
 
 
+
+\begin{frame}[fragile]{Code Walkthrough (contd.)}
+\textbf{HMDA - MLLib}
+
+We developed the model using MLLib and saved the model to HDFS for our interactive application to use: 
+
+\begin{lstlisting}
+
+val indexer1 = new StringIndexer().
+..
+val encoder1 = new OneHotEncoder().
+..
+val assembler = new VectorAssembler().   //feature matrix
+..
+val pipeline = new Pipeline().setStages(Array(indexer,..,assembler,NaiveBayes))
+...
+val cvFullModel = cv.fit(hmdaBucketedSample)
+cvFullModel.save("<path>/HMDAModel")
+
+
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Code Walkthrough (contd.)}
+\textbf{HMDA - Visualization}
+
+We had to use subplots in order to slice the data (gender, state, etc.)
+
+\begin{lstlisting}
+
+fig = make_subplots(
+    rows=3, cols=2,
+    column_widths=[0.5, 0.5], # corresponding to each row!
+    row_heights=[0.25, 0.30, 0.45], # corresponding to each column!
+    specs=[[{"type": "scatter", "rowspan": 2}, {"type": "scatter", "rowspan": 2}],[None ,None],
+           [{"type": "scatter"}, {"type": "scatter"}]],
+    subplot_titles=("Denial Rate Per Race", "Denial Rate Per Income Percentile", 
+                    "Denial Rate Per Ethnicity", "Denial Rate Per Gender")
+)
+
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}{Insights}
+
+\begin{enumerate}
+
+\item Loan Application amounts (sampled 2013 data) appear normally distributed between \$10,000 to \$500,000
+\item Naive Bayes had the best AUC and the fastest performance time
+\item ...
+
+\end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}{Obstacles}
+
+\begin{enumerate}
+
+\item Relatively large dataset, we needed to find ways to work around the speed of sparkSQL dataframes
+\item The panel data was not as clean as we hoped - lenders are subsidiaries of bank holding companies (i.e. parent lender)
+  \begin{itemize}
+     \item Panel data information for some lenders was not uniformly entered from year to year
+      \item Respondent IDs were not unique across regulating agencies (i.e. FDIC respondent 1 is not the same as Fed's respondent 1)
+  \end{itemize}
+\item ...
+
+\end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}{Summary}
+
+This application will help you find the lender that will most likely extend credit based on your metadata.  It leverages historical information to learn lender patterns and bias.  
+
+\end{frame}
+
+\begin{frame}{Acknowledgements}
+
+\begin{itemize}
+  \item NYU HPC
+  \item CFPB for making the data publicly available
+  \item The Federal Reserve's and CFBP's data aggregators and collectors
+  \item Professor McIntosh!
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{References}
+
+\footnotesize
+\begin{itemize}
+  \item S~Frumkin. \href{https://www.fdic.gov/regulations/examinations/supervisory/insights/siwin07/siwinter07-article4.pdf}{``HMDA Data: Identifying and Analyzing Outliers''}. \textit{Supervisory Insights, Winter 2007}.  Federal Deposit Insurance Corporation. 
+ \item R. B. Avery, K. P. Brevoort, G. B. Canner. \href{https://ideas.repec.org/a/jre/issued/v29n42007p351-380.html
+}{``Opportunities and Issues in Using HMDA Data''}. \textit{Journal of Real Estate Research, American Real Estate Society}. Vol. 29(4), pages 351-380. 2007.
+
+\item \href{ https://catalog.data.gov/dataset/tiger-line-shapefile-2017-nation-u-s-current-county-and-equivalent-national-shapefile}{United States Census Bureau, Department of Commerce. TIGER/Line Shapefile, 2017, nation, U.S., Current County and Equivalent National Shapefile. Data.Gov. Updated June 2019. Retrieved July 2019.}
+
+\item \href{https://catalog.data.gov/dataset/tiger-line-shapefile-2017-nation-u-s-current-state-and-equivalent-national  }{United States Census Bureau, Department of Commerce. TIGER/Line Shapefile, 2017, nation, U.S., Current State and Equivalent National. Data.Gov. Updated February 2019. Retrieved July 2019. }
+
+\item Bissmark, Johan and Warnling, Oscar. \href{http://www.diva-portal.se/smash/get/diva2:1111045/FULLTEXT01.pdf}{The Sparse Data Problem Within Classification Algorithms: The Effect of Sparse Data on the Naïve Bayes Algorithm}. KTH, Datavetenskap, June 2017.
+
+\item HMDA: \href{https://www.consumerfinance.gov/data-research/hmda/historic-data/}{Consumer Financial Protection Bureau public website of HMDA data}
+
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Demo!}
+\textbf{DEMO}
+\end{frame}
+
+\begin{frame}{Thanks}
+
+\textbf{Thank you!!}
+\end{frame}
 \end{document}
