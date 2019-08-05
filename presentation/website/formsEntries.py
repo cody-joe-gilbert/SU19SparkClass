@@ -54,12 +54,12 @@ STATE_CHOICES = [
                 ("51","VA"),
                 ("53","WA"),
                 ("55","WI"),
-                ("56","WY"),
-                ("60","AS"),
-                ("66","GU"),
-                ("69","MP"),
-                ("72","PR"),
-                ("78","VI")]
+                ("56","WY")]
+                #("60","AS"),
+                #("66","GU"),
+                #("69","MP"),
+                #("72","PR"),
+                #("78","VI")
 ETHNICITY = [("1", "Hispanic or Latino"),
              ("2", "Not Hispanic or Latino")]
 RACE = [("1", "American Indian or Alaska Native"),
