@@ -25,8 +25,8 @@ import pandas as pd
 import logging
 import logging.config
 import sys
-sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
-#sys.path.insert(0, r:'/Users/fanghan/anaconda3/bin/python')
+#sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
+sys.path.insert(0, r'/Users/fanghan/anaconda3/bin/python')
 
 from pyspark.sql import SparkSession
 from pyspark.ml import Pipeline, PipelineModel
@@ -43,10 +43,10 @@ class runModel():
         self.logger = logging.getLogger('entry.driverCode')
         self.logger.info('creating instance of runModel')
         self.sc = SparkSession.builder.master("local[*]").getOrCreate()
-        self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
-        #self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
-        #self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel"
-        self.modelFolder = r"C:\spark\modelData\lenderModel"
+        #self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
+        self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
+        self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel"
+        #self.modelFolder = r"C:\spark\modelData\lenderModel"
         
 
     def runPrediction(self, form):
@@ -94,19 +94,19 @@ class runModel():
                          ' to %s:%s ' % (repr(state),
                                          repr(type(state))))
         self.inputDF["state_code"] = state
-        loanAmnt = form.loanAmnt.data
+        loanAmnt = form.loanAmnt.data / 1000
         self.logger.info('Setting model DF' +
                          ' loan_amount_000s ' +
                          ' to %s:%s ' % (repr(loanAmnt),
                                          repr(type(loanAmnt))))
         self.inputDF["loan_amount_000s"] = loanAmnt
-        income = form.income.data
+        income = form.income.data / 1000
         self.logger.info('Setting model DF' +
                          ' applicant_income_000s ' +
                          ' to %s:%s ' % (repr(income),
                                          repr(type(income))))
         self.inputDF["applicant_income_000s"] = income
-        race = form.race.data
+        race = form.race.data 
         self.logger.info('Setting model DF' +
                          ' applicant_race_1 ' +
                          ' to %s:%s ' % (repr(race),
