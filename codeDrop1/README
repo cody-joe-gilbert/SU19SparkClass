@@ -1,6 +1,0 @@
-.
-├── DataPrep_JL.scala       			# @author: Jeremy Lao -- The code performs ETL on the HMDA data
-├── JoinData.scala          			# @author: Fang Han -- The code extracts columns from the institution data join them with HMDA data  
-├── driverCode.py           			# @author: Cody Gilbert -- The code forms the overall flow of the HMDA Loan prediction recomendation and analysis tool
-├── logisticRegressionModel_script.scala        # @author: Jeremy Lao -- Scripts used to build regression models on the hMDA data
-└── README
