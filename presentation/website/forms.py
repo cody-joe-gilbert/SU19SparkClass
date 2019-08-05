@@ -5,7 +5,7 @@ from wtforms.fields import SelectField
 from formsEntries import STATE_CHOICES, ETHNICITY, RACE, GENDER
 
 class RegistrationForm(FlaskForm):
-
+    
     state = SelectField(label='State', validators=[DataRequired()], choices=STATE_CHOICES)
 
     income = IntegerField('Income', validators=[DataRequired()])

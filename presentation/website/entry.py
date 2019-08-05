@@ -28,24 +28,10 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.income}', '{self.state}','{self.gender}', '{self.race}', '{self.loanAmnt}', '{self.ethninicity}', '{self.email}')"
 
-db.create_all()
-posts = [
-    {
-        'title': 'Read our paper: Using Big Data Systems to Analyze Big (not Jumbo) Mortgage Data',
-        #'authors': 'Cody, Jeremy, Fang',
-        'content': 'Banking professionals are required to submit data to Federal regulators for the purposese of monitoring the health and safety of the financial system and individual banks. However, banks are also required by law to help promote growth in their local economies through lending. The Home Mortgage Disclosure acts requires banks and lenders to provide low-level mortgage application data to the Consumer Finance Protection Bureau (CFPB). Federal banking regulators analyze the data to discern economic trends and monitor for unfair lending practices. Our analysis utilizes big data architecture, namely Spark, to dig deeper into the numbers to analyze denial rates by race group, gender, and various borrower characteristics. Our visualization application will serve as a tool for both regulators and lenders to help identify possible red flags in lending practices.',
-    },
-    {
-        #'author': '<delete>',
-        'title': 'Learn more about HMDA data',
-        'content': '<Link to HMDA website>',
-    }
-]
-
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', title="Home")
 
 
 @app.route("/visualizeByState")
@@ -66,35 +52,20 @@ def paper():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
-    # TODO: ISSUE: doesn't validate! 
-    if request.method == 'POST': #and form.validate(): #form.validate_on_submit():
-        flash('We\'re working hard to find you some good lenders!')
+    form = RegistrationForm() 
+    if form.validate_on_submit():
+        #flash('We\'re working hard to find you some good lenders!')
         if runSpark:
-            #modeler = runModel()
-            #modeler.runPrediction(form)
-            #visTable = modeler.predData  # Output for visualization
-            #flash(f'User profile created for {form.email.data}!', 'success')
-            #return redirect(url_for('mapping'))
-            #plotter = plotTopLenders(visTable)
-            plotter = plotTopLenders()
-            plotter.plot(5)
+            modeler = runModel()
+            modeler.runPrediction(form)
+            visTable = modeler.predData  # Output for visualization
+            #visTable.to_pickle("./dummy.pkl")
+            visTable.to_json(path_or_buf="./tmp.json", orient='values')
+            #plotter = plotTopLenders(visTable) # DIRECTLY READING FROM DF CAUSES INCONSISTENCY IN RECOMMEND.PY
+            plotter = plotTopLenders() # TAKING A DETOUR, READING THE ./tmp.json IN RECOMMEND.PY
+            plotter.plot()
             return redirect(url_for('register'))
-    #return render_template('findLender.html', title='Register', form=form)
-
-"""
-@app.route("/mapping", methods=['GET'])
-def mapping():
-    return render_template('HMDACounties.html', title='Mapping')
-"""
-@app.route("/modeling", methods=['GET', 'POST'])
-def modeling():
-    """
-    TODO
-    visualize modeling result
-    add button to redirect to mapping
-    """
-    return render_template('modeling.html', title='Modeling')
+    return render_template('findLender.html', title='Register', form=form)
 
 
 if __name__ == '__main__':

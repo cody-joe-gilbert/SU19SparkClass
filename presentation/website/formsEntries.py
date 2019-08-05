@@ -1,7 +1,7 @@
 """
 CSCI-GA.3033-001: Big Data Application Development
 Team Project Code
-Cody Gilbert, Fan Han, Jeremy Lao
+Cody Gilbert, Fang Han, Jeremy Lao
 
 Holds the constants that define the form selection choices.
 """

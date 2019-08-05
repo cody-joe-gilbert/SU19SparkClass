@@ -24,7 +24,8 @@ import plotly.offline as offline
 
 class plotTopLenders(): 
     def __init__(self, df = None):
-        self.tmp_jsonPath = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/testProbabilities.json"
+        #self.tmp_jsonPath = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/testProbabilities.json"
+        self.tmp_jsonPath = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/tmp.json"
         if df is None:
             self.df = pd.read_json(self.tmp_jsonPath)   
         else: 
@@ -37,12 +38,21 @@ class plotTopLenders():
         'tag_1' for approve, 'tag_2' for deny, 
         then sort by approve in descending order
         """
+        """
         tmp = self.df['probability'].apply(pd.Series)                                                                                                                                                               
         probs = tmp['values'].apply(pd.Series)
         probs = probs.rename(columns = lambda x : 'tag_' + str(x))  
         self.df = pd.concat([self.df[:], probs[:]], axis=1).sort_values(by='tag_1', ascending=False)  
 
         lenders = self.df["Respondent Name (Panel)"].unique()
+        self.topN = lenders[:top]
+        """
+        tmp = self.df[2].apply(pd.Series)                                                                                                                                                               
+        probs = tmp['values'].apply(pd.Series)
+        probs = probs.rename(columns = lambda x : 'tag_' + str(x))  
+        self.df = pd.concat([self.df[:], probs[:]], axis=1).sort_values(by='tag_1', ascending=False)  
+
+        lenders = self.df[0].unique()
         self.topN = lenders[:top]
         #return self.topN
         
@@ -56,11 +66,16 @@ class plotTopLenders():
         self.lendersByYear = dict.fromkeys(self.topN) 
         self.lendersPeak = dict.fromkeys(self.topN) # get the peak historic probability of each lender
         for name in self.topN:
-            lenderData = self.df[self.df["Respondent Name (Panel)"] == name]
+            #lenderData = self.df[self.df["Respondent Name (Panel)"] == name]
+            lenderData = self.df[self.df[0] == name]
             accum = []
             for i in years:
-                year = lenderData[lenderData['as_of_year'] == i]
-                accum.append(year['tag_1'].values[0].astype('float'))    
+                #year = lenderData[lenderData['as_of_year'] == i]
+                year = lenderData[lenderData[0] == i]
+                if len(year) < 1: # guard against missing years
+                    accum.append(0)
+                else: 
+                    accum.append(year['tag_1'].values[0].astype('float'))    
                 self.years.append(i)
             self.lendersByYear[name] = accum
             self.lendersPeak[name] = max(accum)
