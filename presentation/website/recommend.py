@@ -77,11 +77,11 @@ class plotTopLenders():
             accum = []
             for i in years:
                 #year = lenderData[lenderData['as_of_year'] == i]
-                year = lenderData[lenderData[0] == i]
-                if len(year) < 1: # guard against missing years
-                    accum.append(0)
-                else: 
-                    accum.append(year['tag_1'].values[0].astype('float'))    
+                year = lenderData[lenderData[1] == i]
+                #if len(year) < 1: # guard against missing years
+                #    accum.append(0)
+                #else: 
+                accum.append(year['tag_1'].values[0].astype('float'))    
                 self.years.append(i)
             self.lendersByYear[name] = accum
             self.lendersPeak[name] = max(accum)
@@ -142,8 +142,8 @@ class plotTopLenders():
             title_text="Top Lenders We'd Recommend To You: ",
         )
         
-        offline.iplot(fig)
+        #offline.iplot(fig)
         # to plot in a separete browser window
-        offline.plot(fig, auto_open=True, image_filename="lenderRecommendations" ,image_width=2000, image_height=2000, 
-              filename='lenderRecommendations', validate=True)
+        offline.plot(fig,
+              filename='lenderRecommendations.html', validate=True)
         #fig.write_image("file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/templates", format='jpg')

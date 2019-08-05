@@ -76,3 +76,457 @@ INFO - 2019-08-05 14:23:32,955 - entry.driverCode
 prediction completed!
 INFO - 2019-08-05 14:26:47,458 - entry
 |    starting flask...
+INFO - 2019-08-05 17:05:34,027 - entry
+|    starting flask...
+INFO - 2019-08-05 17:05:37,242 - entry
+|    starting flask...
+INFO - 2019-08-05 17:06:19,827 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:06:19,827 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:06:19,832 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:06:26,458 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-05 17:08:30,487 - entry
+|    starting flask...
+INFO - 2019-08-05 17:08:47,605 - entry
+|    starting flask...
+INFO - 2019-08-05 17:08:56,998 - entry
+|    starting flask...
+INFO - 2019-08-05 17:09:45,941 - entry
+|    starting flask...
+INFO - 2019-08-05 17:09:47,722 - entry
+|    starting flask...
+INFO - 2019-08-05 17:09:55,418 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:09:55,418 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:09:55,421 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:10:01,749 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:10:14,879 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:10:14,917 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:10:14,918 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:10:14,919 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300000:<class 'int'> 
+INFO - 2019-08-05 17:10:14,920 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 200000:<class 'int'> 
+INFO - 2019-08-05 17:10:14,920 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-05 17:10:14,921 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:10:14,922 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:10:14,985 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:10:17,614 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:10:18,435 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year probability
+0  PROVIDENT FUNDING ASSOCIATES        2007  [0.0, 1.0]
+1         STEARNS LENDING  INC.        2007  [0.0, 1.0]
+2           QUICKEN LOANS  INC.        2007  [0.0, 1.0]
+3                    FREMONT BK        2007  [0.0, 1.0]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.0, 1.0]
+5                 BRANCH BKG&TC        2007  [0.0, 1.0]
+INFO - 2019-08-05 17:10:18,436 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:12:50,756 - entry
+|    starting flask...
+INFO - 2019-08-05 17:12:56,819 - entry
+|    starting flask...
+INFO - 2019-08-05 17:13:07,494 - entry
+|    starting flask...
+INFO - 2019-08-05 17:13:24,158 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:13:24,158 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:13:24,162 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:13:29,024 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:13:39,249 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:13:39,295 - entry.driverCode
+|    Setting model DF applicant_sex  to '2':<class 'str'> 
+INFO - 2019-08-05 17:13:39,296 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:13:39,297 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300.0:<class 'float'> 
+INFO - 2019-08-05 17:13:39,298 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 200.0:<class 'float'> 
+INFO - 2019-08-05 17:13:39,299 - entry.driverCode
+|    Setting model DF applicant_race_1  to '2':<class 'str'> 
+INFO - 2019-08-05 17:13:39,299 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '2':<class 'str'> 
+INFO - 2019-08-05 17:13:39,300 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:13:39,361 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:13:40,847 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:13:41,603 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                  probability
+0  PROVIDENT FUNDING ASSOCIATES        2007      [0.002317858081300118, 0.9976821419187]
+1         STEARNS LENDING  INC.        2007  [0.0016055930484047294, 0.9983944069515953]
+2           QUICKEN LOANS  INC.        2007  [0.0036715081663692174, 0.9963284918336309]
+3                    FREMONT BK        2007  [0.0013317664878293475, 0.9986682335121707]
+4       SIERRA PACIFIC MORTGAGE        2007   [0.001593479426990193, 0.9984065205730098]
+5                 BRANCH BKG&TC        2007   [0.007194822533025302, 0.9928051774669746]
+INFO - 2019-08-05 17:13:41,603 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:14:50,874 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:14:50,887 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:14:55,929 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:14:55,981 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:14:55,989 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:14:55,991 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 3.0:<class 'float'> 
+INFO - 2019-08-05 17:14:55,992 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 5.0:<class 'float'> 
+INFO - 2019-08-05 17:14:55,997 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-05 17:14:56,003 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:14:56,010 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:14:56,085 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:14:57,058 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:14:57,570 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.534773482577258, 0.46522651742274207]
+1         STEARNS LENDING  INC.        2007   [0.4431111183440409, 0.5568888816559592]
+2           QUICKEN LOANS  INC.        2007  [0.6458016986325288, 0.35419830136747127]
+3                    FREMONT BK        2007   [0.3975206935796701, 0.6024793064203299]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.44124013915641364, 0.5587598608435864]
+5                 BRANCH BKG&TC        2007  [0.7819279822126503, 0.21807201778734975]
+INFO - 2019-08-05 17:14:57,571 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:16:20,177 - entry
+|    starting flask...
+INFO - 2019-08-05 17:16:28,419 - entry
+|    starting flask...
+INFO - 2019-08-05 17:17:44,218 - entry
+|    starting flask...
+INFO - 2019-08-05 17:17:52,436 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:17:52,436 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:17:52,439 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:18:03,745 - entry
+|    starting flask...
+INFO - 2019-08-05 17:18:18,352 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:18:18,352 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:18:18,355 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:18:25,424 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:18:41,444 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:18:41,504 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:18:41,506 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:18:41,507 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300.0:<class 'float'> 
+INFO - 2019-08-05 17:18:41,508 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 200.0:<class 'float'> 
+INFO - 2019-08-05 17:18:41,508 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-05 17:18:41,509 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:18:41,510 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:18:41,570 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:18:43,343 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:18:44,405 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007  [0.006182759257548454, 0.9938172407424516]
+1         STEARNS LENDING  INC.        2007  [0.004287935815792119, 0.9957120641842079]
+2           QUICKEN LOANS  INC.        2007  [0.009771439867404329, 0.9902285601325955]
+3                    FREMONT BK        2007  [0.003558278340720311, 0.9964417216592798]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.004255671145884219, 0.9957443288541158]
+5                 BRANCH BKG&TC        2007   [0.01903662749304485, 0.9809633725069552]
+INFO - 2019-08-05 17:18:44,405 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:20:56,994 - entry
+|    starting flask...
+INFO - 2019-08-05 17:25:14,449 - entry
+|    starting flask...
+INFO - 2019-08-05 17:25:35,594 - entry
+|    starting flask...
+INFO - 2019-08-05 17:26:08,689 - entry
+|    starting flask...
+INFO - 2019-08-05 17:26:09,111 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:26:09,111 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:26:09,115 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:26:22,479 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:26:45,700 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:26:45,768 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:26:45,770 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:26:45,771 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300.0:<class 'float'> 
+INFO - 2019-08-05 17:26:45,772 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 200.0:<class 'float'> 
+INFO - 2019-08-05 17:26:45,772 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-05 17:26:45,773 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:26:45,774 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:26:45,854 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:26:51,091 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:26:52,171 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007  [0.006182759257548454, 0.9938172407424516]
+1         STEARNS LENDING  INC.        2007  [0.004287935815792119, 0.9957120641842079]
+2           QUICKEN LOANS  INC.        2007  [0.009771439867404329, 0.9902285601325955]
+3                    FREMONT BK        2007  [0.003558278340720311, 0.9964417216592798]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.004255671145884219, 0.9957443288541158]
+5                 BRANCH BKG&TC        2007   [0.01903662749304485, 0.9809633725069552]
+INFO - 2019-08-05 17:26:52,171 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:29:03,267 - entry
+|    starting flask...
+INFO - 2019-08-05 17:29:49,062 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:29:49,062 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:29:49,066 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:29:55,963 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:30:07,192 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:30:07,279 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:30:07,282 - entry.driverCode
+|    Setting model DF state_code  to '34':<class 'str'> 
+INFO - 2019-08-05 17:30:07,283 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300.0:<class 'float'> 
+INFO - 2019-08-05 17:30:07,285 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-05 17:30:07,285 - entry.driverCode
+|    Setting model DF applicant_race_1  to '3':<class 'str'> 
+INFO - 2019-08-05 17:30:07,286 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:30:07,287 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:30:07,359 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:30:09,030 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:30:09,850 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                   probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.9995577687972136, 0.0004422312027863888]
+1         STEARNS LENDING  INC.        2007   [0.9993612582622972, 0.0006387417377028776]
+2           QUICKEN LOANS  INC.        2007   [0.999721148453964, 0.00027885154603591705]
+3                    FREMONT BK        2007    [0.999229815696035, 0.0007701843039649027]
+4       SIERRA PACIFIC MORTGAGE        2007   [0.9993563978726288, 0.0006436021273712994]
+5                 BRANCH BKG&TC        2007  [0.9998581862047857, 0.00014181379521425763]
+INFO - 2019-08-05 17:30:09,850 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:31:26,779 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:31:26,779 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:31:26,783 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:31:26,786 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:31:31,638 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:31:31,654 - entry.driverCode
+|    Setting model DF applicant_sex  to '2':<class 'str'> 
+INFO - 2019-08-05 17:31:31,656 - entry.driverCode
+|    Setting model DF state_code  to '06':<class 'str'> 
+INFO - 2019-08-05 17:31:31,656 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300.0:<class 'float'> 
+INFO - 2019-08-05 17:31:31,657 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 80.0:<class 'float'> 
+INFO - 2019-08-05 17:31:31,658 - entry.driverCode
+|    Setting model DF applicant_race_1  to '2':<class 'str'> 
+INFO - 2019-08-05 17:31:31,659 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:31:31,660 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:31:31,711 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:31:32,238 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:31:32,585 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007  [0.9918757445041984, 0.008124255495801716]
+1         STEARNS LENDING  INC.        2007  [0.9883055755861112, 0.011694424413888795]
+2           QUICKEN LOANS  INC.        2007  [0.9948626150614674, 0.005137384938532649]
+3                    FREMONT BK        2007  [0.9859310833179032, 0.014068916682096694]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.9882175808236008, 0.011782419176399349]
+5                 BRANCH BKG&TC        2007  [0.9973810572292894, 0.002618942770710506]
+INFO - 2019-08-05 17:31:32,585 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:32:00,178 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:32:00,179 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:32:00,183 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:32:00,186 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:32:04,325 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:32:04,331 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:32:04,332 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:32:04,333 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300.0:<class 'float'> 
+INFO - 2019-08-05 17:32:04,333 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 100.0:<class 'float'> 
+INFO - 2019-08-05 17:32:04,340 - entry.driverCode
+|    Setting model DF applicant_race_1  to '2':<class 'str'> 
+INFO - 2019-08-05 17:32:04,341 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '2':<class 'str'> 
+INFO - 2019-08-05 17:32:04,342 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:32:04,384 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:32:04,850 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:32:05,109 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                probability
+0  PROVIDENT FUNDING ASSOCIATES        2007  [0.8805530418985473, 0.11944695810145266]
+1         STEARNS LENDING  INC.        2007  [0.8361441247986235, 0.16385587520137646]
+2           QUICKEN LOANS  INC.        2007  [0.9212167165723734, 0.07878328342762662]
+3                    FREMONT BK        2007   [0.8088496239961802, 0.1911503760038198]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.8351022223616146, 0.16489777763838542]
+5                 BRANCH BKG&TC        2007  [0.9583254256149188, 0.04167457438508102]
+INFO - 2019-08-05 17:32:05,110 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:32:37,475 - entry
+|    starting flask...
+INFO - 2019-08-05 17:32:43,913 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:32:43,913 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:32:43,915 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:32:49,190 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:33:00,306 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:33:00,349 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:33:00,350 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:33:00,351 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 300.0:<class 'float'> 
+INFO - 2019-08-05 17:33:00,352 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 100.0:<class 'float'> 
+INFO - 2019-08-05 17:33:00,352 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-05 17:33:00,353 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:33:00,354 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:33:00,410 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:33:02,759 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:33:03,633 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007  [0.9635705132946998, 0.036429486705300225]
+1         STEARNS LENDING  INC.        2007   [0.9482111902524831, 0.05178880974751698]
+2           QUICKEN LOANS  INC.        2007  [0.9767195104940044, 0.023280489505995556]
+3                    FREMONT BK        2007    [0.9382047659483587, 0.0617952340516414]
+4       SIERRA PACIFIC MORTGAGE        2007   [0.9478374282220656, 0.05216257177793452]
+5                 BRANCH BKG&TC        2007  [0.9880249849599507, 0.011975015040049336]
+INFO - 2019-08-05 17:33:03,633 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:33:33,799 - entry
+|    starting flask...
+INFO - 2019-08-05 17:33:51,455 - entry
+|    starting flask...
+INFO - 2019-08-05 17:34:14,320 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:34:14,321 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:34:14,324 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:34:20,502 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:34:33,774 - entry.driverCode
+|    loading model matrix from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv 
+INFO - 2019-08-05 17:34:33,829 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-05 17:34:33,831 - entry.driverCode
+|    Setting model DF state_code  to '36':<class 'str'> 
+INFO - 2019-08-05 17:34:33,832 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 1000.0:<class 'float'> 
+INFO - 2019-08-05 17:34:33,832 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 200.0:<class 'float'> 
+INFO - 2019-08-05 17:34:33,833 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-05 17:34:33,834 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-05 17:34:33,835 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-05 17:34:33,900 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-05 17:34:36,195 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-05 17:34:37,515 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                   probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.9999999992558537, 7.441462624349461e-10]
+1         STEARNS LENDING  INC.        2007  [0.9999999989249724, 1.0750275832462456e-09]
+2           QUICKEN LOANS  INC.        2007   [0.9999999995308508, 4.691492204448248e-10]
+3                    FREMONT BK        2007  [0.9999999987035788, 1.2964211295213848e-09]
+4       SIERRA PACIFIC MORTGAGE        2007   [0.9999999989167869, 1.083213079301214e-09]
+5                 BRANCH BKG&TC        2007    [0.9999999997614404, 2.38559598354072e-10]
+INFO - 2019-08-05 17:34:37,515 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-05 17:35:07,211 - entry
+|    lender form submitted
+INFO - 2019-08-05 17:35:07,214 - entry
+|    running prediction modeling
+INFO - 2019-08-05 17:35:07,221 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-05 17:35:07,224 - entry.driverCode
+|    loading model from file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel
+INFO - 2019-08-05 17:35:15,603 - entry
+|    starting flask...
