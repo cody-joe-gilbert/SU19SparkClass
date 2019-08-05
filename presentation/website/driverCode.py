@@ -22,8 +22,10 @@ CURRENT DRAFT: UNFINISHED
 @author: Cody Gilbert
 """
 import pandas as pd
+import logging
+import logging.config
 import sys
-#sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
+sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
 #sys.path.insert(0, r:'/Users/fanghan/anaconda3/bin/python')
 
 from pyspark.sql import SparkSession
@@ -37,10 +39,15 @@ from forms import RegistrationForm
 
 class runModel():
     def __init__(self):
+        logging.config.fileConfig('logging.conf')
+        self.logger = logging.getLogger('entry.driverCode')
+        self.logger.info('creating instance of runModel')
         self.sc = SparkSession.builder.master("local[*]").getOrCreate()
-        #self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
-        self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
-        self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel"
+        self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
+        #self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
+        #self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel"
+        self.modelFolder = r"C:\spark\modelData\lenderModel"
+        
 
     def runPrediction(self, form):
         '''
@@ -64,36 +71,76 @@ class runModel():
         visualization
         '''
         # Load in the pre-fit model
+        self.logger.info('loading model from %s' % self.modelFolder)
         self.model = PipelineModel.load(self.modelFolder)
 
-
         # Load in lender-Year matrix
+        self.logger.info('loading model matrix from %s' % self.lenderFile)
         self.inputDF = pd.read_csv(self.lenderFile)
+        
         self.inputDF.columns = ["respondent_id",
                                    "agency_code",
                                    "Respondent Name (Panel)",
                                    "as_of_year"]
-        self.inputDF["applicant_sex"] = form.gender.data#[1]
-        self.inputDF["state_code"] = form.state.data#[0]
-        self.inputDF["loan_amount_000s"] = form.loanAmnt.data
-        self.inputDF["applicant_income_000s"] = form.income.data
-        self.inputDF["applicant_race_1"] = form.race.data#[1]
-        self.inputDF["applicant_ethnicity"] = form.ethnicity.data#[1]
+        gender = form.gender.data
+        self.logger.info('Setting model DF' +
+                         ' applicant_sex ' +
+                         ' to %s:%s ' % (repr(gender),
+                                         repr(type(gender))))
+        self.inputDF["applicant_sex"] = gender
+        state = form.state.data
+        self.logger.info('Setting model DF' +
+                         ' state_code ' +
+                         ' to %s:%s ' % (repr(state),
+                                         repr(type(state))))
+        self.inputDF["state_code"] = state
+        loanAmnt = form.loanAmnt.data
+        self.logger.info('Setting model DF' +
+                         ' loan_amount_000s ' +
+                         ' to %s:%s ' % (repr(loanAmnt),
+                                         repr(type(loanAmnt))))
+        self.inputDF["loan_amount_000s"] = loanAmnt
+        income = form.income.data
+        self.logger.info('Setting model DF' +
+                         ' applicant_income_000s ' +
+                         ' to %s:%s ' % (repr(income),
+                                         repr(type(income))))
+        self.inputDF["applicant_income_000s"] = income
+        race = form.race.data
+        self.logger.info('Setting model DF' +
+                         ' applicant_race_1 ' +
+                         ' to %s:%s ' % (repr(race),
+                                         repr(type(race))))
+        self.inputDF["applicant_race_1"] = race
+        ethnicity = form.ethnicity.data
+        self.logger.info('Setting model DF' +
+                         ' applicant_ethnicity ' +
+                         ' to %s:%s ' % (repr(ethnicity),
+                                         repr(type(ethnicity))))
+        self.inputDF["applicant_ethnicity"] = ethnicity
 
         # Create the Spark dataframe from the user input
+        self.logger.info('creating the PySpark RDD of Pandas dataframe ')
         self.modeledDF = self.sc.createDataFrame(self.inputDF)
 
         # Transform and model the data with the model
+        self.logger.info('transforming RDD to create predictions')
         self.prediction = self.model.transform(self.modeledDF)
 
         # Pull out the requested lenders, years, and proabaility of approval
         self.selectedData = self.prediction.select("Respondent Name (Panel)",
                                                    "as_of_year", "probability")
-        self.selectedData
+        
         # Convert to a pandas dataframe and save it to the class
+        self.logger.info('converting RDD to pandas (Spark Action)')
         self.predData = self.selectedData.toPandas()
-
+        self.logger.debug('Predicted Data Head: \n' +
+                          '%s' % self.predData.loc[0:5,:].to_string())
+        
+        self.logger.info('prediction completed!')
+        return(self.predData)
     def __exit__(self):
+        self.logger.info('stopping Spark Context')
         self.sc.stop()
 
 

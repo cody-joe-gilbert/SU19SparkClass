@@ -17,9 +17,15 @@ To install:  $conda install -c plotly plotly-orca
 """
 
 import pandas as pd
-import plotly.graph_objects as go
+
 from plotly.subplots import make_subplots
 import plotly.offline as offline
+
+# CJG: Try statement import; some versions of plotly use a different name
+try:
+    import plotly.graph_objects as go
+except ImportError:
+    import plotly.graph_objs as go
 
 
 class plotTopLenders(): 

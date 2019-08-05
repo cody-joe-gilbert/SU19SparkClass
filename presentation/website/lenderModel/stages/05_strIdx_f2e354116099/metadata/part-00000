@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1565027593166,"sparkVersion":"2.2.0","uid":"strIdx_f2e354116099","paramMap":{"outputCol":"agency_code_index","handleInvalid":"error","inputCol":"agency_code"}}

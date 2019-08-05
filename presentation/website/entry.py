@@ -2,6 +2,13 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from forms import RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
 from recommend import plotTopLenders
+import logging
+import logging.config
+
+#CJG: Setup logger for debugging
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger('entry')
+logger.info('starting flask...')
 
 # runSpark flag: If you have all the spark and PySpark directories setup,
 #   set to True, otherwise False. If you set to True and don't have all the
@@ -54,8 +61,10 @@ def paper():
 def register():
     form = RegistrationForm() 
     if form.validate_on_submit():
+        logger.info('lender form submitted')
         #flash('We\'re working hard to find you some good lenders!')
         if runSpark:
+            logger.info('running prediction modeling')
             modeler = runModel()
             modeler.runPrediction(form)
             visTable = modeler.predData  # Output for visualization
