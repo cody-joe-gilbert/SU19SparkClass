@@ -2,10 +2,10 @@
 CSCI-GA.3033-001: Summer 2019 Team Project
 Cody Gilbert, Fang Han, Jeremy Lao
 
-US Census Geography file cleaning and processing scripts.
-Uses GeoSpark to read in the downloaded Shapefiles and convert
-to more Spark-manageable JSON files.
+US Census Geography file cleaning and processing script.
 
+Drops uneeded columns, extracts data for visual profiling, and
+determines data missing between joins to the HMDA data.
 
 @author: Cody Gilbert
 */

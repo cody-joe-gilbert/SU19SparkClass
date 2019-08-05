@@ -1,4 +1,5 @@
 # Geographic Mapping
+### Author: C.J. Gilbert
 
 This folder contains the tools and methods to download US Census county and state mapping data that is used to geographically partition HMDA loan data for analysis. After processing and profiler, it was ultimately decided that the geographic information added no additional value to the final application and no further manipulation was performed on the data.
 

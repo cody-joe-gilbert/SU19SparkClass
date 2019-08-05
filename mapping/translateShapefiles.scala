@@ -1,3 +1,16 @@
+/*
+CSCI-GA.3033-001: Summer 2019 Team Project
+Cody Gilbert, Fang Han, Jeremy Lao
+
+US Census Geography file cleaning and processing script.
+Uses GeoSpark to translate the shapefiles into more managible
+JSON files for later use within Spark.
+
+
+@author: Cody Gilbert
+*/
+
+
 import org.apache.spark.sql._
 import com.vividsolutions.jts.geom.{Coordinate, Envelope, GeometryFactory}
 import org.apache.spark.serializer.KryoSerializer
