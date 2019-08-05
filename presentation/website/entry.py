@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
 from forms import RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
+from recommend import plotTopLenders
 
 # runSpark flag: If you have all the spark and PySpark directories setup,
 #   set to True, otherwise False. If you set to True and don't have all the
@@ -70,13 +71,16 @@ def register():
     if request.method == 'POST': #and form.validate(): #form.validate_on_submit():
         flash('We\'re working hard to find you some good lenders!')
         if runSpark:
-            modeler = runModel()
-            modeler.runPrediction(form)
-            visTable = modeler.predData  # Output for visualization
+            #modeler = runModel()
+            #modeler.runPrediction(form)
+            #visTable = modeler.predData  # Output for visualization
             #flash(f'User profile created for {form.email.data}!', 'success')
             #return redirect(url_for('mapping'))
-            return redirect(url_for('modeling'))
-    return render_template('findLender.html', title='Register', form=form)
+            #plotter = plotTopLenders(visTable)
+            plotter = plotTopLenders()
+            plotter.plot(5)
+            return redirect(url_for('register'))
+    #return render_template('findLender.html', title='Register', form=form)
 
 """
 @app.route("/mapping", methods=['GET'])

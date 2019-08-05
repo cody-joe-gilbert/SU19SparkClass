@@ -74,7 +74,7 @@ class runModel():
                                    "Respondent Name (Panel)",
                                    "as_of_year"]
         self.inputDF["applicant_sex"] = form.gender.data#[1]
-        self.inputDF["state_code"] = form.state.data[0]
+        self.inputDF["state_code"] = form.state.data#[0]
         self.inputDF["loan_amount_000s"] = form.loanAmnt.data
         self.inputDF["applicant_income_000s"] = form.income.data
         self.inputDF["applicant_race_1"] = form.race.data#[1]
