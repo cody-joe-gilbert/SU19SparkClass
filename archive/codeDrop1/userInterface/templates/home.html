@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for post in posts %}
+    <p style="margin-left: 2em;padding: 0 20em 0em 0; border-width: 0px; border-color: black; border-style:solid;"></p>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title" href="{{ url_for('paper') }}">{{ post.title }}</a></h2>
+            <a class="mr-2">{{ post.author }}</a>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
