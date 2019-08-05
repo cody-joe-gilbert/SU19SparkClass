@@ -60,12 +60,12 @@ STATE_CHOICES = [
                 ("69","MP"),
                 ("72","PR"),
                 ("78","VI")]
-ETHNICITY = [(1, "Hispanic or Latino"),
-             (2, "Not Hispanic or Latino")]
-RACE = [(1, "American Indian or Alaska Native"),
-        (2, "Asian"),
-        (3, "Black or African American"),
-        (4, "Native Hawaiian or Other Pacific Islander"),
-        (5, "White")]
-GENDER = [(1, "Male"),
-          (2, "Female")]
+ETHNICITY = [("1", "Hispanic or Latino"),
+             ("2", "Not Hispanic or Latino")]
+RACE = [("1", "American Indian or Alaska Native"),
+        ("2", "Asian"),
+        ("3", "Black or African American"),
+        ("4", "Native Hawaiian or Other Pacific Islander"),
+        ("5", "White")]
+GENDER = [("1", "Male"),
+          ("2", "Female")]
