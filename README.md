@@ -84,6 +84,26 @@ or deploy to the cluster:
 
 ````spark2-submit --class DataPrep --deploy-mode cluster --executor-memory 100G --total-executor-cores 2048 target/scala-0.0.1-SNAPSHOT.jar````
 
+### /profiling_code
+
+#### Execute the Scala-Spark File Using Maven to Profile the Raw Data and Calculate Denial Rates by Various Feature Mixtures
+
+Compile the data with this command, using the ````pom.xml```` in the folder: 
+
+````/opt/maven/bin/mvn package````
+
+````nohup spark2-submit --class DataProfiler --master yarn target/scala-0.0.1-SNAPSHOT.jar````
+
+````nohup spark2-submit --class CalculateAverageDenialRate --master yarn target/scala-0.0.1-SNAPSHOT.jar  &````
+
+or deploy to the cluster:
+
+````spark2-submit --class DataProfiler --deploy-mode cluster --executor-memory 100G --total-executor-cores 2048 target/scala-0.0.1-SNAPSHOT.jar````
+
+````spark2-submit --class CalculateAverageDenialRate --deploy-mode cluster --executor-memory 100G --total-executor-cores 2048 target/scala-0.0.1-SNAPSHOT.jar````
+
+
+
 * `website` contains the Flask application used to host the HMDA Data Exploration application and all associated UI tools
 * `mapping` contains the tools and methods used in processing the US Census Geography Data
 * `modeling` contains the Scala scripts and modeling method for the underlying model of the Lender Recommendation Tool
