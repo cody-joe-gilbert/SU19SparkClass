@@ -1,3 +1,5 @@
+#Use Bash Script to Unzip Data Files into Scratch
+
 The scripts are a pipeline that are meant to be executed in the following order: 
 
   1.  Unzip the files into the target folder 
@@ -30,3 +32,14 @@ Once the files are ready in scratch, then they can be put into hdfs by:
 
 ````hdfs dfs -put <filename> /user/<username>/<target-folder>````
 
+#Execute the Scala-Spark File Using Maven to ETL the Raw Data into a Usable CSV Files
+
+Compile the data with this command, using the ````pom.xml```` in the folder: 
+
+````/opt/maven/bin/mvn package````
+
+````nohup spark2-submit --class DataPrep --master yarn target/scala-0.0.1-SNAPSHOT.jar  &````
+
+or deploy to the cluster:
+
+````spark2-submit --class DataPrep --deploy-mode cluster --executor-memory 100G --total-executor-cores 2048 target/scala-0.0.1-SNAPSHOT.jar````
