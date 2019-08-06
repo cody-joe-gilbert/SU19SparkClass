@@ -102,7 +102,15 @@ or deploy to the cluster:
 
 ````spark2-submit --class CalculateAverageDenialRate --deploy-mode cluster --executor-memory 100G --total-executor-cores 2048 target/scala-0.0.1-SNAPSHOT.jar````
 
+### /app_code
 
+The code will execute machine learning model evaluation code. It evaluates the AUC (area under curve) for Naive Bayes, SVM, and Logistic Regression.
+
+Running spark-submit:
+
+/opt/maven/bin/mvn package
+
+spark2-submit --class ModelEval --deploy-mode cluster --executor-memory 50G --total-executor-cores 9182 target/scala-0.0.1-SNAPSHOT.jar > output.txt
 
 * `website` contains the Flask application used to host the HMDA Data Exploration application and all associated UI tools
 * `mapping` contains the tools and methods used in processing the US Census Geography Data
