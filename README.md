@@ -17,7 +17,7 @@ This repository contains all the files used to create and execute the HMDA Data 
 
 ### /data_ingest
 
-#### HMDA Data Ingest
+#### Use bash scripts for HMDA zip Data Ingest
 
 > The bash scripts will Get/download Home Mortgage Disclosure Act data zip files from the CFPB's website.
 
