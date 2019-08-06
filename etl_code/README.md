@@ -1,4 +1,4 @@
-#Use Bash Script to Unzip Data Files into Scratch
+# Use Bash Script to Unzip Data Files into Scratch
 
 The scripts are a pipeline that are meant to be executed in the following order: 
 
@@ -32,7 +32,7 @@ Once the files are ready in scratch, then they can be put into hdfs by:
 
 ````hdfs dfs -put <filename> /user/<username>/<target-folder>````
 
-#Execute the Scala-Spark File Using Maven to ETL the Raw Data into a Usable CSV Files
+# Execute the Scala-Spark File Using Maven to ETL the Raw Data into a Usable CSV Files
 
 Compile the data with this command, using the ````pom.xml```` in the folder: 
 
