@@ -290,8 +290,8 @@ val assembler = new VectorAssembler().   //feature matrix
 ..
 val pipeline = new Pipeline().setStages(Array(indexer,..,assembler,NaiveBayes))
 ...
-val cvFullModel = cv.fit(hmdaBucketedSample)
-cvFullModel.save("<path>/HMDAModel")
+val nbFinalModel  = cv.fit(hmdaInstitutionsBucketed)
+nbFinalModel .save("<path>/HMDAModel")
 
 
 \end{lstlisting}
@@ -325,8 +325,8 @@ fig = make_subplots(
 \begin{enumerate}
 
 \item Loan Application amounts (sampled 2013 data) appear normally distributed between \$10,000 to \$500,000
-\item Naive Bayes had the best AUC and the fastest performance time
-\item ...
+\item Naive Bayes had the best AUC and the fastest performance time despite poor accuracy (79\% AUC)
+\item Poor modeling results indicate that loans are not first-order dependent on applicant race, gender, or ethnicity
 
 \end{enumerate}
 
@@ -344,7 +344,7 @@ fig = make_subplots(
      \item Panel data information for some lenders was not uniformly entered from year to year
       \item Respondent IDs were not unique across regulating agencies (i.e. FDIC respondent 1 is not the same as Fed's respondent 1)
   \end{itemize}
-\item ...
+\item Proper model iteration hindered by data size and relatively few available models
 
 \end{enumerate}
 
