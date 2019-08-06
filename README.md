@@ -1,18 +1,16 @@
-# SU19SparkClass
+# CSCI-GA.3033-001: Summer 2019 Team Project
+### Cody Gilbert, Fang Han, Jeremy Lao
+
 Repository for the team project in the Summer 2019 Spark Class.
 
-In order to use dataFrames type the following lines into the Dumbo shell (load modules and spark shell with databricks package): 
-
-````module load java/1.8.0_72 ````
-
-````module load spark/2.2.0 ````
-
-````spark-shell --packages com.databricks:spark-csv_2.11:1.2.0 --master local -deprecation````
+This repository contains all the files used to create and execute the HMDA Data Exploration web application. This project is broken down into separate sections by subfolder. See each subfolder for details of execution, methodology, and application enviroments.
 
 
+## Subfolders
 
-**Running** ````spark-submit````:
-
-    /opt/maven/bin/mvn package
-    
-    nohup spark2-submit --class DataProfiler --master yarn target/scala-0.0.1-SNAPSHOT.jar  &
+* `website` contains the Flask application used to host the HMDA Data Exploration application and all associated UI tools
+* `mapping` contains the tools and methods used in processing the US Census Geography Data
+* `modeling` contains the Scala scripts and modeling method for the underlying model of the Lender Recommendation Tool
+* `InstitutionData` contains the Scala scripts and data used to profile the Nationwide Institution Data
+* `HMDA` contains the Scala scripts and data used to profile the Home Mortgage Disclosure Act (HMDA) dataset
+* `docs` contains the papers and presentations created by this project. 
