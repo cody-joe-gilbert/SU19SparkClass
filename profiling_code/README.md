@@ -4,7 +4,7 @@ Compile the data with this command, using the ````pom.xml```` in the folder:
 
 ````/opt/maven/bin/mvn package````
 
-````nohup spark2-submit --class DataProfiler --master yarn target/scala-0.0.1-SNAPSHOT.jar  
+````nohup spark2-submit --class DataProfiler --master yarn target/scala-0.0.1-SNAPSHOT.jar````
 
 ````nohup spark2-submit --class CalculateAverageDenialRate --master yarn target/scala-0.0.1-SNAPSHOT.jar  &````
 
