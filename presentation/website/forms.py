@@ -21,10 +21,6 @@ class RegistrationForm(FlaskForm):
     ethnicity = SelectField(u'Ethnicity', validators=[DataRequired()],
                                 choices=ETHNICITY)
 
-    """
-    TODO
-    delete email field if not using database
-    """
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    # email = StringField('Email', validators=[DataRequired(), Email()])
 
     submit = SubmitField('Submit')

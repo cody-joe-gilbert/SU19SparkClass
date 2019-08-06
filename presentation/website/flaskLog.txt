@@ -215,3 +215,372 @@ INFO - 2019-08-06 15:29:23,281 - entry.driverCode
 |    Creating local[*] SparkContext
 INFO - 2019-08-06 15:29:29,528 - entry.driverCode
 |    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:04:10,182 - entry
+|    starting flask...
+INFO - 2019-08-06 18:04:12,260 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:04:12,261 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:04:12,261 - entry.driverCode
+|    Spark Context thread created with ID: 24220
+INFO - 2019-08-06 18:04:12,596 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:04:35,987 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:21:41,939 - entry
+|    starting flask...
+INFO - 2019-08-06 18:21:41,949 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:21:41,949 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:21:41,949 - entry.driverCode
+|    Spark Context thread created with ID: 20752
+INFO - 2019-08-06 18:21:41,972 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:21:51,813 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:27:13,488 - entry
+|    starting flask...
+INFO - 2019-08-06 18:27:13,501 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:27:13,502 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:27:13,502 - entry.driverCode
+|    Spark Context thread created with ID: 12756
+INFO - 2019-08-06 18:27:13,544 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:27:22,953 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:35:33,289 - entry
+|    starting flask...
+INFO - 2019-08-06 18:35:33,324 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:35:33,325 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:35:33,326 - entry.driverCode
+|    Spark Context thread created with ID: 22880
+INFO - 2019-08-06 18:35:33,368 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:35:40,956 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:39:34,838 - entry
+|    lender form submitted
+INFO - 2019-08-06 18:39:34,840 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-06 18:39:34,960 - entry.driverCode
+|    Setting model DF state_code  to '01':<class 'str'> 
+INFO - 2019-08-06 18:39:34,963 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 20.0:<class 'float'> 
+INFO - 2019-08-06 18:39:34,966 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-06 18:39:34,969 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-06 18:39:34,972 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-06 18:39:34,976 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-06 18:39:35,232 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-06 18:39:38,193 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-06 18:39:44,206 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.06369740076390429, 0.9363025992360956]
+1         STEARNS LENDING  INC.        2007   [0.04497378820887512, 0.9550262117911249]
+2           QUICKEN LOANS  INC.        2007   [0.09739780571834376, 0.9026021942816562]
+3                    FREMONT BK        2007    [0.03758212779699103, 0.962417872203009]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.044649109738133776, 0.9553508902618661]
+5                 BRANCH BKG&TC        2007   [0.17506077484520485, 0.8249392251547952]
+INFO - 2019-08-06 18:39:44,207 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-06 18:41:32,110 - entry
+|    starting flask...
+INFO - 2019-08-06 18:41:32,118 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:41:32,119 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:41:32,119 - entry.driverCode
+|    Spark Context thread created with ID: 23348
+INFO - 2019-08-06 18:41:32,145 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:41:38,679 - entry
+|    lender form submitted
+INFO - 2019-08-06 18:41:38,679 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-06 18:41:38,680 - entry.driverCode
+|    Setting model DF state_code  to '01':<class 'str'> 
+INFO - 2019-08-06 18:41:38,682 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 20.0:<class 'float'> 
+INFO - 2019-08-06 18:41:38,683 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-06 18:41:38,684 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-06 18:41:38,685 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-06 18:41:38,686 - entry.driverCode
+|    SparkContext or model not created. Waiting 5 secs
+INFO - 2019-08-06 18:41:40,424 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+ERROR - 2019-08-06 18:41:43,687 - entry.driverCode
+|    Model not created. See above log of separate thread
+NoneType: None
+INFO - 2019-08-06 18:43:41,674 - entry
+|    starting flask...
+INFO - 2019-08-06 18:43:41,679 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:43:41,680 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:43:41,680 - entry.driverCode
+|    Spark Context thread created with ID: 15408
+INFO - 2019-08-06 18:43:41,717 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:43:49,850 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:43:53,676 - entry
+|    lender form submitted
+INFO - 2019-08-06 18:43:53,677 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-06 18:43:53,678 - entry.driverCode
+|    Setting model DF state_code  to '01':<class 'str'> 
+INFO - 2019-08-06 18:43:53,680 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 20.0:<class 'float'> 
+INFO - 2019-08-06 18:43:53,681 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-06 18:43:53,682 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-06 18:43:53,683 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-06 18:43:53,684 - entry.driverCode
+|    SparkContext or model not created. Waiting 10 secs
+ERROR - 2019-08-06 18:44:03,685 - entry.driverCode
+|    Model not created. See above log of separate thread
+NoneType: None
+INFO - 2019-08-06 18:46:10,056 - entry
+|    starting flask...
+INFO - 2019-08-06 18:46:10,061 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:46:10,062 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:46:10,063 - entry.driverCode
+|    Spark Context thread created with ID: 19368
+INFO - 2019-08-06 18:46:10,093 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:46:17,825 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:46:39,185 - entry.driverCode
+|    model loaded
+INFO - 2019-08-06 18:47:53,406 - entry
+|    starting flask...
+INFO - 2019-08-06 18:47:53,411 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:47:53,412 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:47:53,412 - entry.driverCode
+|    Spark Context thread created with ID: 13552
+INFO - 2019-08-06 18:47:53,448 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:48:00,997 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:48:25,126 - entry.driverCode
+|    model loaded
+INFO - 2019-08-06 18:49:52,598 - entry
+|    lender form submitted
+INFO - 2019-08-06 18:49:52,598 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-06 18:49:52,605 - entry.driverCode
+|    Setting model DF state_code  to '01':<class 'str'> 
+INFO - 2019-08-06 18:49:52,609 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-06 18:49:52,611 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 20.0:<class 'float'> 
+INFO - 2019-08-06 18:49:52,614 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-06 18:49:52,617 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-06 18:49:52,622 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-06 18:49:52,752 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-06 18:49:54,901 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-06 18:50:00,030 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.7185402007495006, 0.2814597992504993]
+1         STEARNS LENDING  INC.        2007   [0.6386173390415484, 0.3613826609584517]
+2           QUICKEN LOANS  INC.        2007  [0.8019534955558794, 0.19804650444412075]
+3                    FREMONT BK        2007   [0.5943811515385162, 0.4056188484614837]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.6368649116627129, 0.36313508833728714]
+5                 BRANCH BKG&TC        2007  [0.8884346389379938, 0.11156536106200625]
+INFO - 2019-08-06 18:50:00,030 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-06 18:50:00,053 - entry.recommend
+|    Instantiating plotTopLenders class
+INFO - 2019-08-06 18:50:00,190 - entry.recommend
+|    Creating the top 3 lenders
+INFO - 2019-08-06 18:53:42,208 - entry
+|    starting flask...
+INFO - 2019-08-06 18:53:42,216 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:53:42,217 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:53:42,217 - entry.driverCode
+|    Spark Context thread created with ID: 25268
+INFO - 2019-08-06 18:53:42,259 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:53:50,164 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:54:12,940 - entry.driverCode
+|    model loaded
+INFO - 2019-08-06 18:55:26,573 - entry
+|    lender form submitted
+INFO - 2019-08-06 18:55:26,574 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-06 18:55:26,580 - entry.driverCode
+|    Setting model DF state_code  to '01':<class 'str'> 
+INFO - 2019-08-06 18:55:26,585 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 20.0:<class 'float'> 
+INFO - 2019-08-06 18:55:26,589 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-06 18:55:26,592 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-06 18:55:26,598 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-06 18:55:26,601 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-06 18:55:26,748 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-06 18:55:28,816 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-06 18:55:34,088 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.06369740076390429, 0.9363025992360956]
+1         STEARNS LENDING  INC.        2007   [0.04497378820887512, 0.9550262117911249]
+2           QUICKEN LOANS  INC.        2007   [0.09739780571834376, 0.9026021942816562]
+3                    FREMONT BK        2007    [0.03758212779699103, 0.962417872203009]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.044649109738133776, 0.9553508902618661]
+5                 BRANCH BKG&TC        2007   [0.17506077484520485, 0.8249392251547952]
+INFO - 2019-08-06 18:55:34,088 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-06 18:55:34,110 - entry.recommend
+|    Instantiating plotTopLenders class
+INFO - 2019-08-06 18:55:34,120 - entry.recommend
+|    Plotting probabilities
+INFO - 2019-08-06 18:55:34,120 - entry.recommend
+|    Creating the top 3 lenders
+INFO - 2019-08-06 18:58:12,033 - entry
+|    starting flask...
+INFO - 2019-08-06 18:58:12,040 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 18:58:12,041 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 18:58:12,041 - entry.driverCode
+|    Spark Context thread created with ID: 15916
+INFO - 2019-08-06 18:58:12,102 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 18:58:20,069 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 18:58:43,165 - entry.driverCode
+|    model loaded
+INFO - 2019-08-06 18:59:01,493 - entry
+|    lender form submitted
+INFO - 2019-08-06 18:59:01,494 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-06 18:59:01,496 - entry.driverCode
+|    Setting model DF state_code  to '01':<class 'str'> 
+INFO - 2019-08-06 18:59:01,499 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 20.0:<class 'float'> 
+INFO - 2019-08-06 18:59:01,503 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-06 18:59:01,505 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-06 18:59:01,507 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-06 18:59:01,508 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-06 18:59:01,727 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-06 18:59:03,995 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-06 18:59:09,221 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.06369740076390429, 0.9363025992360956]
+1         STEARNS LENDING  INC.        2007   [0.04497378820887512, 0.9550262117911249]
+2           QUICKEN LOANS  INC.        2007   [0.09739780571834376, 0.9026021942816562]
+3                    FREMONT BK        2007    [0.03758212779699103, 0.962417872203009]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.044649109738133776, 0.9553508902618661]
+5                 BRANCH BKG&TC        2007   [0.17506077484520485, 0.8249392251547952]
+INFO - 2019-08-06 18:59:09,222 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-06 18:59:09,241 - entry.recommend
+|    Instantiating plotTopLenders class
+INFO - 2019-08-06 18:59:09,249 - entry.recommend
+|    Plotting probabilities
+INFO - 2019-08-06 18:59:09,249 - entry.recommend
+|    Creating the top 3 lenders
+DEBUG - 2019-08-06 18:59:09,470 - entry.recommend
+|    Top 3 lenders: 
+['GUARANTEED RATE INC.' 'GUILD MORTGAGE COMPANY'
+ 'PRIMELENDING A PLAINSCAPITAL C']
+INFO - 2019-08-06 18:59:09,470 - entry.recommend
+|    Creating yearly rates
+INFO - 2019-08-06 19:17:06,258 - entry
+|    starting flask...
+INFO - 2019-08-06 19:17:06,262 - entry.driverCode
+|    creating instance of runModel
+INFO - 2019-08-06 19:17:06,263 - entry.driverCode
+|    loading model matrix from C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv
+INFO - 2019-08-06 19:17:06,264 - entry.driverCode
+|    Spark Context thread created with ID: 30576
+INFO - 2019-08-06 19:17:06,304 - entry.driverCode
+|    Creating local[*] SparkContext
+INFO - 2019-08-06 19:17:16,662 - entry.driverCode
+|    loading model from C:\spark\modelData\lenderModel
+INFO - 2019-08-06 19:17:50,875 - entry.driverCode
+|    model loaded
+INFO - 2019-08-06 19:19:14,546 - entry
+|    lender form submitted
+INFO - 2019-08-06 19:19:14,546 - entry.driverCode
+|    Setting model DF applicant_sex  to '1':<class 'str'> 
+INFO - 2019-08-06 19:19:14,590 - entry.driverCode
+|    Setting model DF state_code  to '01':<class 'str'> 
+INFO - 2019-08-06 19:19:14,593 - entry.driverCode
+|    Setting model DF loan_amount_000s  to 20.0:<class 'float'> 
+INFO - 2019-08-06 19:19:14,595 - entry.driverCode
+|    Setting model DF applicant_income_000s  to 50.0:<class 'float'> 
+INFO - 2019-08-06 19:19:14,597 - entry.driverCode
+|    Setting model DF applicant_race_1  to '1':<class 'str'> 
+INFO - 2019-08-06 19:19:14,598 - entry.driverCode
+|    Setting model DF applicant_ethnicity  to '1':<class 'str'> 
+INFO - 2019-08-06 19:19:14,599 - entry.driverCode
+|    creating the PySpark RDD of Pandas dataframe 
+INFO - 2019-08-06 19:19:14,710 - entry.driverCode
+|    transforming RDD to create predictions
+INFO - 2019-08-06 19:19:16,850 - entry.driverCode
+|    converting RDD to pandas (Spark Action)
+DEBUG - 2019-08-06 19:19:20,964 - entry.driverCode
+|    Predicted Data Head: 
+        Respondent Name (Panel)  as_of_year                                 probability
+0  PROVIDENT FUNDING ASSOCIATES        2007   [0.06369740076390429, 0.9363025992360956]
+1         STEARNS LENDING  INC.        2007   [0.04497378820887512, 0.9550262117911249]
+2           QUICKEN LOANS  INC.        2007   [0.09739780571834376, 0.9026021942816562]
+3                    FREMONT BK        2007    [0.03758212779699103, 0.962417872203009]
+4       SIERRA PACIFIC MORTGAGE        2007  [0.044649109738133776, 0.9553508902618661]
+5                 BRANCH BKG&TC        2007   [0.17506077484520485, 0.8249392251547952]
+INFO - 2019-08-06 19:19:20,964 - entry.driverCode
+|    prediction completed!
+INFO - 2019-08-06 19:19:20,978 - entry.recommend
+|    Instantiating plotTopLenders class
+INFO - 2019-08-06 19:19:21,170 - entry.recommend
+|    Plotting probabilities
+INFO - 2019-08-06 19:19:21,171 - entry.recommend
+|    Creating the top 3 lenders
+DEBUG - 2019-08-06 19:19:21,769 - entry.recommend
+|    Top 3 lenders: 
+['GUARANTEED RATE INC.' 'GUILD MORTGAGE COMPANY'
+ 'PRIMELENDING A PLAINSCAPITAL C']
+INFO - 2019-08-06 19:19:21,769 - entry.recommend
+|    Creating yearly rates

@@ -87,6 +87,7 @@ class runModel():
             # log an error in case of failure,
             self.logger.exception('Error in loading model!')
             raise Exception('Model load error')
+        self.logger.info('model loaded')
 
     def runPrediction(self, form):
         '''
@@ -150,8 +151,8 @@ class runModel():
         # Check for startup thread status
         if self.sc is None or self.model is None:
             # In case form submitted before sc given time to start
-            self.logger.info('SparkContext or model not created. Waiting 5 secs')
-            time.sleep(5)
+            self.logger.info('SparkContext or model not created. Waiting 20 secs')
+            time.sleep(20)
         if self.model is None:
             self.logger.exception('Model not created. See above log of separate thread')
             raise Exception('Model load error')
