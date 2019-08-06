@@ -19,9 +19,9 @@ This repository contains all the files used to create and execute the HMDA Data 
 
 #### HMDA Data Ingest
 
-<p> The bash scripts will Get/download Home Mortgage Disclosure Act data zip files from the CFPB's website.
+> The bash scripts will Get/download Home Mortgage Disclosure Act data zip files from the CFPB's website.
 
-There are two sets of download, unzip, and concatenate scripts.  This is because there are two ways of representing the data set.  The representation with larger amounts of memory has extensive string representations of the data.  The representation that takes less memory is an integer representation of the text options. 
+> There are two sets of download, unzip, and concatenate scripts.  This is because there are two ways of representing the data set.  The representation with larger amounts of memory has extensive string representations of the data.  The representation that takes less memory is an integer representation of the text options. 
 
 How to execute the following scripts:
 
@@ -33,7 +33,7 @@ Example:
 
 ````./get_hmda_code_zip_files.bash jjl359````
 
-This should download the zip and subsequently unzip the LAR files into your scratch workspace. </p>
+This should download the zip and subsequently unzip the LAR files into your scratch workspace. 
 
 
 * `website` contains the Flask application used to host the HMDA Data Exploration application and all associated UI tools
