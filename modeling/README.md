@@ -18,6 +18,8 @@ actions and create the final feature and label dataframe.
 	* Including heavy use of the [MLLib Library]( https://spark.apache.org/docs/2.2.0/ml-guide.html )
 * Apache Hadoop 2.6.0 with Yarn
 
+
+
 ## Hardware Used
 
 * [NYU HPC Dumbo Cluster]( https://wikis.nyu.edu/display/NYUHPC/Clusters+-+Dumbo ) for big data processing
