@@ -5,7 +5,8 @@ Cody Gilbert, Fan Han, Jeremy Lao
 
 This code performs the modeling steps for input data from the Flask entry.py
 code. When the runModel class is instantiated, a pyspark sql context is created
-for later use. This may take a few seconds to intialize.
+for later use. This may take a few seconds to intialize, however a new thread is used to
+launch the pySpark context while the user navigates through the input pages.
 
 function runPrediction(self, form) does the main grunt work of the modeling
 process. See its documentation below
@@ -17,7 +18,7 @@ predData(Respondent Name (Panel):String Lender Name,
          probability:List[float] where List[0] is prob. of denial,
                                        List[1] is prob of approval)
 
-CURRENT DRAFT: UNFINISHED
+
 
 @author: Cody Gilbert
 """
@@ -25,8 +26,10 @@ import pandas as pd
 import logging
 import logging.config
 import sys
-#sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
-sys.path.insert(0, r'/Users/fanghan/anaconda3/bin/python')
+import threading
+import time
+sys.path.insert(0, r'C:\spark\spark-2.4.3-bin-hadoop2.7\python')
+#sys.path.insert(0, r'/Users/fanghan/anaconda3/bin/python')
 
 from pyspark.sql import SparkSession
 from pyspark.ml import Pipeline, PipelineModel
@@ -42,12 +45,48 @@ class runModel():
         logging.config.fileConfig('logging.conf')
         self.logger = logging.getLogger('entry.driverCode')
         self.logger.info('creating instance of runModel')
-        self.sc = SparkSession.builder.master("local[*]").getOrCreate()
-        #self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
-        self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
-        self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel"
-        #self.modelFolder = r"C:\spark\modelData\lenderModel"
+        self.sc = None  # set to None to catch in case of speedy launching
+        self.model = None  # set to none in case of model launch error
+        self.lenderFile = r"C:\Users\Cody Gilbert\Desktop\SparkClass\SU19SparkClass\presentation\website\modelingMatrix.csv"
+        #self.lenderFile = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/modelingMatrix.csv "
+        #self.modelFolder = "file:///Users/fanghan/Desktop/BDAD_summer19/SU19SparkClass/presentation/website/lenderModel"
+        self.modelFolder = r"C:\spark\modelData\lenderModel"
         
+        self.scThread = threading.Thread(target=self.startSession)
+        self.scThread.start()
+        self.logger.info('Spark Context thread created with ID: %s' % self.scThread.ident)
+    
+    def startSession(self):
+        '''
+        This method launches the Spark context, loads in pre-trained model,
+        and loads the modeling template.
+        This has  been included as a standalone method to allow dispatch
+        via multithreading. Creating the Spark Context and loading take
+        some time, therefore including it in a separate thread during startup
+        will "hide" the loading from the user.
+        '''
+        # Load in lender-Year matrix into a pandas dataframe
+        self.logger.info('loading model matrix from %s' % self.lenderFile)
+        self.inputDF = pd.read_csv(self.lenderFile)
+        
+        # Load each of the form inputs as modeling columns
+        self.inputDF.columns = ["respondent_id",
+                                   "agency_code",
+                                   "Respondent Name (Panel)",
+                                   "as_of_year"]
+        
+        # Load in the spark context
+        self.logger.info('Creating local[*] SparkContext')
+        self.sc = SparkSession.builder.master("local[*]").getOrCreate()
+        
+        # Load in the pre-fit model
+        self.logger.info('loading model from %s' % self.modelFolder)
+        try:
+            self.model = PipelineModel.load(self.modelFolder)
+        except:
+            # log an error in case of failure,
+            self.logger.exception('Error in loading model!')
+            raise Exception('Model load error')
 
     def runPrediction(self, form):
         '''
@@ -70,18 +109,7 @@ class runModel():
         self.predictionDF: *pandas* dataframe that can be used in output
         visualization
         '''
-        # Load in the pre-fit model
-        self.logger.info('loading model from %s' % self.modelFolder)
-        self.model = PipelineModel.load(self.modelFolder)
 
-        # Load in lender-Year matrix
-        self.logger.info('loading model matrix from %s' % self.lenderFile)
-        self.inputDF = pd.read_csv(self.lenderFile)
-        
-        self.inputDF.columns = ["respondent_id",
-                                   "agency_code",
-                                   "Respondent Name (Panel)",
-                                   "as_of_year"]
         gender = form.gender.data
         self.logger.info('Setting model DF' +
                          ' applicant_sex ' +
@@ -118,7 +146,16 @@ class runModel():
                          ' to %s:%s ' % (repr(ethnicity),
                                          repr(type(ethnicity))))
         self.inputDF["applicant_ethnicity"] = ethnicity
-
+        
+        # Check for startup thread status
+        if self.sc is None or self.model is None:
+            # In case form submitted before sc given time to start
+            self.logger.info('SparkContext or model not created. Waiting 5 secs')
+            time.sleep(5)
+        if self.model is None:
+            self.logger.exception('Model not created. See above log of separate thread')
+            raise Exception('Model load error')
+        
         # Create the Spark dataframe from the user input
         self.logger.info('creating the PySpark RDD of Pandas dataframe ')
         self.modeledDF = self.sc.createDataFrame(self.inputDF)

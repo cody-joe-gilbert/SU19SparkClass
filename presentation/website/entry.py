@@ -16,6 +16,7 @@ logger.info('starting flask...')
 runSpark = True
 if runSpark:
     from driverCode import runModel
+    modeler = runModel() # Run early to let the SparkContext startup
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
@@ -65,7 +66,6 @@ def register():
         #flash('We\'re working hard to find you some good lenders!')
         if runSpark:
             logger.info('running prediction modeling')
-            modeler = runModel()
             modeler.runPrediction(form)
             visTable = modeler.predData  # Output for visualization
             #visTable.to_pickle("./dummy.pkl")
