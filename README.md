@@ -339,6 +339,15 @@ Three Levels of Denial Rate Analysis:
    
    ![Data Profiling Output](https://github.com/cody-joe-gilbert/SU19SparkClass/blob/master/screenshots/data-profiling-output.PNG)
    
+#### More Denial Rates And Visualization
+* Denial Rate by Race: `/user/fh643/VisualPrep/raceDenials`
+* Denial Rate by Gender: `/user/fh643/VisualPrep/sexDenials`
+* Denial Rate by Ethnicity: `/user/fh643/VisualPrep/ethDenials`
+* Denial Rate by Income:  `/user/fh643/VisualPrep/incomeDenials`
+
+![Overall Denial Rate](https://github.com/cody-joe-gilbert/SU19SparkClass/blob/master/screenshots/denial_rate_heatmap.png)
+![Denial Rates by Key Parameters](https://github.com/cody-joe-gilbert/SU19SparkClass/blob/master/screenshots/denial_rate_param.png)
+
 
 #### US Census Geography Data Profiling
 
