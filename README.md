@@ -302,6 +302,8 @@ This folder contains the scripts and tools used to profile the input datasets.
 * `parse_fields.scala` Scala scripts that prepared the HMDA data for profiling
 * `compute_denial_per_fields.scala` Scala code for generating summary statistics for several key parameters 
 * `compute_overall_denial.scala` Scala code for generating state-wise summary statistics 
+* `heatMap_slider.ipynb` Python Jupyter Notebook script used to plot the overall denial rate heatmap
+* `plotParam.py` Python script used to plot denial rates by parameters
 
 #### Data Files
 
