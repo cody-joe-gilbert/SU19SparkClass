@@ -34,7 +34,7 @@ import pyspark
 ```
 
 ## Special Note On Path Config
-When running on a different environment, please change the path in `src/driverCode.py` line 50 ~ 55
+When running in a different environment, please change the path in `src/driverCode.py` line 50 ~ 55
 
 
 ## Execution
