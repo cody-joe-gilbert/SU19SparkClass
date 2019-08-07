@@ -6,9 +6,9 @@ TODO:
 	* ~~ingest~~
 	* ~~etl~~
 	* ~~profiling~~
-* Fang: When app is finished, move the final copy of the website folder into the /app_code folder
+* ~~Fang: When app is finished, move the final copy of the website folder into the /app_code folder~~
 * Jeremy: Ensure all code is moved into the applicable folders and a desciption is included in the README (done)
-* Fang: Ensure all code is moved into the applicable folders and a desciption is included in theREADME **TODO: visualization**
+* ~~Fang: Ensure all code is moved into the applicable folders and a desciption is included in theREADME~~ 
 * Fang: Include the applicable writeup to the Flask app in the /app_code section. I've included some of the steps already from the website folder README and I've added files I could think of.
 * ~~Fang: Ensure all HDFS data is correctly listed~~
 * Fang: Add screenshots of app working to /screenshots

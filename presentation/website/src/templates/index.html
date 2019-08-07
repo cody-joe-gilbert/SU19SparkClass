@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>HMDA project</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">  <!-- change!! -->
+</head>
+<body>
+<header>
+  <nav class="main-nav">
+    <ul>
+      <li>
+        <ul>
+          <li><a href="{{ url_for('index') }}" class="active">home</a></li>
+          <li><a href="https://www.consumerfinance.gov/data-research/hmda/historic-data/">data source</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+<section id="title" class="home">
+  <h1>FIND A FAIR LENDER</h1>
+  <h2>with HMDA data and machine learning</h2>
+</section>
+<section id="main-content">
+  <div class="text-intro">
+    <h2><a href="https://github.com/cody-joe-gilbert/SU19SparkClass" class="more">Check out our repository</a></h2>
+  </div>
+  <div class="columns features">
+    <div class="one-third first">
+      <h3>State-wise Heat Map</h3>
+      <p>Want to find out how state-wise loan denial rates have changed from 2007 to 2017?</p>
+      <p><a href="{{ url_for('visualizeByState') }}" class="more">See our visualization</a></p>
+    </div>
+    <div class="one-third">
+      <h3>Plots by Certain Parameters</h3>
+      <p>Curious how your gender, income, race and ethnicity might affect your chances of getting a mortgage?</p>
+      <p><a href="{{ url_for('visualizeByKeyParam') }}" class="more">See some data</a></p>
+    </div>
+    <div class="one-third">
+      <h3>Help Me Find A Fair Lender!</h3>
+      <p>With the power of machine learning, we can tell you which lenders are more likely to approve of your application, based on your gender, race, ethnicity, and income.</p>
+      <p><a href="{{ url_for('register') }}" class="more">Give it a try!</a></p>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="copyright"><small>Copyright. All Rights Reserved | presented by <span style="font-weight:bold">Cody Gilbert, Fang Han, and Jeremy Lao</span>.</small></div>
+</footer>
+</body>
+</html>

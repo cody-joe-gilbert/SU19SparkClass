@@ -33,6 +33,10 @@ pip install flask_sqlalchemy
 import pyspark
 ```
 
+## Special Note On Path Config
+When running on a different environment, please change the path in `src/driverCode.py` line 50 ~ 55
+
+
 ## Execution
 To execute the flask web application run **entry.py** with
 ```shell
