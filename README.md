@@ -295,6 +295,10 @@ Three Levels of Denial Rate Analysis:
    |----|-----|----|---------|-----------|
    |2007|AR   |White|Hispanic| x%|
    |... |..   |..  | .. | ..|
+   
+   
+   ![Data Profiling Output](https://github.com/cody-joe-gilbert/SU19SparkClass/blob/master/screenshots/data-profiling-output.PNG)
+   
 
 #### US Census Geography Data Profiling
 
@@ -332,11 +336,15 @@ To validate the HMDA to state and county join, an anti-join was created and outp
 #### Initial Model Evaluation
 The code will execute machine learning model evaluation code. It evaluates the AUC (area under curve) for Naive Bayes, SVM, and Logistic Regression.
 
+This segment of the application uses the following folder for its data: ```hdfs dfs -ls /user/jjl359/project/df_for_logistic_regression```
+
 Running spark-submit:
 
-/opt/maven/bin/mvn package
+```/opt/maven/bin/mvn package```
 
-spark2-submit --class ModelEval --deploy-mode cluster --executor-memory 50G --total-executor-cores 9182 target/scala-0.0.1-SNAPSHOT.jar > output.txt
+```spark2-submit --class ModelEval --deploy-mode cluster --executor-memory 50G --total-executor-cores 9182 target/scala-0.0.1-SNAPSHOT.jar > output.txt```
+
+
 
 #### Creating Model Feature and Label Input
 After the HMDA and institution data had been cleaned and profiled, the next task was to create a model that constructs the probability of lender approval for various lenders over time given the applicant demographics. To construct such a model, the input features must include each of the features on which an approval prediction will be made, and the corresponding binary label of approved or denied. These features included the following based on their locations in the given datasets:
