@@ -487,11 +487,13 @@ python entry.py
 ```
 ### /screenshots <a name="screenshots"></a>
 
+[ScreenShots](https://github.com/cody-joe-gilbert/SU19SparkClass/tree/master/screenshots)
 
 ### /test\_code <a name="testcode"></a>
 
 Code in this folder was used to prototype four machine learning models on the entire data set using Scala-Spark REPL.
 
+[TestCode](https://github.com/cody-joe-gilbert/SU19SparkClass/tree/master/test_code)
 
 ## Access  <a name="Access"></a>
 
