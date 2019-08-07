@@ -567,13 +567,6 @@ Models were fit on a random sample of the HMDA data, as the full set of data can
 
 \textbf{Naive Bayes} - model performed the best with an AUC-ROC of 79\%. Based on already conducted research, the Naive Bayes algorithm is far less affected by sparse data compared to other commonly used machine learning algorithms.  The features of our analysis included both continuous and categorical values as well as dummy variables for race and gender of a loan applicant.  The underlying data in our analytic also exhibited some degree of covariance and the data was not evenly distributed across all the combinations of races, genders, and states that were analyzed.  Therefore, we expect the feature matrix to be sparse, and the Naive Bayes algorithm performs better on sparse feature matrices \cite{naiveBayes}.  
 
-\begin{eqnarray*}
-P(y=k | loanAmt, applicantIncome \\
-& & race, ethnicity, gender  \\
-  & & lender, state, year)
-\end{eqnarray*}
-
-
 \textbf{Linear Support Vector Machine (L-SVM)} - an L-SVM classifier was fit using the MLLib LinearSVC function. A single regularization parameter 0.1 was used as a previous profiling of the data indicated that the data is not linearly separable, and this model would likely perform poorly regardless of regularization. The AUC-ROC was 59\%, confirming this assumption.
 Based on the results of the above models, the Naive Bayes model was chosen as the predictive model used in the loan assessment tool. It is noted that even though this model outperformed all other considered models, it’s accuracy is still below that of limits acceptable for mainstream predictive analytics. In the consideration of time and the overall uncertainty of the data, this model was considered to be adequate enough for this analysis. Future work on the subject must perform additional analysis of models to find a more accurate assessment of loan approval.
 
