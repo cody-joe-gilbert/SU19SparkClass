@@ -495,4 +495,4 @@ Code in this folder was used to prototype four machine learning models on the en
 
 ## Access  <a name="Access"></a>
 
-[Access screenshot](https://github.com/cody-joe-gilbert/SU19SparkClass/blob/master/screenshots/HDFS-access.PNG)
+![Access screenshot](https://github.com/cody-joe-gilbert/SU19SparkClass/blob/master/screenshots/HDFS-access.PNG)
