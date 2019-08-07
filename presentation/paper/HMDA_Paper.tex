@@ -568,9 +568,9 @@ Models were fit on a random sample of the HMDA data, as the full set of data can
 \textbf{Naive Bayes} - model performed the best with an AUC-ROC of 79\%. Based on already conducted research, the Naive Bayes algorithm is far less affected by sparse data compared to other commonly used machine learning algorithms.  The features of our analysis included both continuous and categorical values as well as dummy variables for race and gender of a loan applicant.  The underlying data in our analytic also exhibited some degree of covariance and the data was not evenly distributed across all the combinations of races, genders, and states that were analyzed.  Therefore, we expect the feature matrix to be sparse, and the Naive Bayes algorithm performs better on sparse feature matrices \cite{naiveBayes}.  
 
 \begin{eqnarray*}
-P(y=k | loanAmt, applicantIncome \\
+  P(y=k & | & loanAmt, applicantIncome \\
 & & race, ethnicity, gender  \\
-  & & lender, state, year)
+& & lender, state, year)
 \end{eqnarray*}
 
 
