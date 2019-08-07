@@ -454,8 +454,10 @@ The full bucketed joined HMDA-Institution dataset was fit using the above pipeli
 
 #### Flask Web Application
 
-
-
+* **Why Flask**: We chose Flask to host our final visualization and model output because:
+	1. Flask is light weight, which is great for prototyping and facilitates test-driven development
+	1. Flask has nice safety features built-in that allow us to validate form input and encrypt server-side information with ease
+	1. With our model developed primarily in PySpark, using python-based Flask is very natural. 
 
 #### Flask Installation
 
@@ -473,9 +475,9 @@ import pyspark
 ```
 
 #### Flask Execution
-To execute the flask web application run **entry.py** with
+To execute the flask web application run **run.py** with
 ```shell
-python entry.py
+python run.py
 ```
 ### /screenshots <a name="screenshots"></a>
 
