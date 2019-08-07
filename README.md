@@ -149,6 +149,21 @@ Once the files are ready in scratch, then they can be put into hdfs by:
 hdfs dfs -put <filename> /user/<username>/<target-folder>
 ```
 
+#### HMDA Nationwide Institution Panel Data
+HMDA related institution data are available as yearly csv files in both panel and transmittal formats from 2007 to 2017 on:
+* [HMDA institutions](https://www.consumerfinance.gov/data-research/hmda/historic-data/)
+
+Panel format was chosen over transmittal for it contains richer information. All csv files were downloaded from the aforementioned site and tranported onto Dumbo via SCP, subsequently uploaded onto Dumbo HDFS with shell command 
+
+```
+hdfs dfs -put /user/fh643/InstitutionData
+```
+
+These raw csv files henceforth reside in locations: 
+
+* **data from 2007 to 2009**`/user/fh643/InstitutionData/InstitutionData/data/panel_07-09/_*.csv`
+* **data from 2010 to 2017** `/user/fh643/InstitutionData/InstitutionData/data/panel_10-17/_*.csv` 
+
 #### US Census Geography Data Acquisition
 
 The county and state geometries were contained in shapefiles created by the US Census Bureau and downloaded directly from the US government open data source Data.gov at the following links:
