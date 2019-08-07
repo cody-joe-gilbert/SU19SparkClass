@@ -258,7 +258,7 @@ spark2-submit --class DataPrep --deploy-mode cluster --executor-memory 100G --to
 
 #### HMDA Nationwide Institution Panel Data
 
-Benefitting from the relatively small size of the institution data, its ETL were done interactively throught the Spark shell. Scripts and functions used are aggregated into a Scala object for reusability in `etl_code/JoinData.scala`. As the file name indicates, the primary purpose of the ETL is to join the institution data with HMDA data. 
+Benefitting from the relatively small size of the institution data, its ETL were done interactively throught the Spark shell. Scripts and functions used are aggregated into a Scala object for reusability in `etl_code/JoinData.scala`. As the file name indicates, the primary purpose of the ETL is to **join the institution data with HMDA data**. 
 
 Selected columns from the instution data before they are joined with HMDA data are: 
 
@@ -271,6 +271,11 @@ Selected columns from the instution data before they are joined with HMDA data a
 | RespondentState | state where the institution reported at | StringType |
 | RespondentCity | city where the institution reported at | StringType | 
 
+As the result of the etl operations, institution list were successfully joined to the HMDA dataset on a compound primary key composed of *respondentID, respondentState and AgencyCode* that maps any record to a unique respondent name. 
+
+The joined dataset is saved on HDFS at: 
+
+* **Joined Data:** `/user/fh643/InstitutionData/HmdaJoined`
 
 #### US Census Geography Shapefile Conversion
 
