@@ -16,7 +16,7 @@ TODO:
 * Fang: Add testing code to the /test_code folder (optional)
 
 
-#CSCI-GA.3033-001: Summer 2019 Team Project
+# CSCI-GA.3033-001: Summer 2019 Team Project
 Authors: Cody Gilbert, Fang Han, Jeremy Lao
 
 Repository for the team project in the Summer 2019 Spark Class.
