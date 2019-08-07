@@ -1,7 +1,6 @@
 TODO:
 
 *Remove the list item as you do it so we can track what has been completed*
-* Fang: Include the applicable writeup to the Flask app in the /app_code section. I've included some of the steps already from the website folder README and I've added files I could think of.
 * Jeremy: Add testing code to the /test_code folder (optional)
 * Fang: Add testing code to the /test_code folder (optional)
 
@@ -461,19 +460,18 @@ The full bucketed joined HMDA-Institution dataset was fit using the above pipeli
 	* Since the initial phase of the project, Plot.ly has been a preferred visualization tool for us. The consistency in language between front and back end is quite ideal.  
 
 * Flask Installation
+	* Ensure Flask & flask_sqlalchemy is installed
 
-1. Ensure Flask & flask_sqlalchemy is installed
+	```shell
+	pip install -U Flask
+	pip install flask_sqlalchemy
+	```
 
-```shell
-pip install -U Flask
-pip install flask_sqlalchemy
-```
+	* Install a local version of [Spark]( https://spark.apache.org/downloads.html ) verify PySpark is reachable from your python PATH. This can be verified by
 
-2. Install a local version of [Spark]( https://spark.apache.org/downloads.html ) verify PySpark is reachable from your python PATH. This can be verified by
-
-```python
-import pyspark
-```
+	```python
+	import pyspark
+	```
 
 * Launch Web Application 
 	To execute the flask web application run **run.py** with
