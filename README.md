@@ -5,10 +5,10 @@ TODO:
 * Fang: Add institution data steps to each of the given folders as applicable
 	* ~~ingest~~
 	* ~~etl~~
-	* profiling
+	* ~~profiling~~
 * Fang: When app is finished, move the final copy of the website folder into the /app_code folder
 * Jeremy: Ensure all code is moved into the applicable folders and a desciption is included in the README
-* Fang: Ensure all code is moved into the applicable folders and a desciption is included in theREADME
+* Fang: Ensure all code is moved into the applicable folders and a desciption is included in theREADME **TODO: visualization**
 * Fang: Include the applicable writeup to the Flask app in the /app_code section. I've included some of the steps already from the website folder README and I've added files I could think of.
 * ~~Fang: Ensure all HDFS data is correctly listed~~
 * Fang: Add screenshots of app working to /screenshots
@@ -194,7 +194,7 @@ This folder contains the code for data cleaning and pre-processing.
 * `pom.xml` Maven dependencies file for HMDA etl scripts in `src`
 * `runscript.sh` Script used to run Scala etl code for US Census Geography data
 * `translateShapefiles.scala` Scala etl code for translating US Census Shapefiles to JSON files
-
+* `JoinData.scala` contains scripts/functions used to join HMDA data with the institution dataset
 
 #### HDFS Data
 
@@ -299,6 +299,9 @@ This folder contains the scripts and tools used to profile the input datasets.
 * `pom.xml` Maven dependencies file for HMDA profiling scripts in `src`
 * `cleanMapData.scala` Scala code for cleaning and profiling map data
 * `plotCounties.py` Python code for plotting HMDA records by US Census geographical location
+* `parse_fields.scala` Scala scripts that prepared the HMDA data for profiling
+* `compute_denial_per_fields.scala` Scala code for generating summary statistics for several key parameters 
+* `compute_overall_denial.scala` Scala code for generating state-wise summary statistics 
 
 #### Data Files
 
