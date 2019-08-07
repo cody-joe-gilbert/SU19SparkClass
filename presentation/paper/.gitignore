@@ -4,3 +4,4 @@
 *.aux
 .gitignore.un~
 .gitignore~
+*.tex~
