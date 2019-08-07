@@ -261,6 +261,7 @@ spark2-submit --class DataPrep --deploy-mode cluster --executor-memory 100G --to
 Benefitting from the relatively small size of the institution data, its ETL were done interactively throught the Spark shell. Scripts and functions used are aggregated into a Scala object for reusability in `etl_code/JoinData.scala`. As the file name indicates, the primary purpose of the ETL is to join the institution data with HMDA data. 
 
 Selected columns from the instution data before they are joined with HMDA data are: 
+
 | name | description | data type |
 | ----------- | ----------- | ----------- |
 | Year | reporting year |  IntegerType    |   
