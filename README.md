@@ -7,7 +7,7 @@ TODO:
 	* ~~etl~~
 	* ~~profiling~~
 * Fang: When app is finished, move the final copy of the website folder into the /app_code folder
-* Jeremy: Ensure all code is moved into the applicable folders and a desciption is included in the README
+* Jeremy: Ensure all code is moved into the applicable folders and a desciption is included in the README (done)
 * Fang: Ensure all code is moved into the applicable folders and a desciption is included in theREADME **TODO: visualization**
 * Fang: Include the applicable writeup to the Flask app in the /app_code section. I've included some of the steps already from the website folder README and I've added files I could think of.
 * ~~Fang: Ensure all HDFS data is correctly listed~~
@@ -35,6 +35,7 @@ This repository contains all the files used to create and execute the HMDA Data 
 	* [/app_code](#appcode)
 	* [/screenshots](#screenshots)
 	* [/test_code](#testcode)
+* [Access](#Access)
 
 ## Software Used <a name="SoftwareUsed"></a>
 
@@ -490,3 +491,8 @@ python entry.py
 ### /test\_code <a name="testcode"></a>
 
 Code in this folder was used to prototype four machine learning models on the entire data set using Scala-Spark REPL.
+
+
+## Access  <a name="Access"></a>
+
+[Access screenshot](https://github.com/cody-joe-gilbert/SU19SparkClass/blob/master/screenshots/HDFS-access.PNG)
