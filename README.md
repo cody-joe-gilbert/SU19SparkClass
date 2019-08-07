@@ -3,6 +3,9 @@ TODO:
 *Remove the list item as you do it so we can track what has been completed*
 
 * Fang: Add institution data steps to each of the given folders as applicable
+	* ~~ingest~~
+	* etl
+	* profiling
 * Fang: When app is finished, move the final copy of the website folder into the /app_code folder
 * Jeremy: Ensure all code is moved into the applicable folders and a desciption is included in the README
 * Fang: Ensure all code is moved into the applicable folders and a desciption is included in theREADME
@@ -151,7 +154,7 @@ hdfs dfs -put <filename> /user/<username>/<target-folder>
 
 #### HMDA Nationwide Institution Panel Data
 HMDA related institution data are available as yearly csv files in both panel and transmittal formats from 2007 to 2017 on:
-* [HMDA institutions](https://www.consumerfinance.gov/data-research/hmda/historic-data/)
+* [institution data](https://www.consumerfinance.gov/data-research/hmda/historic-data/)
 
 Panel format was chosen over transmittal for it contains richer information. All csv files were downloaded from the aforementioned site and tranported onto Dumbo via SCP, subsequently uploaded onto Dumbo HDFS with shell command 
 
