@@ -4,7 +4,7 @@ TODO:
 
 * Fang: Add institution data steps to each of the given folders as applicable
 	* ~~ingest~~
-	* etl
+	* ~~etl~~
 	* profiling
 * Fang: When app is finished, move the final copy of the website folder into the /app_code folder
 * Jeremy: Ensure all code is moved into the applicable folders and a desciption is included in the README
@@ -258,17 +258,17 @@ spark2-submit --class DataPrep --deploy-mode cluster --executor-memory 100G --to
 
 #### HMDA Nationwide Institution Panel Data
 
-Benefitting from the relatively small size of the institution data, its ETL were done interactively throught the Spark shell. Scripts and functions used are aggregated into a Scala object for reusability in *etl_code/JoinData.scala*. As the file name indicates, the primary purpose of the ETL is to join the institution data with HMDA data. 
+Benefitting from the relatively small size of the institution data, its ETL were done interactively throught the Spark shell. Scripts and functions used are aggregated into a Scala object for reusability in `etl_code/JoinData.scala`. As the file name indicates, the primary purpose of the ETL is to join the institution data with HMDA data. 
 
 Selected columns from the instution data before they are joined with HMDA data are: 
-name | description | data type
-----|----|----
-Year | reporting year |  IntegerType      
-RespondentID |  ten-digit number that uniquely identifies a reporting institution | LongType
-RespondentName | name of the reporting institution | StringType
-AgencyCode | The agency that regulates the lender  | IntegerType
-RespondentState | state where the institution reported at | StringType
-RespondentCity | city where the institution reported at | StringType
+| name | description | data type
+| ----|----|----
+| Year | reporting year |  IntegerType      
+| RespondentID |  ten-digit number that uniquely identifies a reporting institution | LongType
+| RespondentName | name of the reporting institution | StringType
+| AgencyCode | The agency that regulates the lender  | IntegerType
+| RespondentState | state where the institution reported at | StringType
+| RespondentCity | city where the institution reported at | StringType
 
 
 #### US Census Geography Shapefile Conversion
