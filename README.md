@@ -1,10 +1,3 @@
-TODO:
-
-*Remove the list item as you do it so we can track what has been completed*
-* Jeremy: Add testing code to the /test_code folder (optional)
-* Fang: Add testing code to the /test_code folder (optional)
-
-
 # CSCI-GA.3033-001: Summer 2019 Team Project
 Authors: Cody Gilbert, Fang Han, Jeremy Lao
 
