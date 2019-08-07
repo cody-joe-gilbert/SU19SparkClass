@@ -7,14 +7,14 @@ TODO:
 * Jeremy: Ensure all code is moved into the applicable folders and a desciption is included in the README
 * Fang: Ensure all code is moved into the applicable folders and a desciption is included in theREADME
 * Fang: Include the applicable writeup to the Flask app in the /app_code section. I've included some of the steps already from the website folder README and I've added files I could think of.
-* Fang: Ensure all HDFS data is correctly listed
+~~* Fang: Ensure all HDFS data is correctly listed ~~
 * Fang: Add screenshots of app working to /screenshots
 * Jeremy: Add testing code to the /test_code folder (optional)
 * Fang: Add testing code to the /test_code folder (optional)
 
 
 #CSCI-GA.3033-001: Summer 2019 Team Project
-Authors: Cody Gilbert, Fang Han Jeremy Lao
+Authors: Cody Gilbert, Fang Han, Jeremy Lao
 
 Repository for the team project in the Summer 2019 Spark Class.
 
@@ -80,6 +80,8 @@ This folder contains the scripts used to ingest each dataset.
 
 * `/user/jjl359/project/data/HMDA_2007_to_2017_codes.csv` HMDA codes data.
 * `/user/jjl359/project/data/HMDA_2007_to_2017.csv` HMDA labels data
+* `/user/fh643/InstitutionData/InstitutionData/data/panel_07-09/_*.csv` HMDA nationwide institution panel data from 2007 to 2009
+* `/user/fh643/InstitutionData/InstitutionData/data/panel_10-17/_*.csv` HMDA nationwide institution panel data from 2010 to 2017
 * `/user/cjg507/sparkproject/geometries/states/tl_2017_us_state.*` US Census State Shapefile data
 * `/user/cjg507/sparkproject/geometries/states/tl_2017_us_state.tl_2017_us_state.shp.xml` US Census State Shapefile data metadata, schema, column names and explanations
 * `/user/cjg507/sparkproject/geometries/states/tl_2017_us_county.*` US Census County Shapefile data
