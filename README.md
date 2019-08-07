@@ -285,6 +285,17 @@ spark2-submit --class DataProfiler --deploy-mode cluster --executor-memory 100G 
 spark2-submit --class CalculateAverageDenialRate --deploy-mode cluster --executor-memory 100G --total-executor-cores 2048 target/scala-0.0.1-SNAPSHOT.jar
 ```
 
+Three Levels of Denial Rate Analysis: 
+
+   1.  Overall Denial Rate by State: ```hdfs dfs -ls /user/jjl359/project/denial-rate-analysis/denial_overall```
+   2.  Denial Rate by Race-Ethnicity pair: ```hdfs dfs -ls /user/jjl359/project/denial-rate-analysis/high_level```
+   3.  Denial Rate by Year, State, Race-Ethnicity Pair: ```hdfs dfs -ls /user/jjl359/project/denial-rate-analysis/low_level```
+   
+   |YEAR|State|Race|Ethnicity|Denial Rate|
+   |----|-----|----|---------|-----------|
+   |2007|AR   |White|Hispanic| x%|
+   |... |..   |..  | .. | ..|
+
 #### US Census Geography Data Profiling
 
 To better understand the geographical distribution of the HMDA data, the combined state-county table was inner-joined to the HMDA data set by state and county name. The number of HMDA records per state and county were calculated and the results saved to `/user/cjg507/sparkproject/geometries/hmdaCountyJoinedCount.json`. This dataset was transferred to a local machine and the `plotCounties.py` script was executed on the data to generate the choropleth saved to `HMDACounties.html`. The results show that the overwhelming majority of counties have few records within the HMDA data set, and that analysis should be made at the state level rather than the county level to make sufficiently well-informed conclusions.
