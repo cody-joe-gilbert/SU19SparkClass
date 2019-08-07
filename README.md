@@ -455,11 +455,12 @@ The full bucketed joined HMDA-Institution dataset was fit using the above pipeli
 #### Flask Web Application
 
 * **Why Flask**: We chose Flask to host our final visualization and model output because:
-	1. Flask is light weight, which is great for prototyping and facilitates test-driven development
-	1. Flask has nice safety features built-in that allow us to validate form input and encrypt server-side information with ease
-	1. With our model developed primarily in PySpark, using python-based Flask is very natural. 
+	* Flask is light weight, which is great for prototyping and facilitates test-driven development
+	* Flask has nice safety features built-in that allow us to validate form input and encrypt server-side information with ease
+	* With our model developed primarily in PySpark, using python-based Flask is very natural. 
+	* Since the initial phase of the project, Plot.ly has been a preferred visualization tool for us. The consistency in language between front and back end is quite ideal.  
 
-#### Flask Installation
+* Flask Installation
 
 1. Ensure Flask & flask_sqlalchemy is installed
 
@@ -474,11 +475,12 @@ pip install flask_sqlalchemy
 import pyspark
 ```
 
-#### Flask Execution
-To execute the flask web application run **run.py** with
-```shell
-python run.py
-```
+* Launch Web Application 
+	To execute the flask web application run **run.py** with
+	```shell
+	python run.py
+	```
+
 ### /screenshots <a name="screenshots"></a>
 
 [ScreenShots](https://github.com/cody-joe-gilbert/SU19SparkClass/tree/master/screenshots)
