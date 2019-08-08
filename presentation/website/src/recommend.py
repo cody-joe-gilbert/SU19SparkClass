@@ -93,9 +93,58 @@ class plotTopLenders():
                 "5": "White"}
         GENDER = {"1": "Male",
                 "2": "Female"}
+        STATE = {"01":"AL",
+                "02":"AK",
+                "04":"AZ",
+                "05":"AR",
+                "06":"CA",
+                "08":"CO",
+                "09":"CT",
+                "10":"DE",
+                "12":"FL",
+                "13":"GA",
+                "15":"HI",
+                "16":"ID",
+                "17":"IL",
+                "18":"IN",
+                "19":"IA",
+                "20":"KS",
+                "21":"KY",
+                "22":"LA",
+                "23":"ME",
+                "24":"MD",
+                "25":"MD",
+                "26":"MI",
+                "27":"MN",
+                "28":"MS",
+                "29":"MO",
+                "30":"MT",
+                "31":"NE",
+                "32":"NV",
+                "33":"NH",
+                "34":"NJ",
+                "35":"NM",
+                "36":"NY",
+                "37":"NC",
+                "38":"ND",
+                "39":"OH",
+                "40":"OK",
+                "41":"OR",
+                "42":"PA",
+                "44":"RI",
+                "45":"SC",
+                "46":"SD",
+                "47":"TN",
+                "48":"TX",
+                "49":"UT",
+                "50":"VT",
+                "51":"VA",
+                "53":"WA",
+                "55":"WI",
+                "56":"WY"}
 
         gender = GENDER[form.gender.data]
-        #state = form.state.data
+        state = STATE[form.state.data]
         loanAmnt = form.loanAmnt.data
         income = form.income.data
         race = RACE[form.race.data]
@@ -123,12 +172,12 @@ class plotTopLenders():
         fig.add_trace(
             go.Table(
                 header=dict(
-                    values=["User Gender", "User Income", "Loan Amount", "Race", "Ethinicity"],
+                    values=["User Gender", "State", "User Income", "Loan Amount", "Race", "Ethinicity"],
                     font=dict(size=10),
                     align="center"
                 ),
                 cells=dict(
-                    values=[[gender], [income], [loanAmnt], [race], [ethnicity]],
+                    values=[[gender], [state], [income], [loanAmnt], [race], [ethnicity]],
                     align = "center")
                 ),
                 row=1, col=1
