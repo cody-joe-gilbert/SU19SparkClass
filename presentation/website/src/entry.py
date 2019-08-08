@@ -77,8 +77,8 @@ def register():
         
         # Plot the results to the page
         plotter = plotTopLenders() 
-        plotter.plot(5)
-        return redirect(url_for('register'))
+        plotter.plot(form, 3)
+        #return redirect(url_for('register'))
     return render_template('findLender.html', title='Register', form=form)
 
 if __name__ == '__main__':

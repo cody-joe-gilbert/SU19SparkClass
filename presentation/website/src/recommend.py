@@ -15,6 +15,7 @@ To install:  $conda install -c plotly plotly-orca
 @author: Fang Han
 """
 from plotly.subplots import make_subplots
+from src.forms import RegistrationForm
 import pandas as pd
 import numpy as np
 import os
@@ -74,7 +75,7 @@ class plotTopLenders():
             self.lendersByYear[name] = accum
             self.lendersPeak[name] = max(accum)
 
-    def plot(self, top = 3):
+    def plot(self, form, top = 3):
         '''
         Performs the plotting of the predicted data over time,
         and creates the page shown to the user
@@ -82,22 +83,57 @@ class plotTopLenders():
         self.logger.info('Plotting probabilities')
         self.getLenders(top)
         self.getYearlyRates(top)
-        # turn lendersPeak into a dataframe                                                                        
+        
+        ETHNICITY = {"1":"Hispanic or Latino",
+                    "2": "Not Hispanic or Latino"}
+        RACE = {"1": "American Indian or Alaska Native",
+                "2": "Asian",
+                "3": "Black or African American",
+                "4": "Native Hawaiian or Other Pacific Islander",
+                "5": "White"}
+        GENDER = {"1": "Male",
+                "2": "Female"}
+
+        gender = GENDER[form.gender.data]
+        #state = form.state.data
+        loanAmnt = form.loanAmnt.data
+        income = form.income.data
+        race = RACE[form.race.data]
+        ethnicity = ETHNICITY[form.ethnicity.data]
+
+        #UserInfoString = "Gender: {0}{4}Income: {1}{4}Race: {2}{4}Ethnicity: {3}{4} ".format(gender, income, race, ethnicity, "\n")
+
+        # turn lendersPeak into a dataframe                                                                       
         tab_df = pd.DataFrame.from_dict({'Lender': list(self.lendersPeak.keys()), 
                                         'Highest Historic Probability Of Approval':list(self.lendersPeak.values())}) 
         fig = go.Figure()
         ############################ SET UP SUBPLOTS ###########################
         ########################################################################
         fig = make_subplots(
-            rows=2, cols=1,
+            rows=3, cols=1,
             shared_xaxes=True,
             vertical_spacing=0.03,
             specs=[[{"type": "table"}],
+                [{"type": "table"}],
                 [{"type": "scatter"}]]
         )
         
         ############################ PLOT TABLE ################################
         ########################################################################
+        fig.add_trace(
+            go.Table(
+                header=dict(
+                    values=["User Gender", "User Income", "Loan Amount", "Race", "Ethinicity"],
+                    font=dict(size=10),
+                    align="center"
+                ),
+                cells=dict(
+                    values=[[gender], [income], [loanAmnt], [race], [ethnicity]],
+                    align = "center")
+                ),
+                row=1, col=1
+        )
+
         fig.add_trace(
             go.Table(
                 header=dict(
@@ -109,7 +145,7 @@ class plotTopLenders():
                     values=[tab_df[k].tolist() for k in tab_df.columns[0:]],
                     align = "center")
                 ),
-                row=1, col=1
+                row=2, col=1
         )
         
         ############################ SCATTER PLOT ##############################
@@ -124,12 +160,12 @@ class plotTopLenders():
                     text=["", "", lender],
                     textposition="middle center", 
                 ),
-                row = 2, col = 1
+                row = 3, col = 1
             )
-             
+        
         fig.update_layout(
             template="plotly_dark",
-            height=925,
+            height=800,
             showlegend=True,
             title_text="Top Lenders We'd Recommend To You: ",
         )
